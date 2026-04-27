@@ -41,7 +41,7 @@ impl MemoryManager {
         let mut results = Vec::new();
         
         for entry in table.iter()? {
-            let (key, value) = entry?;
+            let (_key, value) = entry?;
             let val_str = value.value();
             
             // In a production system, you'd store embeddings in a separate table/index.

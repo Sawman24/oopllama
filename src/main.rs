@@ -6,7 +6,7 @@ mod tests;
 
 use crate::engine::InferenceEngine;
 use crate::agent::Agent;
-use crate::tools::{ToolDispatcher, GetTemperature};
+use crate::tools::{ToolDispatcher, GetTemperature, SetLight};
 use crate::memory::MemoryManager;
 
 use std::sync::Arc;

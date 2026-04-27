@@ -58,7 +58,7 @@ impl InferenceEngine {
 
     /// Load weights directly from .safetensors into V100 VRAM.
     pub fn load_weights<P: AsRef<Path>>(&self, path: P) -> Result<VarBuilder> {
-        let tensors = unsafe { candle_core::safetensors::load(path, &self.device)? };
+        let tensors = candle_core::safetensors::load(path, &self.device)?;
         Ok(VarBuilder::from_tensors(tensors, DType::F16, &self.device))
     }
 
