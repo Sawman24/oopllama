@@ -1,6 +1,5 @@
-use redb::{Database, TableDefinition, WriteStrategy};
+use redb::{Database, TableDefinition, ReadableTable};
 use fastembed::{TextEmbedding, InitOptions, EmbeddingModel};
-use std::sync::Arc;
 
 const FACTS_TABLE: TableDefinition<&str, &str> = TableDefinition::new("facts");
 
@@ -12,12 +11,11 @@ pub struct MemoryManager {
 impl MemoryManager {
     pub fn new(db_path: &str) -> anyhow::Result<Self> {
         let db = Database::builder()
-            .set_write_strategy(WriteStrategy::TwoPhase)
             .create(db_path)?;
 
         // Initialize fastembed with a lightweight model for V100
         let model = TextEmbedding::try_new(
-            InitOptions::new(EmbeddingModel::AllMiniLML6V2, true)
+            InitOptions::new(EmbeddingModel::AllMiniLML6V2)
         )?;
 
         Ok(Self { db, model })

@@ -58,10 +58,8 @@ impl InferenceEngine {
 
     /// Load weights directly from .safetensors into V100 VRAM.
     pub fn load_weights<P: AsRef<Path>>(&self, path: P) -> Result<VarBuilder> {
-        unsafe {
-            // VarBuilder with direct CUDA mapping
-            VarBuilder::from_safetensors(vec![path], DType::F16, &self.device)
-        }
+        let tensors = unsafe { candle_core::safetensors::load(path, &self.device)? };
+        Ok(VarBuilder::from_tensors(tensors, DType::F16, &self.device))
     }
 
     /// Example Transformer forward pass scaffold with manual KV Cache integration.
@@ -78,7 +76,7 @@ impl InferenceEngine {
         seqlen_offset: usize,
         cache: &mut KVCache,
     ) -> Result<Tensor> {
-        let mut x = x.clone();
+        let x = x.clone();
 
         for i in 0..self.num_layers {
             // -- Attention Block Placeholder --
