@@ -13,6 +13,13 @@ impl MemoryManager {
         let db = Database::builder()
             .create(db_path)?;
 
+        // Ensure table exists (Phase 3)
+        let write_txn = db.begin_write()?;
+        {
+            let _ = write_txn.open_table(FACTS_TABLE)?;
+        }
+        write_txn.commit()?;
+
         // Initialize fastembed with a lightweight model for V100
         let model = TextEmbedding::try_new(
             InitOptions::new(EmbeddingModel::AllMiniLML6V2)
