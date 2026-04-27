@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  oopllama:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: oopllama_agent
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    environment:
+      - RUST_LOG=info
+      - CUDA_VISIBLE_DEVICES=0
+    restart: unless-stopped
