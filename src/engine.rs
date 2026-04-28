@@ -103,6 +103,8 @@ impl InferenceEngine {
         print!("\n🧠 NOVA: ");
         std::io::stdout().flush().unwrap();
 
+        let mut current_string = String::new();
+
         // 3. Decoding Loop
         for _ in 0..256 {
             let input_tensor = Tensor::new(&[next_token], &self.device)?.unsqueeze(0)?;
@@ -120,20 +122,24 @@ impl InferenceEngine {
             generated_tokens.push(next_token);
             index_pos += 1;
             
-            // Stream the token to the console in real-time
-            if let Ok(t) = self.tokenizer.decode(&[next_token], true) {
-                print!("{}", t);
+            // Stream the delta to preserve spaces properly
+            if let Ok(full_text) = self.tokenizer.decode(&generated_tokens, true) {
+                let new_text = &full_text[current_string.len()..];
+                print!("{}", new_text);
                 let _ = std::io::stdout().flush();
+                current_string = full_text;
             }
 
-            // Stop at EOS token (usually 2 for Llama models)
+            // Stop at EOS token or if the AI tries to simulate the user
             if next_token == 2 || next_token == self.tokenizer.token_to_id("</s>").unwrap_or(2) {
+                break;
+            }
+            if current_string.contains("<|user|>") {
                 break;
             }
         }
         println!();
         
-        let text = self.tokenizer.decode(&generated_tokens, true).map_err(|e| anyhow::anyhow!(e.to_string()))?;
-        Ok(text)
+        Ok(current_string)
     }
 }
