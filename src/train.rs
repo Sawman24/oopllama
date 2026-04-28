@@ -113,5 +113,26 @@ fn main() -> Result<()> {
     println!("We have successfully backpropagated gradients and updated the neural weights of our custom model.");
     println!("=====================================");
 
+    println!("Testing Generative Output (Greedy Decoding)...");
+    let mut generated = vec!['H' as u32, 'e' as u32, 'l' as u32, 'l' as u32, 'o' as u32];
+    
+    for _ in 0..100 {
+        let input = Tensor::from_slice(&generated, (1, generated.len()), &device)?;
+        let logits = model.forward(&input)?;
+        
+        // Get logits for the last token: [1, seq_len, vocab_size] -> [vocab_size]
+        let seq_len = logits.dim(1)?;
+        let logits_last = logits.narrow(1, seq_len - 1, 1)?.squeeze(1)?.squeeze(0)?;
+        
+        // Pick the most likely next character
+        let next_token = logits_last.argmax(0)?.to_scalar::<u32>()?;
+        generated.push(next_token);
+    }
+    
+    let generated_str: String = generated.into_iter().map(|c| c as u8 as char).collect();
+    println!("\n🧠 Custom GPT Output: {}", generated_str);
+    println!("=====================================");
+
     Ok(())
 }
+
