@@ -57,14 +57,6 @@ async fn main() -> anyhow::Result<()> {
 
     // 5. Handle Async Events (Phase 4 & 5)
     println!("Oopllama System Online (V100 SXM2 Optimization Active)");
-    
-    // Simulate an external webhook event (e.g. from Home Assistant)
-    let webhook_tx = tx.clone();
-    tokio::spawn(async move {
-        tokio::time::sleep(std::time::Duration::from_secs(2)).await;
-        let event = "Automation Triggered: Security camera detected motion. What should I do?".to_string();
-        webhook_tx.send(event).await.unwrap();
-    });
 
     // 6. Interactive CLI Loop
     use tokio::io::{self, AsyncBufReadExt, BufReader};
