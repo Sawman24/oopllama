@@ -43,15 +43,20 @@ impl Agent {
     pub async fn run_task(&mut self, task: String) -> anyhow::Result<String> {
         let relevant_facts = self.memory.search_relevant_context(&task, 3).await?;
         let context_str = relevant_facts.join("\n");
-
-        {
+        if self.state.lock().await.history.is_empty() {
             let mut state = self.state.lock().await;
-            let nova_persona = "You are NOVA, a friendly and intelligent conversational AI assistant. \
-You are here to chat, answer questions, and assist the user.";
+            let nova_persona = "You are NOVA, a helpful AI assistant. You answer questions accurately and concisely. \
+NEVER roleplay or simulate a conversation. Only output YOUR response, then stop.";
+
+            let context_block = if context_str.is_empty() {
+                String::new()
+            } else {
+                format!("\nSmart Home Sensor Data:\n{}", context_str)
+            };
 
             state.history.push(Message {
                 role: "system".into(),
-                content: format!("{}\n\nContext:\n{}", nova_persona, context_str),
+                content: format!("{}{}", nova_persona, context_block),
             });
         }
 
