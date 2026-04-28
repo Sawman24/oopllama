@@ -69,7 +69,7 @@ fn main() -> Result<()> {
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
-    let mut opt = AdamW::new_lr(varmap.all_vars(), 5e-4)?;
+    let mut opt = AdamW::new_lr(varmap.all_vars(), 1e-4)?;
 
     println!("Starting hyper-speed training loop...");
     let epochs = 50000;
