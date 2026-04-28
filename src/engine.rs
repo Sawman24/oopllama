@@ -1,6 +1,6 @@
 use candle_core::{Device, Tensor, DType};
 use candle_nn::VarBuilder;
-use candle_transformers::models::llama::{Llama, Config, Cache};
+use candle_transformers::models::llama::{Llama, LlamaConfig, Config, Cache};
 use candle_transformers::generation::LogitsProcessor;
 use tokenizers::Tokenizer;
 use std::path::Path;
@@ -34,7 +34,8 @@ impl InferenceEngine {
         }
 
         tracing::info!("Loading NOVA Config...");
-        let config: Config = serde_json::from_reader(std::fs::File::open(&config_path)?)?;
+        let config_json: LlamaConfig = serde_json::from_reader(std::fs::File::open(&config_path)?)?;
+        let config: Config = config_json.into_config(false); // false = no flash attention for now
         
         tracing::info!("Loading Tokenizer...");
         let tokenizer = Tokenizer::from_file(&tokenizer_path).map_err(|e| anyhow::anyhow!(e.to_string()))?;
