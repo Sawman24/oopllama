@@ -50,12 +50,13 @@ impl CausalSelfAttention {
         let qkv = qkv.reshape((b_size, seq_len, 3, self.n_head, head_dim))?;
         
         // Extract Q, K, V
-        let q = qkv.i((.., .., 0, .., ..))?.transpose(1, 2)?; // [b, n_head, seq, head_dim]
+        let q = qkv.i((.., .., 0, .., ..))?.transpose(1, 2)?.contiguous()?; // [b, n_head, seq, head_dim]
         let k = qkv.i((.., .., 1, .., ..))?.transpose(1, 2)?.contiguous()?;
         let v = qkv.i((.., .., 2, .., ..))?.transpose(1, 2)?.contiguous()?;
 
         // Attention weights: Q * K^T / sqrt(head_dim)
-        let att = q.matmul(&k.transpose(2, 3)?)?;
+        let k_t = k.transpose(2, 3)?.contiguous()?;
+        let att = q.matmul(&k_t)?;
         let att = (att / (head_dim as f64).sqrt())?;
         
         // Causal Mask
@@ -68,7 +69,7 @@ impl CausalSelfAttention {
 
         // Output: att * V
         let y = att.matmul(&v)?;
-        let y = y.transpose(1, 2)?.reshape((b_size, seq_len, n_embd))?;
+        let y = y.transpose(1, 2)?.contiguous()?.reshape((b_size, seq_len, n_embd))?;
         self.c_proj.forward(&y)
     }
 
@@ -127,7 +128,6 @@ pub struct GPT {
     blocks: Vec<Block>,
     ln_f: LayerNorm,
     lm_head: Linear,
-    config: Config,
 }
 
 impl GPT {
@@ -143,7 +143,7 @@ impl GPT {
         let ln_f = layer_norm(cfg.n_embd, 1e-5, vb.pp("ln_f"))?;
         let lm_head = linear(cfg.n_embd, cfg.vocab_size, vb.pp("lm_head"))?;
         
-        Ok(Self { wte, wpe, blocks, ln_f, lm_head, config: cfg.clone() })
+        Ok(Self { wte, wpe, blocks, ln_f, lm_head })
     }
 
     pub fn forward(&self, idx: &Tensor) -> Result<Tensor> {
