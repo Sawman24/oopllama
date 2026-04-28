@@ -29,13 +29,13 @@ impl InferenceEngine {
         let tokenizer_path = model_dir.join("tokenizer.json");
         let weights_path = model_dir.join("model.safetensors");
 
-        if !weights_path.exists() {
-            tracing::warn!("Model weights not found at {:?}. Please run the download script.", weights_path);
+        if !weights_path.exists() || !config_path.exists() || !tokenizer_path.exists() {
+            tracing::warn!("Model files missing. Please run the download script.");
             tracing::warn!("Sleeping to keep container alive for download...");
-            while !weights_path.exists() {
+            while !weights_path.exists() || !config_path.exists() || !tokenizer_path.exists() {
                 std::thread::sleep(std::time::Duration::from_secs(5));
             }
-            tracing::info!("Model found! Booting NOVA...");
+            tracing::info!("All model files found! Booting NOVA...");
         }
 
         tracing::info!("Loading NOVA Config...");
