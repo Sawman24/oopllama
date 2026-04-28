@@ -65,7 +65,7 @@ fn main() -> Result<()> {
         &device,
     )?;
 
-    let batch_size = 64; // Significant increase to saturate V100
+    let batch_size = 32; // Reduced from 64 to avoid OOM while still saturating the GPU
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
