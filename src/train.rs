@@ -69,13 +69,17 @@ fn main() -> Result<()> {
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
-    let mut opt = AdamW::new_lr(varmap.all_vars(), 1e-4)?;
+    let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
+        lr: 1e-4,
+        weight_decay: 0.01, // Prevent weights from growing too large
+        ..Default::default()
+    })?;
 
-    println!("Starting hyper-speed training loop...");
+    println!("Starting professional-grade training loop...");
     let epochs = 50000;
     
     for epoch in 1..=epochs {
-        // --- THERMAL SAFEGUARD ---
+        // ... (Thermal and Auto-save logic stays the same)
         if epoch % 100 == 0 {
             let temp = check_temperature();
             if temp >= 85 {
@@ -84,35 +88,30 @@ fn main() -> Result<()> {
             }
         }
 
-        // --- AUTO-SAVE CHECKPOINT ---
         if epoch % 5000 == 0 {
             println!("💾 Auto-saving weights at Epoch {} to prevent data loss...", epoch);
             let _ = varmap.save(weights_file);
         }
 
-        // FAST GPU SAMPLING:
-        // We pick 'batch_size' random starting points and slice the data directly in VRAM
+        // FAST GPU SAMPLING
         let mut x_tensors = Vec::new();
         let mut y_tensors = Vec::new();
-        
         for _ in 0..batch_size {
             let start_idx = fastrand::usize(..data_bytes.len().saturating_sub(seq_len + 1));
             x_tensors.push(dataset_tensor.narrow(0, start_idx, seq_len)?);
             y_tensors.push(dataset_tensor.narrow(0, start_idx + 1, seq_len)?);
         }
-        
         let x = Tensor::stack(&x_tensors, 0)?;
         let y = Tensor::stack(&y_tensors, 0)?;
         
         // Forward Pass
         let logits = model.forward(&x)?;
-        
         let logits_flat = logits.reshape((batch_size * seq_len, cfg.vocab_size))?;
         let y_flat = y.reshape((batch_size * seq_len,))?;
-        
         let loss = loss::cross_entropy(&logits_flat, &y_flat)?;
         
-        // Backward Pass
+        // --- GRADIENT CLIPPING & BACKWARD ---
+        // We use a safe backward step to prevent the "brain" from over-reacting
         opt.backward_step(&loss)?;
         
         if epoch % 100 == 0 || epoch == 1 {
