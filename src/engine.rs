@@ -99,6 +99,10 @@ impl InferenceEngine {
         generated_tokens.push(next_token);
         index_pos += tokens.len();
         
+        use std::io::Write;
+        print!("\n🧠 NOVA: ");
+        std::io::stdout().flush().unwrap();
+
         // 3. Decoding Loop
         for _ in 0..256 {
             let input_tensor = Tensor::new(&[next_token], &self.device)?.unsqueeze(0)?;
@@ -113,15 +117,21 @@ impl InferenceEngine {
             };
 
             next_token = logits_processor.sample(&logits)?;
-            
             generated_tokens.push(next_token);
             index_pos += 1;
             
+            // Stream the token to the console in real-time
+            if let Ok(t) = self.tokenizer.decode(&[next_token], true) {
+                print!("{}", t);
+                let _ = std::io::stdout().flush();
+            }
+
             // Stop at EOS token (usually 2 for Llama models)
             if next_token == 2 || next_token == self.tokenizer.token_to_id("</s>").unwrap_or(2) {
                 break;
             }
         }
+        println!();
         
         let text = self.tokenizer.decode(&generated_tokens, true).map_err(|e| anyhow::anyhow!(e.to_string()))?;
         Ok(text)
