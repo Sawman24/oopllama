@@ -52,9 +52,9 @@ fn main() -> Result<()> {
     println!("Model initialized successfully. Parameters: {}", varmap.all_vars().len());
 
     // 2. Setup Dataset
-    println!("Loading TinyShakespeare dataset...");
-    let dataset_string = std::fs::read_to_string("input.txt").unwrap_or_else(|_| {
-        String::from("Fallback text! Could not load input.txt.")
+    println!("Loading Alice in Wonderland dataset...");
+    let dataset_string = std::fs::read_to_string("alice.txt").unwrap_or_else(|_| {
+        String::from("Fallback text! Could not load alice.txt.")
     });
     let data_bytes = dataset_string.as_bytes();
     
@@ -123,7 +123,7 @@ fn main() -> Result<()> {
     println!("=====================================");
 
     println!("Testing Generative Output (Greedy Decoding)...");
-    let mut generated = vec!['T' as u32, 'h' as u32, 'e' as u32, ' ' as u32];
+    let mut generated = vec!['A' as u32, 'l' as u32, 'i' as u32, 'c' as u32, 'e' as u32];
     
     for _ in 0..200 {
         let input = Tensor::from_slice(&generated, (1, generated.len()), &device)?;
