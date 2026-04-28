@@ -28,8 +28,8 @@ fn main() -> Result<()> {
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
     println!("Target Device: {:?}", device);
 
-    // 1. Setup Model Architecture (F16 for Tensor Cores!)
-    let dtype = DType::F16; 
+    // 1. Setup Model Architecture (Back to F32 for ultimate stability)
+    let dtype = DType::F32; 
     let cfg = Config {
         vocab_size: 256,
         n_embd: 512,
@@ -42,26 +42,23 @@ fn main() -> Result<()> {
     let vb = VarBuilder::from_varmap(&varmap, dtype, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    let weights_file = "nova_f16_weights.safetensors";
+    let weights_file = "nova_large_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
         println!("Found existing weights! Resuming training from {}...", weights_file);
         varmap.load(weights_file)?;
     } else {
-        println!("No existing weights found. Initializing fresh F16 weights.");
+        println!("No existing weights found. Initializing fresh weights.");
     }
-    
-    println!("Model initialized successfully. Parameters: {}", varmap.all_vars().len());
 
-    // 2. Setup Dataset & MEGA-BATCHING
+    // 2. Setup Dataset & MEGA-BATCHING (Keep this for speed!)
     println!("Preparing Mega-Batch on GPU for zero CPU latency...");
     let dataset_string = std::fs::read_to_string("alice.txt").unwrap_or_else(|_| String::from("Fallback text!"));
     let data_bytes = dataset_string.as_bytes();
     
-    let batch_size = 64; // Increased batch size
+    let batch_size = 32; // Safe batch size
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 1000;
     
-    // Pre-generate 1000 steps worth of data
     let mut mega_x = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
     let mut mega_y = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
     
@@ -84,12 +81,11 @@ fn main() -> Result<()> {
         ..Default::default()
     })?;
 
-    println!("Starting MAX-UTILIZATION training loop (F16 + MegaBatch)...");
+    println!("Starting STABLE training loop (F32 + MegaBatch)...");
     let epochs = 50000;
     let mut smoothed_loss = 0.0;
     
     for epoch in 1..=epochs {
-        // Reduced frequency of checks to keep GPU busy
         if epoch % 500 == 0 {
             let temp = check_temperature();
             if temp >= 85 {
@@ -105,23 +101,19 @@ fn main() -> Result<()> {
             opt.set_learning_rate(current_lr);
         }
 
-        // Zero-latency GPU-side data pull
         let step_idx = (epoch - 1) % mega_batch_steps;
         let x = mega_x_tensor.get(step_idx)?;
         let y = mega_y_tensor.get(step_idx)?;
         
-        // Forward Pass (F16)
+        // Forward Pass
         let logits = model.forward(&x)?;
         let logits_flat = logits.reshape((batch_size * seq_len, cfg.vocab_size))?;
         let y_flat = y.reshape((batch_size * seq_len,))?;
-        
-        // Loss calculation must be in F32 for stability
-        let loss = loss::cross_entropy(&logits_flat.to_dtype(DType::F32)?, &y_flat)?;
+        let loss = loss::cross_entropy(&logits_flat, &y_flat)?;
         
         // Backward Pass
         opt.backward_step(&loss)?;
         
-        // Only calculate loss occasionally to avoid blocking the GPU
         if epoch % 100 == 0 || epoch == 1 {
             let loss_val = loss.to_vec0::<f32>()?;
             if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
