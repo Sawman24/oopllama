@@ -68,8 +68,15 @@ Think step-by-step, explain your reasoning if necessary, and use the provided to
 
         loop {
             // 1. Probabilistic Generation (NOVA's "Brain")
-            let history_dump = format!("{:?}", self.state.lock().await.history);
-            let response = self.engine.generate(&history_dump)?; 
+            // Format the prompt using the TinyLlama Chat template
+            let mut prompt = String::new();
+            for msg in self.state.lock().await.history.iter() {
+                prompt.push_str(&format!("<|{}|>\n{}</s>\n", msg.role, msg.content));
+            }
+            // Prompt the AI to begin its response
+            prompt.push_str("<|assistant|>\nThought:");
+
+            let response = self.engine.generate(&prompt)?; 
             
             println!("\n🧠 NOVA: {}", response);
 
