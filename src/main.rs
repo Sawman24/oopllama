@@ -38,9 +38,8 @@ async fn main() -> anyhow::Result<()> {
         let mut agent = Agent::new(agent_engine, agent_dispatcher, agent_memory);
         
         while let Some(task) = rx.recv().await {
-            match agent.run_task(task).await {
-                Ok(res) => println!("Agent Output: {}", res),
-                Err(e) => eprintln!("Agent Error: {}", e),
+            if let Err(e) = agent.run_task(task).await {
+                eprintln!("Agent Error: {}", e);
             }
         }
     });
