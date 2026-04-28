@@ -1,4 +1,4 @@
-use candle_core::{DType, Device, Result, Tensor, IndexOp};
+use candle_core::{Device, Result, Tensor, IndexOp};
 use candle_nn::{embedding, linear, layer_norm, Linear, LayerNorm, Embedding, VarBuilder, Module};
 
 #[derive(Debug, Clone)]

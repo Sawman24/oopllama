@@ -1,7 +1,5 @@
 use candle_core::{Device, Result, Tensor, DType};
 use candle_nn::{AdamW, Optimizer, VarBuilder, VarMap, loss};
-use std::fs::File;
-use std::io::Read;
 
 mod custom_model;
 use custom_model::{GPT, Config};
@@ -53,7 +51,7 @@ fn main() -> Result<()> {
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
-    let mut opt = AdamW::new_v2(varmap.all_vars(), 1e-3, 0.9, 0.999, 1e-8, 0.01)?;
+    let mut opt = AdamW::new_lr(varmap.all_vars(), 1e-3)?;
 
     println!("Starting training loop...");
     let epochs = 500;
