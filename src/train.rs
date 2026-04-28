@@ -37,7 +37,14 @@ fn main() -> Result<()> {
         max_seq_len: 128,
     };
     
-    let varmap = VarMap::new();
+    let mut varmap = VarMap::new();
+    if std::path::Path::new("nova_weights.safetensors").exists() {
+        println!("Found existing weights! Resuming training from nova_weights.safetensors...");
+        varmap.load("nova_weights.safetensors")?;
+    } else {
+        println!("No existing weights found. Initializing fresh weights.");
+    }
+
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
     let model = GPT::new(vb, &cfg)?;
     
@@ -111,6 +118,8 @@ fn main() -> Result<()> {
     println!("=====================================");
     println!("Training Complete!");
     println!("We have successfully backpropagated gradients and updated the neural weights of our custom model.");
+    println!("Saving weights to 'nova_weights.safetensors'...");
+    varmap.save("nova_weights.safetensors")?;
     println!("=====================================");
 
     println!("Testing Generative Output (Greedy Decoding)...");
