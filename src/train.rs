@@ -38,15 +38,15 @@ fn main() -> Result<()> {
     };
     
     let mut varmap = VarMap::new();
+    let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
+    let model = GPT::new(vb, &cfg)?;
+    
     if std::path::Path::new("nova_weights.safetensors").exists() {
         println!("Found existing weights! Resuming training from nova_weights.safetensors...");
         varmap.load("nova_weights.safetensors")?;
     } else {
         println!("No existing weights found. Initializing fresh weights.");
     }
-
-    let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
-    let model = GPT::new(vb, &cfg)?;
     
     println!("Model initialized successfully. Parameters: {}", varmap.all_vars().len());
 
