@@ -42,11 +42,15 @@ fn main() -> Result<()> {
     let vb = VarBuilder::from_varmap(&varmap, dtype, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    let weights_file = "nova_large_weights.safetensors";
+    let weights_file = "nova_f16_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
         println!("Found existing weights! Resuming training from {}...", weights_file);
         varmap.load(weights_file)?;
+    } else {
+        println!("No existing weights found. Initializing fresh F16 weights.");
     }
+    
+    println!("Model initialized successfully. Parameters: {}", varmap.all_vars().len());
 
     // 2. Setup Dataset & MEGA-BATCHING
     println!("Preparing Mega-Batch on GPU for zero CPU latency...");
