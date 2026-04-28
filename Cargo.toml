@@ -3,6 +3,14 @@ name = "oopllama"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "oopllama"
+path = "src/main.rs"
+
+[[bin]]
+name = "train_nova"
+path = "src/train.rs"
+
 [dependencies]
 # Inference Pipeline
 candle-core = { version = "0.8.2", features = ["cuda"] }
