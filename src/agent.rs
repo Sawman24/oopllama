@@ -1,4 +1,4 @@
-use crate::engine::{InferenceEngine, KVCache};
+use crate::engine::InferenceEngine;
 use crate::tools::ToolDispatcher;
 use crate::memory::MemoryManager;
 use serde::{Deserialize, Serialize};
@@ -23,7 +23,6 @@ pub struct Agent {
     pub state: Arc<Mutex<SystemState>>,
     pub tools: Arc<ToolDispatcher>,
     pub memory: Arc<MemoryManager>,
-    pub cache: KVCache,
 }
 
 impl Agent {
@@ -32,13 +31,11 @@ impl Agent {
         tools: Arc<ToolDispatcher>,
         memory: Arc<MemoryManager>,
     ) -> Self {
-        let num_layers = engine.num_layers;
         Self {
             engine,
             state: Arc::new(Mutex::new(SystemState::default())),
             tools,
             memory,
-            cache: KVCache::new(num_layers),
         }
     }
 
@@ -72,7 +69,7 @@ Think step-by-step, explain your reasoning if necessary, and use the provided to
         loop {
             // 1. Probabilistic Generation (NOVA's "Brain")
             let history_dump = format!("{:?}", self.state.lock().await.history);
-            let response = self.engine.generate(&history_dump, &mut self.cache)?; 
+            let response = self.engine.generate(&history_dump)?; 
             
             println!("\n🧠 NOVA: {}", response);
 

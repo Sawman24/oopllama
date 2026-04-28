@@ -1,30 +1,9 @@
-use candle_core::{Device, Result, Tensor, DType};
+use candle_core::{Device, Tensor, DType};
 use candle_nn::VarBuilder;
+use candle_transformers::models::llama::{Llama, LlamaConfig, Cache};
+use candle_transformers::generation::LogitsProcessor;
+use tokenizers::Tokenizer;
 use std::path::Path;
-
-/// Manual KV Cache management for persisting context.
-/// Holds (Key, Value) tensor pairs for each layer.
-pub struct KVCache {
-    pub k: Vec<Option<Tensor>>,
-    pub v: Vec<Option<Tensor>>,
-}
-
-impl KVCache {
-    pub fn new(num_layers: usize) -> Self {
-        Self {
-            k: vec![None; num_layers],
-            v: vec![None; num_layers],
-        }
-    }
-
-    /// Reset the cache for a new sequence.
-    pub fn clear(&mut self) {
-        for i in 0..self.k.len() {
-            self.k[i] = None;
-            self.v[i] = None;
-        }
-    }
-}
 
 pub struct Telemetry {
     pub vram_total: u64,
@@ -34,135 +13,92 @@ pub struct Telemetry {
 
 pub struct InferenceEngine {
     pub device: Device,
-    pub num_layers: usize,
+    pub model: Llama,
+    pub tokenizer: Tokenizer,
+    pub config: LlamaConfig,
 }
 
 impl InferenceEngine {
-    pub fn new() -> Result<Self> {
+    pub fn new() -> anyhow::Result<Self> {
         // Optimized for V100: Compute Capability 7.0
         let device = Device::new_cuda(0)?;
+        
+        // Define paths to downloaded models
+        let model_dir = Path::new("models");
+        let config_path = model_dir.join("config.json");
+        let tokenizer_path = model_dir.join("tokenizer.json");
+        let weights_path = model_dir.join("model.safetensors");
+
+        if !weights_path.exists() {
+            anyhow::bail!("Model weights not found. Please run download script.");
+        }
+
+        tracing::info!("Loading NOVA Config...");
+        let config: LlamaConfig = serde_json::from_reader(std::fs::File::open(&config_path)?)?;
+        
+        tracing::info!("Loading Tokenizer...");
+        let tokenizer = Tokenizer::from_file(&tokenizer_path).map_err(|e| anyhow::anyhow!(e.to_string()))?;
+
+        tracing::info!("Loading Weights to VRAM (FP16)...");
+        let vb = unsafe { VarBuilder::from_mmaped_safetensors(&[weights_path], DType::F16, &device)? };
+        
+        tracing::info!("Initializing Transformer Engine...");
+        let model = Llama::load(vb, &config)?;
+
         Ok(Self {
             device,
-            num_layers: 32, // Example for Llama-7B
+            model,
+            tokenizer,
+            config,
         })
     }
 
     pub fn get_telemetry(&self) -> Telemetry {
-        // In a real system, use nvml-wrapper to query the V100
         Telemetry {
-            vram_total: 16160, // 16GB for V100 SXM2
-            vram_used: 4096,   // Mocked usage
+            vram_total: 16160,
+            vram_used: 4096, // In a real setup, query via nvml
             temperature: 45.0,
         }
     }
 
-    /// Load weights directly from .safetensors into V100 VRAM.
-    pub fn load_weights<P: AsRef<Path>>(&self, path: P) -> Result<VarBuilder> {
-        let tensors = candle_core::safetensors::load(path, &self.device)?;
-        Ok(VarBuilder::from_tensors(tensors, DType::F16, &self.device))
-    }
-
-    /// Example Transformer forward pass scaffold with manual KV Cache integration.
-    /// 
-    /// Logic:
-    /// 1. Project input 'x' to Query, Key, Value (Q, K, V).
-    /// 2. If seqlen_offset > 0, we are in the 'decoding' phase.
-    /// 3. Retrieve previous K, V from cache and concatenate with new K, V.
-    /// 4. Store updated K, V back in cache.
-    /// 5. Compute scaled dot-product attention using the full context.
-    pub fn forward(
-        &self,
-        x: &Tensor,
-        seqlen_offset: usize,
-        cache: &mut KVCache,
-    ) -> Result<Tensor> {
-        let x = x.clone();
-
-        for i in 0..self.num_layers {
-            // -- Attention Block Placeholder --
-            // let (q, k, v) = self.layers[i].compute_qkv(&x)?;
-            
-            // Mocking K and V for the sake of the scaffold
-            let k = x.clone(); // In reality: x @ W_k
-            let v = x.clone(); // In reality: x @ W_v
-
-            // Update KV Cache for layer 'i'
-            let (k, v) = if seqlen_offset > 0 {
-                let prev_k = cache.k[i].as_ref().unwrap();
-                let prev_v = cache.v[i].as_ref().unwrap();
-                
-                // Concatenate current token's K/V with previous history
-                // On V100, this happens in VRAM (CUDA)
-                let k = Tensor::cat(&[prev_k, &k], 1)?;
-                let v = Tensor::cat(&[prev_v, &v], 1)?;
-                (k, v)
-            } else {
-                (k, v)
-            };
-
-            // Persist the updated state for the next token generation step
-            cache.k[i] = Some(k.clone());
-            cache.v[i] = Some(v.clone());
-
-            // -- Scaled Dot-Product Attention would use 'k' and 'v' here --
-            // x = self.layers[i].attn_output(&q, &k, &v)?;
-            // x = self.layers[i].mlp(&x)?;
-        }
-
-        Ok(x)
-    }
-
-    /// Probabilistic token generation loop. 
-    /// NOVA uses this to reason step-by-step rather than using predetermined outputs.
-    pub fn generate(
-        &self,
-        _prompt: &str,
-        cache: &mut KVCache,
-    ) -> Result<String> {
-        // Clear KV Cache for a new generation sequence
-        cache.clear();
-
-        // 1. Tokenization would happen here
-        // let mut tokens = self.tokenizer.encode(prompt, true).unwrap().get_ids().to_vec();
+    /// Actual Probabilistic Token Generation using Llama Architecture
+    pub fn generate(&self, prompt: &str) -> anyhow::Result<String> {
+        let mut cache = Cache::new(true, DType::F16, &self.config, &self.device)?;
+        let mut logits_processor = LogitsProcessor::new(299792458, Some(0.7), Some(0.95));
         
-        // 2. Probabilistic Sampling Setup
-        // Temperature > 0.0 enables non-deterministic outputs.
-        // Top-P ensures we only sample from the most probable tokens, preventing gibberish.
-        // use candle_transformers::generation::LogitsProcessor;
-        // let mut logits_processor = LogitsProcessor::new(299792458, Some(0.7), Some(0.95));
-
-        let mut generated_text = String::new();
-        let max_tokens = 256;
-
-        for _step in 0..max_tokens {
-            // 3. Forward Pass (Hardware Accelerated)
-            // let input_tensor = Tensor::new(&tokens[tokens.len() - 1..], &self.device)?.unsqueeze(0)?;
-            // let logits = self.forward(&input_tensor, step, cache)?;
-
-            // 4. Probability & Reasoning
-            // let next_token = logits_processor.sample(&logits.squeeze(0)?)?;
-            // tokens.push(next_token);
+        let tokens = self.tokenizer.encode(prompt, true).map_err(|e| anyhow::anyhow!(e.to_string()))?.get_ids().to_vec();
+        
+        let mut generated_tokens = vec![];
+        let mut index_pos = 0;
+        
+        // 1. Initial Prompt Forward Pass (Prefill Phase)
+        let input_tensor = Tensor::new(tokens.as_slice(), &self.device)?.unsqueeze(0)?;
+        let logits = self.model.forward(&input_tensor, index_pos, &mut cache)?;
+        
+        // 2. Sample first new token
+        let logits = logits.squeeze(0)?.squeeze(0)?; // Adjust tensor dims
+        let mut next_token = logits_processor.sample(&logits)?;
+        generated_tokens.push(next_token);
+        index_pos += tokens.len();
+        
+        // 3. Decoding Loop
+        for _ in 0..256 {
+            let input_tensor = Tensor::new(&[next_token], &self.device)?.unsqueeze(0)?;
+            let logits = self.model.forward(&input_tensor, index_pos, &mut cache)?;
             
-            // 5. Decode token to text
-            // if next_token == EOS_TOKEN { break; }
-            // generated_text.push_str(&self.tokenizer.decode(&[next_token], true).unwrap());
-
-            // Mocking the generation for the scaffold to satisfy the compilation
-            let lower_prompt = _prompt.to_lowercase();
-            let is_new_task = !lower_prompt.ends_with("observation: 22.5°c\" } ]"); // Check if the last thing in history is an observation
-
-            if !is_new_task {
-                generated_text = format!("Thought: I have received the necessary information. Final Answer: I've processed your request using my probabilistic engine. (Action completed)");
-            } else if lower_prompt.contains("hello") || lower_prompt.contains("hi") {
-                generated_text = format!("Thought: The user is greeting me. I don't need any tools for this. Final Answer: Hello! I am NOVA. How can I assist you today?");
-            } else if lower_prompt.contains("how are you") {
-                generated_text = format!("Thought: The user is asking how I am. Final Answer: I am functioning at optimal capacity across all CUDA cores. How can I help you?");
-            } else {
-                generated_text = "Thought: I am NOVA. I must evaluate the current state using probabilities. Action: GetTemperature {}".to_string();
+            let logits = logits.squeeze(0)?.squeeze(0)?;
+            next_token = logits_processor.sample(&logits)?;
+            
+            generated_tokens.push(next_token);
+            index_pos += 1;
+            
+            // Stop at EOS token (usually 2 for Llama models)
+            if next_token == 2 || next_token == self.tokenizer.token_to_id("</s>").unwrap_or(2) {
+                break;
             }
-            break;
         }
-
-        Ok(generated_text)
+        
+        let text = self.tokenizer.decode(&generated_tokens, true).map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        Ok(text)
     }
 }
