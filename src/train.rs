@@ -65,7 +65,7 @@ fn main() -> Result<()> {
         &device,
     )?;
 
-    let batch_size = 32; // Reduced from 64 to avoid OOM while still saturating the GPU
+    let batch_size = 64; // Restored to 64 now that we have the full 16GB of VRAM available
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
