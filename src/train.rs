@@ -64,8 +64,8 @@ fn main() -> Result<()> {
     // 3. Setup Optimizer
     let mut opt = AdamW::new_lr(varmap.all_vars(), 3e-4)?;
 
-    println!("Starting training loop...");
-    let epochs = 5000; // Increased epochs since the dataset is much larger
+    println!("Starting massive training loop...");
+    let epochs = 50000; // Massive 10x increase in training length!
     
     for epoch in 1..=epochs {
         // --- THERMAL SAFEGUARD ---
@@ -75,6 +75,12 @@ fn main() -> Result<()> {
                 println!("⚠️ CRITICAL: GPU Temperature reached {}°C! Pausing training for 60 seconds to cool down...", temp);
                 std::thread::sleep(std::time::Duration::from_secs(60));
             }
+        }
+
+        // --- AUTO-SAVE CHECKPOINT ---
+        if epoch % 5000 == 0 {
+            println!("💾 Auto-saving weights at Epoch {} to prevent data loss...", epoch);
+            let _ = varmap.save(weights_file);
         }
 
         // Create a random batch from our dataset
