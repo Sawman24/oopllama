@@ -28,44 +28,48 @@ fn main() -> Result<()> {
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
     println!("Target Device: {:?}", device);
 
-    // 1. Setup Model Architecture
+    // 1. Setup Model Architecture (Scaled up!)
     let cfg = Config {
-        vocab_size: 256, // Character-level model for quick training
-        n_embd: 128,
-        n_layer: 4,
-        n_head: 4,
-        max_seq_len: 128,
+        vocab_size: 256,
+        n_embd: 512,      // 4x thicker embeddings
+        n_layer: 8,       // 2x deeper
+        n_head: 8,        // 2x more attention heads
+        max_seq_len: 256, // 2x longer context window
     };
     
     let mut varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    if std::path::Path::new("nova_weights.safetensors").exists() {
-        println!("Found existing weights! Resuming training from nova_weights.safetensors...");
-        varmap.load("nova_weights.safetensors")?;
+    let weights_file = "nova_large_weights.safetensors";
+    if std::path::Path::new(weights_file).exists() {
+        println!("Found existing weights! Resuming training from {}...", weights_file);
+        varmap.load(weights_file)?;
     } else {
         println!("No existing weights found. Initializing fresh weights.");
     }
     
     println!("Model initialized successfully. Parameters: {}", varmap.all_vars().len());
 
-    // 2. Setup Dataset (We will train it on a mini dataset)
-    let dataset = "Hello! I am NOVA, your custom AI model. I was built from scratch in Rust using Candle. I am learning how to speak by looking at this text over and over again until I understand language!";
-    let data_bytes = dataset.as_bytes();
+    // 2. Setup Dataset
+    println!("Loading TinyShakespeare dataset...");
+    let dataset_string = std::fs::read_to_string("input.txt").unwrap_or_else(|_| {
+        String::from("Fallback text! Could not load input.txt.")
+    });
+    let data_bytes = dataset_string.as_bytes();
     
-    let batch_size = 4;
+    let batch_size = 16;
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
-    let mut opt = AdamW::new_lr(varmap.all_vars(), 1e-3)?;
+    let mut opt = AdamW::new_lr(varmap.all_vars(), 3e-4)?;
 
     println!("Starting training loop...");
-    let epochs = 500;
+    let epochs = 5000; // Increased epochs since the dataset is much larger
     
     for epoch in 1..=epochs {
         // --- THERMAL SAFEGUARD ---
-        if epoch % 10 == 0 {
+        if epoch % 50 == 0 {
             let temp = check_temperature();
             if temp >= 85 {
                 println!("⚠️ CRITICAL: GPU Temperature reached {}°C! Pausing training for 60 seconds to cool down...", temp);
@@ -78,15 +82,14 @@ fn main() -> Result<()> {
         let mut y_batch = Vec::new();
         
         for _ in 0..batch_size {
-            // Because our dataset is tiny, we just pad or loop it, but here we just take the first seq_len bytes
-            // In a real scenario, you would randomly sample chunks from a large corpus
+            // Randomly sample sequences from the large corpus
+            let start_idx = fastrand::usize(..data_bytes.len().saturating_sub(seq_len + 1));
+            
             let mut x_seq = Vec::new();
             let mut y_seq = Vec::new();
             for i in 0..seq_len {
-                let idx = (epoch + i) % data_bytes.len();
-                let next_idx = (epoch + i + 1) % data_bytes.len();
-                x_seq.push(data_bytes[idx] as u32);
-                y_seq.push(data_bytes[next_idx] as u32);
+                x_seq.push(data_bytes[start_idx + i] as u32);
+                y_seq.push(data_bytes[start_idx + i + 1] as u32);
             }
             x_batch.extend_from_slice(&x_seq);
             y_batch.extend_from_slice(&y_seq);
@@ -98,9 +101,6 @@ fn main() -> Result<()> {
         // Forward Pass
         let logits = model.forward(&x)?;
         
-        // Calculate Cross Entropy Loss
-        // Logits shape: [b, seq, vocab] -> [b * seq, vocab]
-        // Target shape: [b, seq] -> [b * seq]
         let logits_flat = logits.reshape((batch_size * seq_len, cfg.vocab_size))?;
         let y_flat = y.reshape((batch_size * seq_len,))?;
         
@@ -109,7 +109,7 @@ fn main() -> Result<()> {
         // Backward Pass
         opt.backward_step(&loss)?;
         
-        if epoch % 50 == 0 || epoch == 1 {
+        if epoch % 100 == 0 || epoch == 1 {
             let loss_f32 = loss.to_vec0::<f32>()?;
             println!("Epoch {}/{} | Loss: {:.4}", epoch, epochs, loss_f32);
         }
@@ -118,18 +118,17 @@ fn main() -> Result<()> {
     println!("=====================================");
     println!("Training Complete!");
     println!("We have successfully backpropagated gradients and updated the neural weights of our custom model.");
-    println!("Saving weights to 'nova_weights.safetensors'...");
-    varmap.save("nova_weights.safetensors")?;
+    println!("Saving weights to '{}'...", weights_file);
+    varmap.save(weights_file)?;
     println!("=====================================");
 
     println!("Testing Generative Output (Greedy Decoding)...");
-    let mut generated = vec!['H' as u32, 'e' as u32, 'l' as u32, 'l' as u32, 'o' as u32];
+    let mut generated = vec!['T' as u32, 'h' as u32, 'e' as u32, ' ' as u32];
     
-    for _ in 0..100 {
+    for _ in 0..200 {
         let input = Tensor::from_slice(&generated, (1, generated.len()), &device)?;
         let logits = model.forward(&input)?;
         
-        // Get logits for the last token: [1, seq_len, vocab_size] -> [vocab_size]
         let seq_len = logits.dim(1)?;
         let logits_last = logits.narrow(1, seq_len - 1, 1)?.squeeze(1)?.squeeze(0)?;
         
