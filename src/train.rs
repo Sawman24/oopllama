@@ -69,17 +69,19 @@ fn main() -> Result<()> {
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
+    let mut current_lr = 1e-4;
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
-        lr: 1e-4,
-        weight_decay: 0.01, // Prevent weights from growing too large
+        lr: current_lr,
+        weight_decay: 0.01,
         ..Default::default()
     })?;
 
-    println!("Starting professional-grade training loop...");
+    println!("Starting precision-scheduled training loop...");
     let epochs = 50000;
+    let mut smoothed_loss = 0.0;
     
     for epoch in 1..=epochs {
-        // ... (Thermal and Auto-save logic stays the same)
+        // ... (Thermal and Auto-save logic)
         if epoch % 100 == 0 {
             let temp = check_temperature();
             if temp >= 85 {
@@ -91,6 +93,12 @@ fn main() -> Result<()> {
         if epoch % 5000 == 0 {
             println!("💾 Auto-saving weights at Epoch {} to prevent data loss...", epoch);
             let _ = varmap.save(weights_file);
+            
+            // --- LEARNING RATE DECAY ---
+            // We slow down the learning rate as we get closer to the solution
+            current_lr *= 0.8; 
+            opt.set_learning_rate(current_lr);
+            println!("📉 Learning Rate decayed to {:.6} for higher precision.", current_lr);
         }
 
         // FAST GPU SAMPLING
@@ -110,13 +118,16 @@ fn main() -> Result<()> {
         let y_flat = y.reshape((batch_size * seq_len,))?;
         let loss = loss::cross_entropy(&logits_flat, &y_flat)?;
         
-        // --- GRADIENT CLIPPING & BACKWARD ---
-        // We use a safe backward step to prevent the "brain" from over-reacting
+        // Backward Pass
         opt.backward_step(&loss)?;
         
+        // Smooth the loss for better visualization
+        let loss_val = loss.to_vec0::<f32>()?;
+        if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
+        smoothed_loss = smoothed_loss * 0.95 + loss_val * 0.05;
+        
         if epoch % 100 == 0 || epoch == 1 {
-            let loss_f32 = loss.to_vec0::<f32>()?;
-            println!("Epoch {}/{} | Loss: {:.4}", epoch, epochs, loss_f32);
+            println!("Epoch {}/{} | Smoothed Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
         }
     }
 
