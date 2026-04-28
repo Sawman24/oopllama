@@ -7,10 +7,9 @@ services:
       dockerfile: Dockerfile
     container_name: oopllama_agent
     volumes:
+      - .:/app/code
       - ./models:/app/models
       - ./data:/app/data
-      - .:/app/code
-    command: tail -f /dev/null
     deploy:
       resources:
         reservations:
@@ -21,3 +20,4 @@ services:
     environment:
       - RUST_LOG=info
       - CUDA_VISIBLE_DEVICES=0
+    restart: unless-stopped
