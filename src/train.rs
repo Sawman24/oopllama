@@ -6,10 +6,25 @@ use std::io::Read;
 mod custom_model;
 use custom_model::{GPT, Config};
 
+fn check_temperature() -> u32 {
+    let output = std::process::Command::new("nvidia-smi")
+        .args(&["--query-gpu=temperature.gpu", "--format=csv,noheader"])
+        .output();
+        
+    if let Ok(out) = output {
+        let temp_str = String::from_utf8_lossy(&out.stdout);
+        if let Ok(temp) = temp_str.trim().parse::<u32>() {
+            return temp;
+        }
+    }
+    0
+}
+
 fn main() -> Result<()> {
     println!("=====================================");
     println!("Initializing Custom NOVA Training...");
     println!("Architecture: GPT from scratch");
+    println!("Safeguard: Thermal Throttling Active (Max 85°C)");
     println!("=====================================");
 
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
@@ -44,6 +59,15 @@ fn main() -> Result<()> {
     let epochs = 500;
     
     for epoch in 1..=epochs {
+        // --- THERMAL SAFEGUARD ---
+        if epoch % 10 == 0 {
+            let temp = check_temperature();
+            if temp >= 85 {
+                println!("⚠️ CRITICAL: GPU Temperature reached {}°C! Pausing training for 60 seconds to cool down...", temp);
+                std::thread::sleep(std::time::Duration::from_secs(60));
+            }
+        }
+
         // Create a random batch from our dataset
         let mut x_batch = Vec::new();
         let mut y_batch = Vec::new();
