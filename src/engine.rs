@@ -148,7 +148,13 @@ impl InferenceEngine {
             // generated_text.push_str(&self.tokenizer.decode(&[next_token], true).unwrap());
 
             // Mocking the generation for the scaffold to satisfy the compilation
-            generated_text = "Thought: I am NOVA. I must evaluate the current state using probabilities. Action: GetTemperature {}".to_string();
+            if _prompt.contains("Observation:") {
+                generated_text = format!("Thought: I have received the necessary information. Final Answer: Hello! I've processed your request using my probabilistic engine. (Action completed)");
+            } else if _prompt.to_lowercase().contains("hello") {
+                generated_text = format!("Thought: The user is greeting me. I don't need any tools for this. Final Answer: Hello! I am NOVA. How can I assist you today?");
+            } else {
+                generated_text = "Thought: I am NOVA. I must evaluate the current state using probabilities. Action: GetTemperature {}".to_string();
+            }
             break;
         }
 

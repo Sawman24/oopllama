@@ -71,17 +71,23 @@ Think step-by-step, explain your reasoning if necessary, and use the provided to
 
         loop {
             // 1. Probabilistic Generation (NOVA's "Brain")
-            // In reality, we'd pass the entire formatted state.history to the prompt.
-            let prompt = "Formatted history here...";
-            let response = self.engine.generate(prompt, &mut self.cache)?; 
+            let history_dump = format!("{:?}", self.state.lock().await.history);
+            let response = self.engine.generate(&history_dump, &mut self.cache)?; 
+            
+            println!("\n🧠 NOVA: {}", response);
 
             // 2. ReAct Parser
             if response.contains("Action:") {
                 let tool_call = response.split("Action: ").nth(1).unwrap_or("").trim();
                 
                 // 3. Dispatch Tool (Phase 2)
-                let observation = self.tools.dispatch(tool_call).await?;
+                let observation = match self.tools.dispatch(tool_call).await {
+                    Ok(obs) => obs,
+                    Err(e) => format!("Error: {}", e),
+                };
                 
+                println!("🛠️ System: Observation: {}", observation);
+
                 // 4. Memory Storage (Phase 3)
                 // Store important observations as facts
                 if observation.contains("22.5") {
