@@ -19,8 +19,14 @@ echo "Target: $MODEL_DIR/$MODEL_FILE"
 echo "Downloading from HuggingFace (This may take a few minutes depending on connection speed)..."
 echo "========================================================="
 
-# Download the model using curl, following redirects (-L) and showing a progress bar (-#)
+echo "Downloading Model Weights (Safetensors)..."
 curl -L -# "$MODEL_URL" -o "$MODEL_DIR/$MODEL_FILE"
+
+echo "Downloading Model Config (config.json)..."
+curl -L -s "https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/config.json" -o "$MODEL_DIR/config.json"
+
+echo "Downloading Tokenizer (tokenizer.json)..."
+curl -L -s "https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/tokenizer.json" -o "$MODEL_DIR/tokenizer.json"
 
 if [ $? -eq 0 ]; then
     echo ""
