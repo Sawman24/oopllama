@@ -85,9 +85,15 @@ impl InferenceEngine {
         let logits = self.model.forward(&input_tensor, index_pos, &mut cache)?;
         
         // 2. Extract the logits for the very last token
-        let logits = logits.squeeze(0)?; // now [seq_len, vocab_size]
-        let seq_len = logits.dim(0)?;
-        let logits = logits.narrow(0, seq_len - 1, 1)?.squeeze(0)?; // now [vocab_size]
+        let logits = logits.squeeze(0)?; 
+        let logits = if logits.rank() == 2 {
+            // [seq_len, vocab_size] -> take the last token
+            let seq_len = logits.dim(0)?;
+            logits.narrow(0, seq_len - 1, 1)?.squeeze(0)?
+        } else {
+            // Already [vocab_size]
+            logits
+        };
         
         let mut next_token = logits_processor.sample(&logits)?;
         generated_tokens.push(next_token);
@@ -98,7 +104,14 @@ impl InferenceEngine {
             let input_tensor = Tensor::new(&[next_token], &self.device)?.unsqueeze(0)?;
             let logits = self.model.forward(&input_tensor, index_pos, &mut cache)?;
             
-            let logits = logits.squeeze(0)?.squeeze(0)?; // safe here because seq_len is always 1 during decoding
+            let logits = logits.squeeze(0)?;
+            let logits = if logits.rank() == 2 {
+                let seq_len = logits.dim(0)?;
+                logits.narrow(0, seq_len - 1, 1)?.squeeze(0)?
+            } else {
+                logits
+            };
+
             next_token = logits_processor.sample(&logits)?;
             
             generated_tokens.push(next_token);
