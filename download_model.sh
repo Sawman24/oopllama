@@ -5,7 +5,7 @@
 # We are starting with Microsoft's Phi-3-mini-4k-instruct (3.8B parameters) or TinyLlama 
 # to ensure it comfortably fits in your V100's 16GB VRAM at FP16 precision without quantization.
 
-MODEL_DIR="./models"
+MODEL_DIR="/app/models"
 MODEL_FILE="model.safetensors"
 # Using TinyLlama 1.1B Chat for rapid testing. It's fully open and requires no API tokens.
 MODEL_URL="https://huggingface.co/TinyLlama/TinyLlama-1.1B-Chat-v1.0/resolve/main/model.safetensors"

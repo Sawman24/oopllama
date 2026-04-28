@@ -23,14 +23,19 @@ impl InferenceEngine {
         // Optimized for V100: Compute Capability 7.0
         let device = Device::new_cuda(0)?;
         
-        // Define paths to downloaded models
-        let model_dir = Path::new("models");
+        // Define paths to downloaded models (using the persistent Docker volume)
+        let model_dir = Path::new("/app/models");
         let config_path = model_dir.join("config.json");
         let tokenizer_path = model_dir.join("tokenizer.json");
         let weights_path = model_dir.join("model.safetensors");
 
         if !weights_path.exists() {
-            anyhow::bail!("Model weights not found. Please run download script.");
+            tracing::warn!("Model weights not found at {:?}. Please run the download script.", weights_path);
+            tracing::warn!("Sleeping to keep container alive for download...");
+            while !weights_path.exists() {
+                std::thread::sleep(std::time::Duration::from_secs(5));
+            }
+            tracing::info!("Model found! Booting NOVA...");
         }
 
         tracing::info!("Loading NOVA Config...");
