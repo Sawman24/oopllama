@@ -86,8 +86,22 @@ Available Tools:
             println!("\n🧠 NOVA: {}", response);
 
             // 2. ReAct Parser
-            if response.contains("Action:") {
-                let tool_call = response.split("Action: ").nth(1).unwrap_or("").trim();
+            let action_idx = response.find("Action:");
+            let final_idx = response.find("Final Answer:");
+
+            // If Final Answer appears first, or there's no action, return the answer
+            if let Some(f_idx) = final_idx {
+                if action_idx.is_none() || f_idx < action_idx.unwrap() {
+                    let answer_block = response[f_idx + "Final Answer:".len()..].trim();
+                    let final_answer = answer_block.split("Thought:").next().unwrap_or(answer_block).trim();
+                    return Ok(final_answer.to_string());
+                }
+            }
+
+            // Otherwise, process the Action
+            if let Some(a_idx) = action_idx {
+                let tool_block = response[a_idx + "Action:".len()..].trim();
+                let tool_call = tool_block.lines().next().unwrap_or("").trim();
                 
                 // 3. Dispatch Tool (Phase 2)
                 let observation = match self.tools.dispatch(tool_call).await {
@@ -98,9 +112,8 @@ Available Tools:
                 println!("🛠️ System: Observation: {}", observation);
 
                 // 4. Memory Storage (Phase 3)
-                // Store important observations as facts
                 if observation.contains("22.5") {
-                    self.memory.store_fact("living_room_temp", &format!("Living room temp is {}", observation))?;
+                    let _ = self.memory.store_fact("living_room_temp", &format!("Living room temp is {}", observation));
                 }
 
                 let mut state = self.state.lock().await;
@@ -108,13 +121,18 @@ Available Tools:
                     role: "system".into(),
                     content: format!("Observation: {}", observation),
                 });
-            } else if response.contains("Final Answer:") {
-                return Ok(response);
+            } else {
+                // If it didn't use the format, force it to try again
+                let mut state = self.state.lock().await;
+                state.history.push(Message {
+                    role: "system".into(),
+                    content: "Observation: Format error. You must use 'Action: [ToolName]' or 'Final Answer: [Your response]'.".into(),
+                });
             }
 
             if self.state.lock().await.history.len() > 15 { break; }
         }
 
-        Ok("Task completed.".into())
+        Ok("Task completed or aborted after too many steps.".into())
     }
 }
