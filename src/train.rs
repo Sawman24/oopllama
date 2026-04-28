@@ -58,18 +58,25 @@ fn main() -> Result<()> {
     });
     let data_bytes = dataset_string.as_bytes();
     
-    let batch_size = 16;
+    // Move the entire dataset to the GPU as a single continuous tensor
+    let dataset_tensor = Tensor::from_slice(
+        &data_bytes.iter().map(|&b| b as u32).collect::<Vec<u32>>(),
+        (data_bytes.len(),),
+        &device,
+    )?;
+
+    let batch_size = 64; // Significant increase to saturate V100
     let seq_len = cfg.max_seq_len;
     
     // 3. Setup Optimizer
-    let mut opt = AdamW::new_lr(varmap.all_vars(), 3e-4)?;
+    let mut opt = AdamW::new_lr(varmap.all_vars(), 5e-4)?;
 
-    println!("Starting massive training loop...");
-    let epochs = 50000; // Massive 10x increase in training length!
+    println!("Starting hyper-speed training loop...");
+    let epochs = 50000;
     
     for epoch in 1..=epochs {
         // --- THERMAL SAFEGUARD ---
-        if epoch % 50 == 0 {
+        if epoch % 100 == 0 {
             let temp = check_temperature();
             if temp >= 85 {
                 println!("⚠️ CRITICAL: GPU Temperature reached {}°C! Pausing training for 60 seconds to cool down...", temp);
@@ -83,26 +90,19 @@ fn main() -> Result<()> {
             let _ = varmap.save(weights_file);
         }
 
-        // Create a random batch from our dataset
-        let mut x_batch = Vec::new();
-        let mut y_batch = Vec::new();
+        // FAST GPU SAMPLING:
+        // We pick 'batch_size' random starting points and slice the data directly in VRAM
+        let mut x_tensors = Vec::new();
+        let mut y_tensors = Vec::new();
         
         for _ in 0..batch_size {
-            // Randomly sample sequences from the large corpus
             let start_idx = fastrand::usize(..data_bytes.len().saturating_sub(seq_len + 1));
-            
-            let mut x_seq = Vec::new();
-            let mut y_seq = Vec::new();
-            for i in 0..seq_len {
-                x_seq.push(data_bytes[start_idx + i] as u32);
-                y_seq.push(data_bytes[start_idx + i + 1] as u32);
-            }
-            x_batch.extend_from_slice(&x_seq);
-            y_batch.extend_from_slice(&y_seq);
+            x_tensors.push(dataset_tensor.narrow(0, start_idx, seq_len)?);
+            y_tensors.push(dataset_tensor.narrow(0, start_idx + 1, seq_len)?);
         }
         
-        let x = Tensor::from_slice(&x_batch, (batch_size, seq_len), &device)?;
-        let y = Tensor::from_slice(&y_batch, (batch_size, seq_len), &device)?;
+        let x = Tensor::stack(&x_tensors, 0)?;
+        let y = Tensor::stack(&y_tensors, 0)?;
         
         // Forward Pass
         let logits = model.forward(&x)?;
