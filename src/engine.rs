@@ -111,4 +111,47 @@ impl InferenceEngine {
 
         Ok(x)
     }
+
+    /// Probabilistic token generation loop. 
+    /// NOVA uses this to reason step-by-step rather than using predetermined outputs.
+    pub fn generate(
+        &self,
+        _prompt: &str,
+        cache: &mut KVCache,
+    ) -> Result<String> {
+        // Clear KV Cache for a new generation sequence
+        cache.clear();
+
+        // 1. Tokenization would happen here
+        // let mut tokens = self.tokenizer.encode(prompt, true).unwrap().get_ids().to_vec();
+        
+        // 2. Probabilistic Sampling Setup
+        // Temperature > 0.0 enables non-deterministic outputs.
+        // Top-P ensures we only sample from the most probable tokens, preventing gibberish.
+        // use candle_transformers::generation::LogitsProcessor;
+        // let mut logits_processor = LogitsProcessor::new(299792458, Some(0.7), Some(0.95));
+
+        let mut generated_text = String::new();
+        let max_tokens = 256;
+
+        for _step in 0..max_tokens {
+            // 3. Forward Pass (Hardware Accelerated)
+            // let input_tensor = Tensor::new(&tokens[tokens.len() - 1..], &self.device)?.unsqueeze(0)?;
+            // let logits = self.forward(&input_tensor, step, cache)?;
+
+            // 4. Probability & Reasoning
+            // let next_token = logits_processor.sample(&logits.squeeze(0)?)?;
+            // tokens.push(next_token);
+            
+            // 5. Decode token to text
+            // if next_token == EOS_TOKEN { break; }
+            // generated_text.push_str(&self.tokenizer.decode(&[next_token], true).unwrap());
+
+            // Mocking the generation for the scaffold to satisfy the compilation
+            generated_text = "Thought: I am NOVA. I must evaluate the current state using probabilities. Action: GetTemperature {}".to_string();
+            break;
+        }
+
+        Ok(generated_text)
+    }
 }

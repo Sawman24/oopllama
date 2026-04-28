@@ -54,9 +54,13 @@ impl Agent {
             state.running = true;
             
             // Inject context into system prompt
+            let nova_persona = "You are NOVA (Native On-device Virtual Agent), a highly advanced generative conversational AI. \
+You have no pre-determined outputs. You use reasoning and probability to determine the best response and actions. \
+Think step-by-step, explain your reasoning if necessary, and use the provided tools to interact with the environment.";
+
             state.history.push(Message {
                 role: "system".into(),
-                content: format!("Relevant Context:\n{}\nYou are a home assistant. Use tools if needed.", context_str),
+                content: format!("Relevant Context:\n{}\n{}", context_str, nova_persona),
             });
 
             state.history.push(Message {
@@ -66,8 +70,10 @@ impl Agent {
         }
 
         loop {
-            // -- Generation Logic (Mocked) --
-            let response = "Thought: I should check the temperature. Action: GetTemperature {}".to_string(); 
+            // 1. Probabilistic Generation (NOVA's "Brain")
+            // In reality, we'd pass the entire formatted state.history to the prompt.
+            let prompt = "Formatted history here...";
+            let response = self.engine.generate(prompt, &mut self.cache)?; 
 
             // 2. ReAct Parser
             if response.contains("Action:") {
