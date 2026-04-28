@@ -114,7 +114,9 @@ fn main() -> Result<()> {
         let logits = model.forward(&x)?;
         let logits_flat = logits.reshape((batch_size * seq_len, cfg.vocab_size))?;
         let y_flat = y.reshape((batch_size * seq_len,))?;
-        let loss = loss::cross_entropy(&logits_flat, &y_flat)?;
+        
+        // Loss calculation must be in F32 for stability
+        let loss = loss::cross_entropy(&logits_flat.to_dtype(DType::F32)?, &y_flat)?;
         
         // Backward Pass
         opt.backward_step(&loss)?;
