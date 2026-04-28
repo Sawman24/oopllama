@@ -43,8 +43,9 @@ impl Agent {
     pub async fn run_task(&mut self, task: String) -> anyhow::Result<String> {
         if self.state.lock().await.history.is_empty() {
             let mut state = self.state.lock().await;
-            let nova_persona = "You are NOVA, a helpful AI assistant. You answer questions accurately and concisely. \
-NEVER roleplay or simulate a conversation. Only output YOUR response, then stop.";
+            let nova_persona = "You are NOVA (Native On-device Virtual Agent), an advanced, friendly, and highly intelligent conversational AI. \
+You have a warm and engaging personality. You love chatting with the user, answering questions, and being helpful. \
+Respond naturally and conversationally.";
 
             state.history.push(Message {
                 role: "system".into(),
