@@ -148,10 +148,15 @@ impl InferenceEngine {
             // generated_text.push_str(&self.tokenizer.decode(&[next_token], true).unwrap());
 
             // Mocking the generation for the scaffold to satisfy the compilation
-            if _prompt.contains("Observation:") {
-                generated_text = format!("Thought: I have received the necessary information. Final Answer: Hello! I've processed your request using my probabilistic engine. (Action completed)");
-            } else if _prompt.to_lowercase().contains("hello") {
+            let lower_prompt = _prompt.to_lowercase();
+            let is_new_task = !lower_prompt.ends_with("observation: 22.5°c\" } ]"); // Check if the last thing in history is an observation
+
+            if !is_new_task {
+                generated_text = format!("Thought: I have received the necessary information. Final Answer: I've processed your request using my probabilistic engine. (Action completed)");
+            } else if lower_prompt.contains("hello") || lower_prompt.contains("hi") {
                 generated_text = format!("Thought: The user is greeting me. I don't need any tools for this. Final Answer: Hello! I am NOVA. How can I assist you today?");
+            } else if lower_prompt.contains("how are you") {
+                generated_text = format!("Thought: The user is asking how I am. Final Answer: I am functioning at optimal capacity across all CUDA cores. How can I help you?");
             } else {
                 generated_text = "Thought: I am NOVA. I must evaluate the current state using probabilities. Action: GetTemperature {}".to_string();
             }
