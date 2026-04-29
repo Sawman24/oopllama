@@ -2,6 +2,8 @@ use candle_core::{DType, Device, Result, Tensor};
 use candle_nn::{AdamW, Optimizer, VarBuilder, VarMap, loss};
 use oopllama::custom_model::{GPT, Config};
 use std::process::Command;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 
 fn check_temperature() -> u32 {
     let output = std::process::Command::new("nvidia-smi")
@@ -14,12 +16,9 @@ fn check_temperature() -> u32 {
     temp_str.trim().parse::<u32>().unwrap_or(0)
 }
 
-use std::sync::atomic::{AtomicBool, Ordering};
-use std::sync::Arc;
-
 fn main() -> Result<()> {
     println!("=====================================");
-    println!("🚀 UNLEASHING V100 PERFORMANCE...");
+    println!("🌙 STARTING OVERNIGHT SOAK (200k Epochs)");
     println!("Architecture: GPT (Lean & Mean)");
     println!("=====================================");
 
@@ -56,6 +55,7 @@ fn main() -> Result<()> {
     
     let weights_file = "nova_lean_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
+        println!("Resuming from existing weights...");
         varmap.load(weights_file)?;
     }
 
@@ -63,9 +63,9 @@ fn main() -> Result<()> {
     let dataset_string = std::fs::read_to_string("alice.txt").unwrap_or_else(|_| String::from("Fallback text!"));
     let data_bytes = dataset_string.as_bytes();
     
-    let batch_size = 64; // Reverted for "Plateau Jumping" noise
+    let batch_size = 64; 
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 2000; // Balanced size
+    let mega_batch_steps = 2000;
 
     // 3. Setup Optimizer
     let mut current_lr = 2e-3;
@@ -75,8 +75,8 @@ fn main() -> Result<()> {
         ..Default::default()
     })?;
 
-    println!("Starting MAX-THROUGHPUT training loop...");
-    let epochs = 50000;
+    println!("Starting OVERNIGHT training loop...");
+    let epochs = 200000;
     let mut smoothed_loss = 0.0;
     
     let mut mega_x_tensor: Option<Tensor> = None;
@@ -85,13 +85,14 @@ fn main() -> Result<()> {
     for epoch in 1..=epochs {
         // Async Thermal Check
         while pause_flag.load(Ordering::SeqCst) {
-            println!("⚠️ Cooling down... (Thermal limit reached)");
+            println!("⚠️ Cooling down...");
             std::thread::sleep(std::time::Duration::from_secs(30));
         }
 
+        // --- Gradual Decay (0.9 every 10k) ---
         if epoch % 10000 == 0 {
             let _ = varmap.save(weights_file);
-            current_lr *= 0.5; 
+            current_lr *= 0.9; 
             opt.set_learning_rate(current_lr);
         }
 
@@ -129,10 +130,7 @@ fn main() -> Result<()> {
         }
     }
 
-    println!("=====================================");
-    println!("Training Complete!");
     varmap.save(weights_file)?;
-    println!("=====================================");
-
+    println!("🌙 Overnight Soak Complete!");
     Ok(())
 }
