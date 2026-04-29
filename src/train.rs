@@ -38,12 +38,12 @@ fn main() -> Result<()> {
     let tokens = encoding.get_ids();
     println!("✅ Dataset ready: {} tokens", tokens.len());
 
-    // 3. Setup Model
+    // 3. Setup XL Model Architecture
     let cfg = Config {
         vocab_size: 4096,
-        n_embd: 256,
-        n_layer: 6,
-        n_head: 8,
+        n_embd: 512,  // Upgraded from 256
+        n_layer: 12,  // Upgraded from 6
+        n_head: 16,   // Upgraded from 8
         max_seq_len: 128,
     };
     
@@ -51,7 +51,7 @@ fn main() -> Result<()> {
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    let weights_file = "nova_hail_mary_weights.safetensors";
+    let weights_file = "nova_xl_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
         println!("Resuming from existing weights...");
         varmap.load(weights_file)?;
@@ -73,7 +73,7 @@ fn main() -> Result<()> {
     });
 
     // 4. Setup Optimizer
-    let mut current_lr = 1e-3;
+    let mut current_lr = 1e-3; 
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
@@ -91,11 +91,11 @@ fn main() -> Result<()> {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting MEGA-TRAINING loop...");
+    println!("Starting MEGA-TRAINING loop (TURBO BOOST ENABLED)...");
     let epochs = 50000;
     let batch_size = 64;
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 1000;
+    let mega_batch_steps = 100;
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
@@ -154,7 +154,7 @@ fn main() -> Result<()> {
             // Save "Best" weights if loss hits new low
             if smoothed_loss < best_loss && epoch > 1000 {
                 best_loss = smoothed_loss;
-                let _ = varmap.save("nova_best_weights.safetensors");
+                let _ = varmap.save("nova_xl_best_weights.safetensors");
             }
         }
     }

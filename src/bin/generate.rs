@@ -11,16 +11,16 @@ fn main() -> Result<()> {
     let tokenizer_path = "hail_mary_tokenizer.json";
     let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
 
-    // 2. Setup Model with 4096 Vocab
+    // 2. Setup XL Model with 4096 Vocab
     let cfg = Config {
         vocab_size: 4096,
-        n_embd: 256,
-        n_layer: 6,
-        n_head: 8,
+        n_embd: 512,
+        n_layer: 12,
+        n_head: 16,
         max_seq_len: 128,
     };
 
-    let weights_file = "nova_hail_mary_weights.safetensors";
+    let weights_file = "nova_xl_weights.safetensors";
     if !std::path::Path::new(weights_file).exists() {
         println!("❌ Error: No weights found. Run training first!");
         return Ok(());
