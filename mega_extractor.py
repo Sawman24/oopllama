@@ -1,9 +1,28 @@
 import fitz  # PyMuPDF
 import re
 import os
+import unicodedata
+
+def clean_text_thoroughly(text):
+    """Aggressively removes PDF artifacts and weird characters."""
+    # 1. Normalize unicode (Fixes weird ligatures like 'fi', 'ff')
+    text = unicodedata.normalize('NFKC', text)
+    
+    # 2. Manual fix for common ligatures if normalization missed them
+    ligatures = {
+        'ﬁ': 'fi', 'ﬀ': 'ff', 'ﬃ': 'ffi', 'ﬄ': 'ffl', 'ﬂ': 'fl', 
+        '’': "'", '‘': "'", '“': '"', '”': '"', '—': '-', '…': '...'
+    }
+    for k, v in ligatures.items():
+        text = text.replace(k, v)
+
+    # 3. Keep only printable ASCII and basic punctuation
+    # This kills the "ghost" characters ()
+    text = "".join(ch for ch in text if unicodedata.category(ch)[0] != 'C' or ch in '\n\r\t')
+    
+    return text
 
 def is_garbage(line):
-    """Detects if a line is likely boilerplate or metadata."""
     garbage_patterns = [
         r'ISBN', r'Copyright', r'All rights reserved', r'Published by',
         r'www\.', r'http', r'\.com', r'Library of Congress',
@@ -13,18 +32,15 @@ def is_garbage(line):
     for pattern in garbage_patterns:
         if re.search(pattern, line, re.IGNORECASE):
             return True
-    
-    # Remove lines that are just numbers (page numbers)
     if re.match(r'^\d+$', line.strip()):
         return True
-        
     return False
 
 def extract_pdf_clean(pdf_path):
     doc = fitz.open(pdf_path)
     full_text = []
 
-    print(f"📖 Surgically Extracting: {pdf_path}...")
+    print(f"📖 Anti-Ghost Extraction: {pdf_path}...")
 
     for page_num in range(doc.page_count):
         page = doc.load_page(page_num)
@@ -33,24 +49,17 @@ def extract_pdf_clean(pdf_path):
         lines = text.split('\n')
         for line in lines:
             line = line.strip()
-            if not line:
+            if not line or is_garbage(line):
                 continue
-            
-            # Skip page numbers and boilerplate
-            if is_garbage(line):
-                continue
-                
             full_text.append(line)
 
-    # Stitch the words into a continuous narrative
+    # Join and perform the thorough scrub
     text = " ".join(full_text)
+    text = clean_text_thoroughly(text)
 
-    # Fix spacing artifacts (double spaces, etc.)
+    # Spacing and Paragraphs
     text = re.sub(r'\s+', ' ', text)
-    
-    # Optional: Break into paragraphs by looking for sentence ends
-    # This helps the model understand structure better
-    text = re.sub(r'([.!?\u201d\"]) ', r'\1\n\n', text)
+    text = re.sub(r'([.!?\"]) ', r'\1\n\n', text)
 
     return text
 
@@ -58,21 +67,17 @@ def build_mega_dataset():
     all_books_text = []
     pdfs = [f for f in os.listdir('.') if f.endswith('.pdf')]
     
-    if not pdfs:
-        print("⚠️ No PDFs found!")
-        return
-
     for pdf in pdfs:
         book_text = extract_pdf_clean(pdf)
         all_books_text.append(book_text)
-        print(f"✅ Cleaned {len(book_text)} characters from {pdf}")
+        print(f"✅ Scrubbed {len(book_text)} characters from {pdf}")
 
     master_text = "\n\n--- NEXT VOLUME ---\n\n".join(all_books_text)
     
     with open("master_training_data.txt", 'w', encoding='utf-8') as f:
         f.write(master_text)
 
-    print(f"\n✨ SURGICAL CLEAN COMPLETE! ✨")
+    print(f"\n✨ ANTI-GHOST SCRUB COMPLETE! ✨")
     print(f"Final Data Size: {len(master_text)} characters")
 
 if __name__ == "__main__":
