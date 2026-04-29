@@ -1,21 +1,17 @@
-use candle_core::{Device, Result, Tensor, DType};
+use candle_core::{DType, Device, Result, Tensor};
 use candle_nn::{AdamW, Optimizer, VarBuilder, VarMap, loss};
-
-mod custom_model;
-use custom_model::{GPT, Config};
+use oopllama::custom_model::{GPT, Config};
+use std::io::Command; // Not needed, we use process::Command
 
 fn check_temperature() -> u32 {
     let output = std::process::Command::new("nvidia-smi")
-        .args(&["--query-gpu=temperature.gpu", "--format=csv,noheader"])
-        .output();
-        
-    if let Ok(out) = output {
-        let temp_str = String::from_utf8_lossy(&out.stdout);
-        if let Ok(temp) = temp_str.trim().parse::<u32>() {
-            return temp;
-        }
-    }
-    0
+        .arg("--query-gpu=temperature.gpu")
+        .arg("--format=csv,noheader,nounits")
+        .output()
+        .expect("failed to execute nvidia-smi");
+    
+    let temp_str = String::from_utf8_lossy(&output.stdout);
+    temp_str.trim().parse::<u32>().unwrap_or(0)
 }
 
 fn main() -> Result<()> {
@@ -28,7 +24,7 @@ fn main() -> Result<()> {
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
     println!("Target Device: {:?}", device);
 
-    // 1. Setup Model Architecture (Back to F32 for ultimate stability)
+    // 1. Setup Model Architecture
     let dtype = DType::F32; 
     let cfg = Config {
         vocab_size: 256,
@@ -50,42 +46,33 @@ fn main() -> Result<()> {
         println!("No existing weights found. Initializing fresh weights.");
     }
 
-    // 2. Setup Dataset & MEGA-BATCHING (Keep this for speed!)
-    println!("Preparing Mega-Batch on GPU for zero CPU latency...");
+    // 2. Setup Dataset
+    println!("Loading Alice in Wonderland dataset...");
     let dataset_string = std::fs::read_to_string("alice.txt").unwrap_or_else(|_| String::from("Fallback text!"));
     let data_bytes = dataset_string.as_bytes();
     
-    let batch_size = 32; // Safe batch size
+    let batch_size = 32;
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 1000;
-    
-    let mut mega_x = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
-    let mut mega_y = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
-    
-    for _ in 0..mega_batch_steps {
-        for _ in 0..batch_size {
-            let start_idx = fastrand::usize(..data_bytes.len().saturating_sub(seq_len + 1));
-            mega_x.extend(data_bytes[start_idx..start_idx+seq_len].iter().map(|&b| b as u32));
-            mega_y.extend(data_bytes[start_idx+1..start_idx+seq_len+1].iter().map(|&b| b as u32));
-        }
-    }
-    
-    let mega_x_tensor = Tensor::from_vec(mega_x, (mega_batch_steps, batch_size, seq_len), &device)?;
-    let mega_y_tensor = Tensor::from_vec(mega_y, (mega_batch_steps, batch_size, seq_len), &device)?;
 
     // 3. Setup Optimizer
-    let mut current_lr = 1e-4;
+    let mut current_lr = 1e-3; // High LR to break the plateau
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
         ..Default::default()
     })?;
 
-    println!("Starting STABLE training loop (F32 + MegaBatch)...");
+    println!("Starting PLATEAU-SMASHER training loop...");
     let epochs = 50000;
     let mut smoothed_loss = 0.0;
     
+    // We'll initialize these inside the loop on the first iteration
+    let mut mega_x_tensor: Option<Tensor> = None;
+    let mut mega_y_tensor: Option<Tensor> = None;
+
     for epoch in 1..=epochs {
+        // --- THERMAL SAFEGUARD ---
         if epoch % 500 == 0 {
             let temp = check_temperature();
             if temp >= 85 {
@@ -94,6 +81,7 @@ fn main() -> Result<()> {
             }
         }
 
+        // --- AUTO-SAVE ---
         if epoch % 5000 == 0 {
             println!("💾 Auto-saving weights...");
             let _ = varmap.save(weights_file);
@@ -101,9 +89,27 @@ fn main() -> Result<()> {
             opt.set_learning_rate(current_lr);
         }
 
+        // --- MEGA-BATCH REFRESH ---
+        if (epoch - 1) % mega_batch_steps == 0 {
+            if epoch > 1 { println!("🔄 Refreshing Mega-Batch with fresh samples from the book..."); }
+            let mut mega_x = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
+            let mut mega_y = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
+            
+            for _ in 0..mega_batch_steps {
+                for _ in 0..batch_size {
+                    let start_idx = fastrand::usize(..data_bytes.len().saturating_sub(seq_len + 1));
+                    mega_x.extend(data_bytes[start_idx..start_idx+seq_len].iter().map(|&b| b as u32));
+                    mega_y.extend(data_bytes[start_idx+1..start_idx+seq_len+1].iter().map(|&b| b as u32));
+                }
+            }
+            
+            mega_x_tensor = Some(Tensor::from_vec(mega_x, (mega_batch_steps, batch_size, seq_len), &device)?);
+            mega_y_tensor = Some(Tensor::from_vec(mega_y, (mega_batch_steps, batch_size, seq_len), &device)?);
+        }
+
         let step_idx = (epoch - 1) % mega_batch_steps;
-        let x = mega_x_tensor.get(step_idx)?;
-        let y = mega_y_tensor.get(step_idx)?;
+        let x = mega_x_tensor.as_ref().unwrap().get(step_idx)?;
+        let y = mega_y_tensor.as_ref().unwrap().get(step_idx)?;
         
         // Forward Pass
         let logits = model.forward(&x)?;
@@ -124,7 +130,6 @@ fn main() -> Result<()> {
 
     println!("=====================================");
     println!("Training Complete!");
-    println!("We have successfully backpropagated gradients and updated the neural weights of our custom model.");
     println!("Saving weights to '{}'...", weights_file);
     varmap.save(weights_file)?;
     println!("=====================================");
@@ -135,11 +140,8 @@ fn main() -> Result<()> {
     for _ in 0..200 {
         let input = Tensor::from_slice(&generated, (1, generated.len()), &device)?;
         let logits = model.forward(&input)?;
-        
         let seq_len = logits.dim(1)?;
         let logits_last = logits.narrow(1, seq_len - 1, 1)?.squeeze(1)?.squeeze(0)?;
-        
-        // Pick the most likely next character
         let next_token = logits_last.argmax(0)?.to_scalar::<u32>()?;
         generated.push(next_token);
     }
@@ -150,4 +152,3 @@ fn main() -> Result<()> {
 
     Ok(())
 }
-
