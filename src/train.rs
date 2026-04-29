@@ -1,7 +1,6 @@
 use candle_core::{DType, Device, Result, Tensor};
 use candle_nn::{AdamW, Optimizer, VarBuilder, VarMap, loss};
-mod custom_model;
-use custom_model::{GPT, Config};
+use oopllama::custom_model::{GPT, Config};
 use std::process::Command;
 
 fn check_temperature() -> u32 {

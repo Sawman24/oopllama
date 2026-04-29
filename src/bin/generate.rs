@@ -1,7 +1,6 @@
 use candle_core::{DType, Device, Result, Tensor};
 use candle_nn::{VarBuilder, VarMap};
-mod custom_model;
-use custom_model::{GPT, Config};
+use oopllama::custom_model::{GPT, Config};
 use std::io::{Write, stdout};
 
 fn main() -> Result<()> {
