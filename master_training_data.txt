@@ -14,7 +14,7 @@ Title: Project Hail Mary: a novel / Andy Weir.
 
 Subjects: GSAFD: Science fiction.
 
-Classification: LCC PS3623.E4324494 P76 2021 (print) | LCC PS3623.E4324494 (ebook) | DDC 813/.6-dc23 Title page image: iStock/Roman Kulinskiy Rocket diagrams: © David Lindroth Inc.
+Classification: LCC PS3623.E4324494 P76 2021 (print) | LCC PS3623.E4324494 (ebook) | DDC 813/.6-dc23 Title page image: iStock/Roman Kulinskiy Rocket diagrams:  David Lindroth Inc.
 
 Book design by Caroline Cunningham, adapted for ebook Cover design: Will Staehle ep_prh_5.6.1_c0_r0 Contents Cover Title Page Chapter Vl Acknowledgments By Andy Weir About the Author "W hat's two plus two?"
 
@@ -532,7 +532,7 @@ I'm Caucasian, I'm male, and I speak English.
 
 Let's play the odds.
 
-"J–John?"
+"JJohn?"
 
 "Incorrect.
 
@@ -1664,7 +1664,7 @@ I have a pen, but no paper.
 
 That's okay-I have a wall.
 
-After a lot of "crazy prisoner scribbling on a wall"–type stuff, I have my answer.
+After a lot of "crazy prisoner scribbling on a wall"type stuff, I have my answer.
 
 Let's say I'm on Earth and in a centrifuge.
 
@@ -1738,7 +1738,7 @@ But she and I ended up becoming good friends.
 
 When the host saw me, he smiled and jerked his thumb toward the usual table.
 
-I made my way through the kitschy décor to Marissa.
+I made my way through the kitschy dcor to Marissa.
 
 She had a couple of empty lowball glasses in front of her and a full one in her hand.
 
@@ -3652,9 +3652,9 @@ Inside the blue band, there's a black circle with weird symbols inside: a yellow
 
 No idea what any of that is supposed to mean.
 
-Around the edge of the black area it says: "姚,"
+Around the edge of the black area it says: ","
 
-"ИЛЮХИНА,"
+","
 
 and "."
 
@@ -3724,7 +3724,7 @@ I'd never seen a lab so well stocked.
 
 And in the middle was a wheeled cart holding a cylindrical container.
 
-Stenciled writing on the cylinder read образец.
+Stenciled writing on the cylinder read .
 
 Not deeply useful.
 
@@ -4506,7 +4506,7 @@ Oh, and there are temperature readings all over the place.
 
 I guess temperature is important because the readings are every few meters along the hull.
 
-And every single one of them reads 96.415°.
+And every single one of them reads 96.415.
 
 Hey, I know that temperature.
 
@@ -4516,7 +4516,7 @@ What do I know it from?
 
 Come on, brain...come on...
 
-- 96.415°, read the display.
+- 96.415, read the display.
 
 "Huh,"
 
@@ -5072,15 +5072,15 @@ It's the Chinese National Space Agency logo.
 
 There's a name tag over the left breast pocket.
 
-It reads 姚- the same character I saw in the Hail Mary mission crest.
+It reads - the same character I saw in the Hail Mary mission crest.
 
-It's pronounced Yáo.
+It's pronounced Yo.
 
 How do I know-?
 
 Of course I know.
 
-Commander Yáo.
+Commander Yo.
 
 He was our leader.
 
@@ -5106,7 +5106,7 @@ And the right shoulder has a tilted red chevron surrounded by a ring.
 
 It's the symbol of Roscosmos- the Russian space agency.
 
-The name patch reads ИЛЮХИНА, another name from the crest.
+The name patch reads , another name from the crest.
 
 This was Ilyukhina's uniform.
 
@@ -5118,9 +5118,9 @@ She could have you laughing your butt off within thirty seconds of meeting you.
 
 She just had one of those infectious and jovial personalities.
 
-As serious as Yáo was, Ilyukhina was casual.
+As serious as Yo was, Ilyukhina was casual.
 
-They butted heads about it from time to time, but even Yáo couldn't resist her charms.
+They butted heads about it from time to time, but even Yo couldn't resist her charms.
 
 I remember when he finally broke down and laughed at one of her jokes.
 
@@ -5222,11 +5222,11 @@ It seems appropriate.
 
 Maybe corny, but it makes me feel better.
 
-Next I carry Commander Yáo to the airlock.
+Next I carry Commander Yo to the airlock.
 
 I set him inside, seal it, and jettison his remains in the same way.
 
-"Yáo Li-Jie,"
+"Yo Li-Jie,"
 
 I say.
 
@@ -5848,7 +5848,7 @@ label.
 
 I look a little closer.
 
-The Fuel info box says : 120-: 96.415°.
+The Fuel info box says : 120-: 96.415.
 
 The Computer box says : 3 .
 
@@ -7342,7 +7342,7 @@ Someone put a Post-it on my head while I slept.
 
 I pulled it off and read it: Clean clothes and toiletries in the duffel under your bunk.
 
-Show this note to any sailor when you've cleaned up: 请带我去甲板7的官员会议室 -Stratt "She is such a pain in my butt..."
+Show this note to any sailor when you've cleaned up: 7 -Stratt "She is such a pain in my butt..."
 
 I mumbled.
 
@@ -7612,7 +7612,7 @@ Above each dot was a star name.
 
 We know when each star was infected and by which infected star.
 
-Our sun was infected by a star called WISE 0855–0714.
+Our sun was infected by a star called WISE 08550714.
 
 That star was infected by Sirius, which was infected by Epsilon Eridani.
 
@@ -7622,7 +7622,7 @@ I peered at the chart.
 
 "Huh.
 
-WISE 0855–0714 also infected Wolf 359, Lalande 21185, and Ross 128."
+WISE 08550714 also infected Wolf 359, Lalande 21185, and Ross 128."
 
 "Yes, every star eventually infects all of its neighbors.
 
@@ -8568,7 +8568,7 @@ Once the engines are off, I'll fire up the Petrovascope and see what's out there
 
 Until then, I'll try to learn as much about the ship as I can.
 
-I'll do just about anything right now to keep from thinking about Yáo and Ilyukhina.
+I'll do just about anything right now to keep from thinking about Yo and Ilyukhina.
 
 - Technically the carrier was named the People's Liberation Army Navy Gansu.
 
@@ -8990,7 +8990,7 @@ I guess I'm one of those people with coma resistance.
 
 That explains why I'm here instead of any of the far more qualified candidates that should have been sent.
 
-But Yáo and Ilyukhina probably had those genes, too, and they didn't make it.
+But Yo and Ilyukhina probably had those genes, too, and they didn't make it.
 
 My guess is the medical robot wasn't perfect.
 
@@ -9032,7 +9032,7 @@ They gave me reference material on stuff that can't possibly be useful.
 
 But hey, it's nice to know that if I need the average rectal temperature of a healthy goat, I can find that out!
 
-(It's 103.4°F / 39.7°C.) Playing with the panel leads to my next discovery: I know how I'll report back to Earth with the beetles.
+(It's 103.4F / 39.7C.) Playing with the panel leads to my next discovery: I know how I'll report back to Earth with the beetles.
 
 I knew they'd be involved, but now I know specifics.
 
@@ -9314,9 +9314,9 @@ It's a little tight.
 
 I check the name patch.
 
-It says 姚.
+It says .
 
-It's one of Yáo's jumpsuits.
+It's one of Yo's jumpsuits.
 
 Well, it's not too tight.
 
@@ -10114,7 +10114,7 @@ I learned a lot about the airlock when I was giving my crewmates a burial in spa
 
 She would have been absolutely bouncing around the cabin with excitement.
 
-Yáo would have been stoic and steady, but he would have cracked a smile when he thought we weren't looking.
+Yo would have been stoic and steady, but he would have cracked a smile when he thought we weren't looking.
 
 The tears ruin my vision.
 
@@ -11194,7 +11194,7 @@ Stratt stood up.
 
 Lokken.
 
-Pack a bag and meet us at Genève Aéroport.
+Pack a bag and meet us at Genve Aroport.
 
 Terminal 3, private plane called Stratt."
 
@@ -11278,7 +11278,7 @@ There are yaw, pitch, and roll readouts, showing the current state of the ship, 
 
 A separate readout is labeled "Crew Compartment Angle"-that must be the turning-around bit.
 
-Each one reads "0° per second."
+Each one reads "0 per second."
 
 Below those is a button labeled "Engage Centrifuge Sequence."
 
@@ -11410,7 +11410,7 @@ It's up to the computer to deal with.
 
 I watch the Centrifuge panel.
 
-The pitch rate reads 0.17° per second.
+The pitch rate reads 0.17 per second.
 
 Another readout labeled "Component Separation"
 
@@ -11420,7 +11420,7 @@ There's a little beep and the "Crew Compartment Angle"
 
 readout blinks.
 
-It shows as 180°.
+It shows as 180.
 
 I assume this whole sequence was worked out well in advance to minimize shock to the system and/or crew.
 
@@ -11456,7 +11456,7 @@ A quadruple beep announces the end of the sequence.
 
 I check the Centrifuge screen.
 
-It shows a pitch rate of 20.71° per second, a total separation of 104 meters, and a "Lab Gravity"
+It shows a pitch rate of 20.71 per second, a total separation of 104 meters, and a "Lab Gravity"
 
 of 1.00 g.
 
@@ -12674,7 +12674,7 @@ He leaned forward to read the screen.
 
 He turned to the other Russians.
 
-"60,000 ньютонов!"
+"60,000 !"
 
 They all cheered.
 
@@ -13788,7 +13788,7 @@ I say.
 
 "Let's see what you left me."
 
-"♩♫♪♪♫,"
+","
 
 says Rocky.
 
@@ -13832,7 +13832,7 @@ I say.
 
 You don't have a mouth!"
 
-"♫♫♩,"
+","
 
 Rocky explains.
 
@@ -13848,7 +13848,7 @@ Maybe not.
 
 Maybe that's just the easiest way to evolve that trait.
 
-"♪."
+"."
 
 Rocky points to the objects they left me.
 
@@ -13994,7 +13994,7 @@ I grab the handcuffs and hold them out to Rocky.
 
 You're trying to tell me something about chemistry!"
 
-"♫♪♫♫♪."
+"."
 
 But wait.
 
@@ -14192,7 +14192,7 @@ I say.
 
 As if that would help him understand.
 
-"♩♪♫."
+"."
 
 He makes a gesture.
 
@@ -14238,7 +14238,7 @@ I turn to leave but immediately hear tap-tap-tap.
 
 I say.
 
-"♪♪♫♪,"
+","
 
 he says, pointing to the clock.
 
@@ -14314,7 +14314,7 @@ I wonder if we have any wavelengths in common.
 
 Maybe red (the color with the lowest wavelength that humans can see) is "
 
-♪♫♩,"
+,"
 
 the highest wavelength they can see.
 
@@ -14398,7 +14398,7 @@ It cycles through six unique symbols before repeating: "l,"
 
 "V,"
 
-"λ,"
+","
 
 "+,"
 
@@ -14438,7 +14438,7 @@ From that, I know that "I"
 
 is 1, "V"
 
-is 2, "λ"
+is 2, ""
 
 is 3, "+"
 
@@ -14474,7 +14474,7 @@ You're a genius!"
 
 And he is!
 
-With this simple act, Rocky showed me: How Eridian numbers work (base six) How Eridian numbers are written (l, I, V, λ,+, V) How Eridians read information (left to right) How long an Eridian second is I hold up a finger and rush back into the ship to get my stopwatch.
+With this simple act, Rocky showed me: How Eridian numbers work (base six) How Eridian numbers are written (l, I, V, ,+, V) How Eridians read information (left to right) How long an Eridian second is I hold up a finger and rush back into the ship to get my stopwatch.
 
 I come back and time Rocky's clock.
 
@@ -14510,7 +14510,7 @@ He doesn't want to leave while I'm still here.
 
 After all, I might do or say something interesting.
 
-"♪♪♩,"
+","
 
 he says.
 
@@ -14590,7 +14590,7 @@ It's the one set of concepts we're guaranteed to share-physical laws are the sam
 
 And once we have enough words to actually talk about science, we'll start talking about Astrophage.
 
-And in "VVlλI"
+And in "VVlI"
 
 Eridian seconds I'll be talking to him again.
 
@@ -14844,7 +14844,7 @@ He pulls the tape out as far as he can, which is about a meter, then releases bo
 
 The resulting recoil and snap-back makes the tape measure spin wildly in front of him.
 
-"♩♪♫♪!!!"
+"!!!"
 
 he says.
 
@@ -15034,7 +15034,7 @@ I hold up my hand.
 
 He stops playing with the tape measure for a moment.
 
-"♩♪♩?"
+"?"
 
 I hold up two fingers.
 
@@ -15524,15 +15524,15 @@ I set up a spreadsheet on my Excel laptop to convert from Rocky time to mine and
 
 I want to sleep for eight hours.
 
-I enter the current time on Rocky's clock, which is IlIVλ, and have the spreadsheet tell me what that clock will say eight hours from now.
+I enter the current time on Rocky's clock, which is IlIV, and have the spreadsheet tell me what that clock will say eight hours from now.
 
-The answer: Iλ+VVλ.
+The answer: I+VV.
 
 I hurry back to the lab to pick up a bunch of Popsicle sticks and tape.
 
 Rocky can't see ink, so I have to improvise.
 
-I tape the sticks to the divider wall to let Rocky know when I'll return: Iλ+VVλ.
+I tape the sticks to the divider wall to let Rocky know when I'll return: I+VV.
 
 Fortunately, the symbols are mostly made of straight lines, so my little craft project should be good enough for him to read.
 
@@ -15716,7 +15716,7 @@ Then I point to Rocky.
 
 He points to the "I"
 
-and says "♪."
+and says "."
 
 I pause the waveform analyzer and scroll back a few seconds.
 
@@ -15742,7 +15742,7 @@ symbol.
 
 I say.
 
-"♪,"
+","
 
 he says.
 
@@ -15760,9 +15760,9 @@ He starts to get excited.
 
 I think he knows what I'm up to and it's got him happy.
 
-I hold up the "λ"
+I hold up the ""
 
-and before I can even speak, he points to it and says, "♫♪."
+and before I can even speak, he points to it and says, "."
 
 Excellent.
 
@@ -15798,11 +15798,11 @@ Tap-tap-tap-tap!
 
 I look back at him.
 
-He points to the "λ"
+He points to the ""
 
 symbol still in my hand and then to me.
 
-Then back to the "λ"
+Then back to the ""
 
 and back to me.
 
@@ -15830,7 +15830,7 @@ I repeat the gesture.
 
 "Yes."
 
-He does it back to me and says, "♫♩."
+He does it back to me and says, "."
 
 I note and record the frequencies in my laptop.
 
@@ -15842,7 +15842,7 @@ Tap-tap-tap.
 
 I look over.
 
-Once he knows he has my attention, he does jazz hands again and says, "♫♩."
+Once he knows he has my attention, he does jazz hands again and says, "."
 
 Same chord as before.
 
@@ -15856,7 +15856,7 @@ He holds up a finger for a moment.
 
 Then he balls two of his fists and taps them together.
 
-"♪♪."
+"."
 
 ...What?
 
@@ -15876,7 +15876,7 @@ I ball my fists and tap them together.
 
 "No."
 
-"♫♩,"
+","
 
 he says.
 
@@ -15934,7 +15934,7 @@ symbol.
 
 He holds up three fingers on one hand, and one finger on another.
 
-"♩♩."
+"."
 
 I make note of the frequencies.
 
@@ -16026,7 +16026,7 @@ He hunkers his carapace a little lower.
 
 He tightens his claws a bit on the bars he uses to keep in place.
 
-"♫♪♫,"
+","
 
 he says, his voice more quiet than usual.
 
@@ -16044,7 +16044,7 @@ I point to the vial.
 
 Bad."
 
-"♫♩♪♫ ♫♪♫♩ ♫♪♫,"
+"  ,"
 
 Rocky says.
 
@@ -16064,7 +16064,7 @@ But we just don't have the words.
 
 It's infuriating!
 
-"♫♫ ♫♩♪♪♫ ♫♪♫,"
+"  ,"
 
 Rocky says.
 
@@ -16098,7 +16098,7 @@ My star is called 'Sol.' "
 
 "Understand.
 
-Eridian name for you star is ♫♪♫♪♩♩."
+Eridian name for you star is ."
 
 I note down the new word.
 
@@ -16114,7 +16114,7 @@ Technically we call it "40 Eridani,"
 
 but I decide to keep it simple.
 
-"Eridian name for my star is ♫♩♪♪♪."
+"Eridian name for my star is ."
 
 I add the word to the dictionary.
 
@@ -16184,7 +16184,7 @@ He curls up like a dead bug and remains motionless for a while.
 
 "Eridians same!
 
-♪♫♫♪!"
+!"
 
 Oh thank God.
 
@@ -16248,17 +16248,17 @@ I point to the device.
 
 "What is that?"
 
-"♫♪♩♫."
+"."
 
 He pulls some kind of tool out of the satchel.
 
-"♫♪♩♫ not function."
+" not function."
 
 He pokes the device with the tool a few times.
 
 "I change.
 
-♫♪♩♫ function."
+ function."
 
 I don't bother to note down the new word.
 
@@ -16280,7 +16280,7 @@ I say.
 
 "You fix."
 
-"♫♪♫♪,"
+","
 
 he says.
 
@@ -16630,7 +16630,7 @@ I point at the necklace.
 
 "Iron."
 
-He points at the necklace and says, "♫♩♪♫♫."
+He points at the necklace and says, "."
 
 I record the word in my dictionary.
 
@@ -16828,7 +16828,7 @@ My mouth hangs open.
 
 "You're the only person on that huge ship?!"
 
-He's quiet for a moment, then says, "♫♩♪♫♩♪♫ ♫♪ ♩♪♫ ♫♪♫♪♩ ♫♪♩♪ ♫♩ ♪ ♫♩♪ ♫ ♩♪♫♩♪ ♫♩♪ ♫."
+He's quiet for a moment, then says, "           ."
 
 Complete nonsense.
 
@@ -17238,7 +17238,7 @@ I said.
 
 "I know New Zealand is pretty cool but-"
 
-"And it was going to be a New Zealand–owned company that charged for the power,"
+"And it was going to be a New Zealandowned company that charged for the power,"
 
 Redell said.
 
@@ -18458,7 +18458,7 @@ Stratt said.
 
 "I want you to meet Dr.
 
-François Leclerc."
+Franois Leclerc."
 
 The Frenchman to her left waved halfheartedly.
 
@@ -19160,7 +19160,7 @@ The coastline sat in the extreme distance, visible only by moonlight.
 
 The entire continent had been evacuated of humans.
 
-Probably an overreaction-the Amundsen–Scott South Pole Station was 1,500 kilometers away.
+Probably an overreaction-the AmundsenScott South Pole Station was 1,500 kilometers away.
 
 The people there would have been just fine.
 
@@ -19554,7 +19554,7 @@ They're made of porous, sponge-like material sealed in flexible sacs.
 
 The majority of the body's water is tied up in those sacs.
 
-And the atmospheric pressure is so high, the 210°C water is still a liquid.
+And the atmospheric pressure is so high, the 210C water is still a liquid.
 
 They have two separate circulatory systems: the "ambient"
 
@@ -19744,7 +19744,7 @@ I chose this because light passes through."
 
 "Amaze.
 
-I gave choices for different ♫♩♪♫ of sound.
+I gave choices for different  of sound.
 
 Never thought of light."
 
@@ -20962,9 +20962,9 @@ I launch the frequency analyzer and bring up my dictionary spreadsheet.
 
 "Ready."
 
-"Seven thousand seven hundred and seventy-six seconds is ♩♫♩♪♪.
+"Seven thousand seven hundred and seventy-six seconds is .
 
-Erid rotate one circle in one ♩♫♩♪♪."
+Erid rotate one circle in one ."
 
 I immediately recognize the number.
 
@@ -20990,7 +20990,7 @@ he says.
 
 "Erid circles Eridani one time every 198.8 Eridian days.
 
-198.8 Eridian days is ♫♩♪♫♪."
+198.8 Eridian days is ."
 
 "Year,"
 
@@ -21564,7 +21564,7 @@ she said.
 
 We watched the astronauts get surrounded by deck crew.
 
-They were absolutely starstruck-especially with Yáo.
+They were absolutely starstruck-especially with Yo.
 
 "DuBois has three doctorates-physics, chemistry, and biology."
 
@@ -21642,9 +21642,9 @@ You're going to impart every single thing you know about it to both of them.
 
 Here comes the prime crew."
 
-Yáo, Ilyukhina, and DuBois walked over to Stratt.
+Yo, Ilyukhina, and DuBois walked over to Stratt.
 
-Yáo bowed.
+Yo bowed.
 
 He spoke with a very slight accent, but otherwise perfect English.
 
@@ -21750,7 +21750,7 @@ He raised his eyebrow.
 
 I shot a look over to Stratt.
 
-She was busy talking to Embezzler Bob and Commander Yáo.
+She was busy talking to Embezzler Bob and Commander Yo.
 
 "First I'm hearing of it."
 
@@ -22032,7 +22032,7 @@ He assures me the holes he added to my bulkheads won't affect the ship's structu
 
 he finally says.
 
-"Name is ♫♩♪♫."
+"Name is ."
 
 I don't need the frequency analyzer anymore.
 
@@ -22090,7 +22090,7 @@ But necessary.
 
 Must save Erid.
 
-You pick human word for ♫♩♪♫."
+You pick human word for ."
 
 Proper nouns are a headache.
 
@@ -22672,7 +22672,7 @@ he says.
 
 "Amaze is compliment.
 
-Better word is ♫♪♫♪."
+Better word is ."
 
 "What's that mean?"
 
@@ -23154,7 +23154,7 @@ It's a camera."
 
 "
 
-♫♪♫,"
+,"
 
 he says quickly.
 
@@ -23350,7 +23350,7 @@ It's a half-meter square or so.
 
 There's a lever beside it with red and yellow stripes all around it.
 
-Text on the lever reads -ПОТЯНУТЬ РЫЧАГ ЧТОБЫ ОСВОБОДИТЬ ECU-拉杆释放.
+Text on the lever reads -    ECU-.
 
 I clip a tether to a convenient hole on the unit (presumably put there for this exact use), and pull the lever over to the open position.
 
@@ -23642,7 +23642,7 @@ I say.
 
 T he crew of the Hail Mary sat on the couch in the break room, each with their drink of choice.
 
-Commander Yáo had a German beer, Engineer Ilyukhina had a distressingly large tumbler of vodka, and Science Specialist DuBois had a glass of 2003 Cabernet Sauvignon that he had poured ten minutes in advance to ensure it had time to breathe.
+Commander Yo had a German beer, Engineer Ilyukhina had a distressingly large tumbler of vodka, and Science Specialist DuBois had a glass of 2003 Cabernet Sauvignon that he had poured ten minutes in advance to ensure it had time to breathe.
 
 The break room itself had been a struggle to arrange.
 
@@ -23694,17 +23694,17 @@ The countdown came on-screen.
 
 Less than a minute to go.
 
-Yáo leaned forward and peered intently.
+Yo leaned forward and peered intently.
 
 It must have been hard-a military man of action forced to passively watch something so important play out.
 
-DuBois saw Yáo's expression.
+DuBois saw Yo's expression.
 
-"I'm certain the launch will go well, Commander Yáo."
+"I'm certain the launch will go well, Commander Yo."
 
 "Mm,"
 
-said Yáo.
+said Yo.
 
 "Thirty seconds to launch,"
 
@@ -23820,7 +23820,7 @@ And I'm not her number two!
 
 I'm just a scientist- drafted into this project like the rest of you!"
 
-Yáo turned around and stared at me for a moment.
+Yo turned around and stared at me for a moment.
 
 The room fell silent.
 
@@ -23858,7 +23858,7 @@ DuBois sipped his wine.
 
 "Astronauts celebrate when the tower is clear."
 
-Without a word, Yáo took a sip of his beer.
+Without a word, Yo took a sip of his beer.
 
 - "Why.
 
@@ -27744,15 +27744,15 @@ The three astronauts sat on a couch in front of me.
 
 I'd commandeered the breakroom and locked the door for this meeting.
 
-Yáo sat in the center, looking stern as always.
+Yo sat in the center, looking stern as always.
 
 DuBois was to his left, his back arched to provide perfect posture.
 
-Ilyukhina slouched to Yáo's left, sipping a beer.
+Ilyukhina slouched to Yo's left, sipping a beer.
 
 "No need for individual meetings,"
 
-said Yáo.
+said Yo.
 
 "There's no room on this mission for secrets."
 
@@ -27874,7 +27874,7 @@ She set her beer down.
 
 Everyone looked at her.
 
-Even Yáo blanched a little.
+Even Yo blanched a little.
 
 "Sorry, what?"
 
@@ -27958,7 +27958,7 @@ Two down, one to go.
 
 "All right.
 
-Commander Yáo?
+Commander Yo?
 
 How about you?"
 
@@ -28002,7 +28002,7 @@ Ilyukhina said.
 
 "Understood,"
 
-said Yáo.
+said Yo.
 
 He turned back to me.
 
@@ -28848,7 +28848,7 @@ She flicked on her walkie-talkie again.
 
 Call them in."
 
-"Yáo here,"
+"Yo here,"
 
 came the first reply.
 
@@ -28908,7 +28908,7 @@ The Russians were taking no chances.
 
 It didn't look like a terrorist attack, but they were securing the critical personnel just in case.
 
-Yáo and Ilyukhina were off in some other bunker.
+Yo and Ilyukhina were off in some other bunker.
 
 The other science leads were in other bunkers as well.
 
@@ -29814,7 +29814,7 @@ The left is all Chinese characters, the middle is Russian, and the right is Engl
 
 I guess under normal operation, the ship changes language based on who is reading the screen.
 
-And this "safe boot"– equivalent screen doesn't know who will be reading it so it's in all our languages.
+And this "safe boot" equivalent screen doesn't know who will be reading it so it's in all our languages.
 
 "What is happen, question?"
 
@@ -29832,7 +29832,7 @@ EMERGENCY POWER: ONLINE BATTERY: 100% ESTIMATED TIME REMAINING: 04D, 16H, 17M SA
 
 !!!LIMITED DURATION, NON-RENEWABLE!!!
 
-TEMPERATURE CONTROL: OFFLINE TEMPERATURE: 22°C PRESSURE: 40,071 PA "The ship's keeping me alive, but not doing anything else right now."
+TEMPERATURE CONTROL: OFFLINE TEMPERATURE: 22C PRESSURE: 40,071 PA "The ship's keeping me alive, but not doing anything else right now."
 
 "Give me generator.
 
@@ -31204,9 +31204,9 @@ He didn't have papers in front of him.
 
 Just the calculator.
 
-Also present were Commander Yáo and Engineer Ilyukhina.
+Also present were Commander Yo and Engineer Ilyukhina.
 
-Yáo looked dour as ever, and Ilyukhina had no drink in her hand.
+Yo looked dour as ever, and Ilyukhina had no drink in her hand.
 
 "Am I late?"
 
@@ -31422,7 +31422,7 @@ Sure, I'm up to speed on Astrophage, but I don't know anything about being an as
 
 "We will train you as we go."
 
-Yáo spoke quietly, but with confidence.
+Yo spoke quietly, but with confidence.
 
 "And we will do the hard tasks.
 
@@ -31434,7 +31434,7 @@ There has to be someone else!"
 
 I looked to Stratt.
 
-"What about Yáo's backup?
+"What about Yo's backup?
 
 Or Ilyukhina's?"
 
@@ -31496,7 +31496,7 @@ Who's the next candidate after me?"
 
 Stratt picked up a piece of paper in front of her.
 
-"Andrea Cáceres, a distillery worker from Paraguay.
+"Andrea Cceres, a distillery worker from Paraguay.
 
 She's coma- resistant, and holds a bachelor's degree in chemistry with a minor in cellular biology.
 
@@ -31514,7 +31514,7 @@ You know the ship and the mission inside and out.
 
 And you're a world-leading expert on Astrophage.
 
-We'd only have a few days to get Cáceres up to speed.
+We'd only have a few days to get Cceres up to speed.
 
 You know how I operate, Dr.
 
@@ -31536,7 +31536,7 @@ said Stratt.
 
 "It must be your decision,"
 
-said Yáo.
+said Yo.
 
 "I will not have someone on my crew who is there against their will.
 
@@ -31544,7 +31544,7 @@ You must come of your own volition.
 
 And if you refuse, we will bring in Ms.
 
-Cáceres and do our best to train her up.
+Cceres and do our best to train her up.
 
 But I urge you to say yes.
 
@@ -31566,7 +31566,7 @@ Stratt said.
 
 "But not for very long.
 
-If you say no, we have to get Cáceres here in a hurry.
+If you say no, we have to get Cceres here in a hurry.
 
 I want your answer by five ..
 
@@ -32094,7 +32094,7 @@ He held me by the shoulders and faced me toward Stratt.
 
 I yelled.
 
-"Yáo will never go for this!
+"Yo will never go for this!
 
 He specifically said he doesn't want anyone on his ship against their will!"
 
@@ -32112,11 +32112,11 @@ You'll have no communication with anyone.
 
 Right before launch, you'll be given a very strong sedative to knock you out and we'll load you into the Soyuz."
 
-"Don't you think Yáo will be a little suspicious about that?"
+"Don't you think Yo will be a little suspicious about that?"
 
-"I'll explain to Commander Yáo and Specialist Ilyukhina that, due to limited astronaut training, you were worried that you'd panic during the launch so you elected to be unconscious for it.
+"I'll explain to Commander Yo and Specialist Ilyukhina that, due to limited astronaut training, you were worried that you'd panic during the launch so you elected to be unconscious for it.
 
-Once aboard the Hail Mary, Yáo and Ilyukhina will secure you into your medical bed and start your coma procedure.
+Once aboard the Hail Mary, Yo and Ilyukhina will secure you into your medical bed and start your coma procedure.
 
 They'll take care of all the pre-launch prep from there.
 
@@ -32188,7 +32188,7 @@ Like I said, you're fundamentally a good man.
 
 When you wake up, you'll be good and angry.
 
-I'm sure Yáo and Ilyukhina will be pretty mad about what I did to you too.
+I'm sure Yo and Ilyukhina will be pretty mad about what I did to you too.
 
 But in the end, you three will be out there and you'll do your job.
 
@@ -32232,7 +32232,7 @@ My throat hurt from yelling.
 
 You and your crewmates will just assume it's a side effect of the coma.
 
-Yáo and Ilyukhina will explain the mission to you and you'll roll right into getting to work.
+Yo and Ilyukhina will explain the mission to you and you'll roll right into getting to work.
 
 The French assure me the drug doesn't erase trained skills, language, or anything like that.
 
@@ -34146,7 +34146,7 @@ But again, this was a suicide mission.
 
 They didn't give us enough coma slurry to get home either.
 
-The only reason I have any at all is because Commander Yáo and Specialist Ilyukhina died en route.
+The only reason I have any at all is because Commander Yo and Specialist Ilyukhina died en route.
 
 All told, I have three months of real food left and about forty months' worth of coma slurry.
 
@@ -34618,7 +34618,7 @@ The box has three zipped duffels.
 
 Each one is labeled with a crewman's name.
 
-"Yáo,"
+"Yo,"
 
 "Ilyukhina,"
 
@@ -34648,7 +34648,7 @@ There are all sorts of random knickknacks inside.
 
 A pendant with some Russian writing on it, a worn old teddy bear she probably had as a kid, a kilogram of heroin, some of her favorite books, and there we are!
 
-Five 1- liter bags of clear liquid labeled водка.
+Five 1- liter bags of clear liquid labeled .
 
 It's Russian for "vodka."
 
@@ -35464,7 +35464,7 @@ I have another three months of real, edible food packs left, and then it'll be c
 
 I'm reluctant to go back into a coma.
 
-I've got the genes to survive it, but so did Yáo and Ilyukhina.
+I've got the genes to survive it, but so did Yo and Ilyukhina.
 
 Why risk death if I don't have to?
 
@@ -35868,7 +35868,7 @@ If the ship is too cold, it runs air across coils filled with Astrophage to warm
 
 A breach in one of those coils would do it.
 
-Lucky for me I've had a big pile of 96°C Astrophage in the lab keeping the crew compartment so warm the ship has to use the air-conditioning system.
+Lucky for me I've had a big pile of 96C Astrophage in the lab keeping the crew compartment so warm the ship has to use the air-conditioning system.
 
 Okay, now I have a plan.
 
@@ -36824,7 +36824,7 @@ The star, almost as bright as Earth's sun, now just looks like a fatter-than-usu
 
 But aside from that...nothing.
 
-I'm way too far away to detect the Tau Ceti–Adrian Petrova line and the Blip-A is nowhere to be seen.
+I'm way too far away to detect the Tau CetiAdrian Petrova line and the Blip-A is nowhere to be seen.
 
 And I know right where it should be.
 
@@ -37302,7 +37302,7 @@ I put my finger on the screen where I saw the blip.
 
 I check the Petrovascope bearing, do some math on the screen, and work out the angle.
 
-It's 214 degrees' yaw in my current plane, which is 55 degrees off the Tau Ceti–Adrian orbital ecliptic.
+It's 214 degrees' yaw in my current plane, which is 55 degrees off the Tau CetiAdrian orbital ecliptic.
 
 "Gotcha!"
 
@@ -38254,7 +38254,7 @@ I finish off the last bite of my meburger and gulp down the vitamin-enriched sod
 
 I put my dishes in the sink and check the clock on my kitchen wall.
 
-Wow, is it V lIλλ already?
+Wow, is it V lI already?
 
 I better hurry up.
 
@@ -38410,7 +38410,7 @@ Rocky waits for me on the Eridian side.
 
 "Finally!
 
-I've been waiting for lλ minutes!
+I've been waiting for l minutes!
 
 What took you so long?!"
 
@@ -38464,7 +38464,7 @@ Like, Ill percent certainty?"
 
 "Yes.
 
-The data was analyzed by a thrum of λV astronomers.
+The data was analyzed by a thrum of V astronomers.
 
 It checks out."
 
@@ -38812,7 +38812,7 @@ But the real story was something entirely different...
 
 (Continued on back flap) fee GAP LNaBOe CON ELI CT: Pisin Na k-o/ Asien Sate aie)' OTHER BOOKS BY STEPHEN R.
 
-DONALDSON THE CHRONICLES OF THOMAS COVENANT Book One: Lord Foul's Bane Book Two: The Illearth War Book Three: The Power That Preserves THE SECOND CHRONICLES OF THOMAS COVENANT Book One: The Wounded Land Book Two: The One Tree Book Three: White Gold Wielder DAUGHTER OF REGALS AND OTHER TALES MORDANT'S NEED Volume One: The Mirror of Her Dreams Volume Two: A Man Rides Through STEPHEN , DONALDS(N oh i ee moet INTO ,CONFLICT: TH REAL STORY BANTAM BOOKS NEW YORK * TORONTO # LONDON »¢ SYDNEY ¢* AUCKLAND Book design by Maria Carella.
+DONALDSON THE CHRONICLES OF THOMAS COVENANT Book One: Lord Foul's Bane Book Two: The Illearth War Book Three: The Power That Preserves THE SECOND CHRONICLES OF THOMAS COVENANT Book One: The Wounded Land Book Two: The One Tree Book Three: White Gold Wielder DAUGHTER OF REGALS AND OTHER TALES MORDANT'S NEED Volume One: The Mirror of Her Dreams Volume Two: A Man Rides Through STEPHEN , DONALDS(N oh i ee moet INTO ,CONFLICT: TH REAL STORY BANTAM BOOKS NEW YORK * TORONTO # LONDON  SYDNEY * AUCKLAND Book design by Maria Carella.
 
 No part of this book may be reproduced or transmitted"
 
@@ -38856,7 +38856,7 @@ It began when Morn Hyland came into Mallorys with Angus Thermopyle.
 
 Those two called attention to themselves because they obviously didn't belong together.
 
-Except for her ill-fitting and outdated shipsuit, which she must have scrounged from someone else's locker, she was gorgeous, with THE URCETA LS THO RY 4° a body that made drunks groan in lost yearning and a pale, delicate beauty of - face that twisted dreamers' hearts.
+Except for her ill-fitting and outdated shipsuit, which she must have scrounged from someone else's locker, she was gorgeous, with THE URCETA LS THO RY 4 a body that made drunks groan in lost yearning and a pale, delicate beauty of - face that twisted dreamers' hearts.
 
 In contrast, he was dark and disreputable, probably the most disreputable man who still had docking-rights at the Sta- tion.
 
@@ -38948,7 +38948,7 @@ If they were born or naturalized inhabitants of the Station, they were here to k
 
 Such people looked at what they saw with more discerning eyes.
 
-When Morn Hyland and Angus Thermopyle came into Mallorys, the men in the corners noticed the way her whole body seemed to twist away JT HAEARCECA LAS TOR Y: 10° even when she sat close beside him.
+When Morn Hyland and Angus Thermopyle came into Mallorys, the men in the corners noticed the way her whole body seemed to twist away JT HAEARCECA LAS TOR Y: 10 even when she sat close beside him.
 
 They heard the dull, almost lifeless sound of her voice when she spoke-a tone of suppression unexpected from someone who had presumably spent weeks or months away from people and drink.
 
@@ -39296,7 +39296,7 @@ Nick grinned amiably.
 
 I shot myself.
 
-q PARE MRGEWA (LES TH@ RY 16° That doesn't sound very plausible, Captain Succorso.
+q PARE MRGEWA (LES TH@ RY 16 That doesn't sound very plausible, Captain Succorso.
 
 Hand over your - computer's datacore, and we'll verify your story.
 
@@ -39410,7 +39410,7 @@ Center wasn't impressed by illusions, however.
 
 Commands to return and redock were broadcast: warning shots were fired.
 
-FT JHAEVLRIECA L&S TF OR Y¥ With contemptuous ease, Captain's Fancy winked off the scanners of the Station.
+FT JHAEVLRIECA L&S TF OR Y With contemptuous ease, Captain's Fancy winked off the scanners of the Station.
 
 Nick Succorso disappeared by performing a delicate maneuver called a "blink crossing."
 
@@ -39752,7 +39752,7 @@ He was afraid, and he ran.
 
 Before he was close enough to the belt to begin deceleration, he had been driving under heavy g for half a standard day.
 
-Now the drugs were © giving him psychotic episodes with increasing regularity, and he no longer knew clearly what he was doing.
+Now the drugs were  giving him psychotic episodes with increasing regularity, and he no longer knew clearly what he was doing.
 
 However, he was familiar with those drugs; before starting them, he'd understood what they would do to him.
 
@@ -40268,7 +40268,7 @@ Leaving his g-seat, he bobbed like a balloon against the asteroid's gravity towa
 
 Once he'd donned his EVA suit and clamped the faceplate shut, he spent a minute simply breathing the sweet air from the tanks.
 
-But he TiIMMEARIEIA LAST O'R ¥ couldn't afford to delay.
+But he TiIMMEARIEIA LAST O'R  couldn't afford to delay.
 
 The remaining survivors might be aware of him.
 
@@ -40352,7 +40352,7 @@ Through the suit's receiver, his confidence sounded insane, detached from realit
 
 "We're going to commandeer your ship."
 
-SIE P HE NERS ADZO) NGAMLID S°OIN His eyes hadn't reacted to Angus' movement.
+SIE P HE NERS ADZO) NGAMLID SOIN His eyes hadn't reacted to Angus' movement.
 
 He wasn't looking at Angus now.
 
@@ -40668,7 +40668,7 @@ And guns.
 
 And tools.
 
-Finally he ran a line which allowed him to S TRE:-POR EYN €R.2 ADSORNFAEL SD 'SCOIN pump water across to his ship.
+Finally he ran a line which allowed him to S TRE:-POR EYN R.2 ADSORNFAEL SD 'SCOIN pump water across to his ship.
 
 When he was done, Bright Beauty was better supplied than she'd been since the day when he'd first stolen her.
 
@@ -41396,7 +41396,7 @@ The idea made him want to break her arms.
 
 He would see her dead-he would crush her-before he would allow her to do anything that might make him weak.
 
-And yet he contained himself until she came out of the san of her S°T}ECPEREERN ERED EORN PAR DESCORN own volition.
+And yet he contained himself until she came out of the san of her ST}ECPEREERN ERED EORN PAR DESCORN own volition.
 
 Fuming, fretting, swelling into a fury, he still waited, storing up violence, until she opened the door herself and came out to face him.
 
@@ -41900,7 +41900,7 @@ She'd brought what was left of her family to ruin.
 
 That struck her in the deepest part of her shame-in the part which believed she'd deserved to be abandoned; the part which believed her resent- ment had killed her mother.
 
-When she needed them most-helpless in Bright Beauty's sickbay, a SAGEIARSECA LS a OR: ¥ with a zone implant in her head and Angus leering over her-her parents didn't answer her appeal.
+When she needed them most-helpless in Bright Beauty's sickbay, a SAGEIARSECA LS a OR:  with a zone implant in her head and Angus leering over her-her parents didn't answer her appeal.
 
 How could they?
 
@@ -42194,7 +42194,7 @@ The firm line of her thighs and the soft pillow of her belly haunted his dreams:
 
 For several days, he was simply unable to think about anything else.
 
-TA BA RS EsA La St O.R ¥ Finally, during one of the periods when he released her from the zone implant's control so that he could take a look at her despair, abhorrence, nausea-look at them and savor them-she asked, "Why are you doing this?
+TA BA RS EsA La St O.R  Finally, during one of the periods when he released her from the zone implant's control so that he could take a look at her despair, abhorrence, nausea-look at them and savor them-she asked, "Why are you doing this?
 
 Why do you hate me so much?"
 
@@ -42406,7 +42406,7 @@ Made us give up our keys and stand there naked until they got around to searchin
 
 Angus forced a guffaw, but it wasn't particularly successful.
 
-For some T HHAEM RECALL ¥S Th O RY reason, the pleasure of what he'd done to Scarl had lost its flavor.
+For some T HHAEM RECALL S Th O RY reason, the pleasure of what he'd done to Scarl had lost its flavor.
 
 There was a bitter taste in his mouth, as if someone had cheated him.
 
@@ -42560,7 +42560,7 @@ When that was done, he started testing his scanners and sifters.
 
 His tests confirmed what he already knew: Bright Beauty had a dan- gerous blind spot where her ports and antennae had been smashed.
 
-That 7, IAEA RECA LAS Ee Our Y¥ meant he would have to run her under spin, rotating constantly so the sweep of functioning sniffers and sensors could compensate for the blindness.
+That 7, IAEA RECA LAS Ee Our Y meant he would have to run her under spin, rotating constantly so the sweep of functioning sniffers and sensors could compensate for the blindness.
 
 A problem in more ways than one: tricky for the pilot; more difficult to analyze incoming data.
 
@@ -43358,7 +43358,7 @@ All those men wanted her.
 
 They wanted to get her away from him.
 
-TIHtE REA Le sit O'R ¥ He was already feeling frightened and bloodthirsty when he caught sight of Nick Succorso through the heat and din of Mallorys.
+TIHtE REA Le sit O'R  He was already feeling frightened and bloodthirsty when he caught sight of Nick Succorso through the heat and din of Mallorys.
 
 At once, he felt like he'd been hit in the chest by an impact-ram- more so because he .couldn't show it, didn't dare react in front of all these people, let them see his weakness.
 
@@ -43420,7 +43420,7 @@ She was his.
 
 He had no way to know he was wrong.
 
-SISEIP A SEIN © Re ADIORNGARL aD ES<OIN et ort ei Ik ; : = SN Jn he truth was that Morn Hyland didn't see Nick Succorso as a sexual being at all.
+SISEIP A SEIN  Re ADIORNGARL aD ES<OIN et ort ei Ik ; : = SN Jn he truth was that Morn Hyland didn't see Nick Succorso as a sexual being at all.
 
 On that point, everyone who noticed her situation or gave any thought to her reactions was wrong.
 
@@ -43516,7 +43516,7 @@ Nick Succorso-which, incidentally, wasn't his real name-had been born station-bo
 
 He was the son of a family of administrators living on a station like Com-Mine, but half a hun- dred parsecs away, a station that tended one of the official (therefore rich) trading routes between Earth and forbidden space.
 
-There he'd begun watch- SEE PALE NER + §DsOtNeArL Des OTN ing scan at an early age, just as most of the children of administrators did on that station, to learn the skills they would need for the rest of their lives.
+There he'd begun watch- SEE PALE NER + DsOtNeArL Des OTN ing scan at an early age, just as most of the children of administrators did on that station, to learn the skills they would need for the rest of their lives.
 
 Unlike most of his peers, however, he'd fallen in love with what he watched, with the vast gulf of space and the lure of the gap, with the ro- mance of sailing the imponderable stellar winds, with the mysterious lurch- and-translation which took men and ships across dimensions beyond the reach of their former lives.
 
@@ -43850,7 +43850,7 @@ While his stomach clenched and tore, and his brain reeled, he left her and close
 
 Then he started to howl like a grief-stricken beast.
 
-fHEOR GALS TORY ' - ~~ a oil ancien Sophia et > Pa fan sani ® ares Saabiov re Lda i 2 » ; -e at i - | ' tail ie le "eas .
+fHEOR GALS TORY ' - ~~ a oil ancien Sophia et > Pa fan sani  ares Saabiov re Lda i 2  ; -e at i - | ' tail ie le "eas .
 
 .
 
@@ -44184,7 +44184,7 @@ he growled, making no effort to dis- guise his malice.
 
 Nick bowed gracefully, but didn't move.
 
-"On the contrary, Captain THEM ROECA-£ aS TO R Fi Thermo-pile."
+"On the contrary, Captain THEM ROECA- aS TO R Fi Thermo-pile."
 
 Except for his scars, his expression was bland.
 
@@ -44304,7 +44304,7 @@ Angus faced them as if he were calm.
 
 With his hands, he dangled _ Nick's unconscious form in front of them.
 
-His fingers were wrapped around » their captain's neck.
+His fingers were wrapped around  their captain's neck.
 
 "Go fucking back inside."
 
@@ -44386,7 +44386,7 @@ The way her gaze sprang involuntarily to Nick's sprawled form hurt him worse tha
 
 But Captain's Fancy's crew ignored her now.
 
-They didn't try to stop i Het Ree A LFS a Ok ¥ Ame Angus from leaving.
+They didn't try to stop i Het Ree A LFS a Ok  Ame Angus from leaving.
 
 Surely they had their own beepers.
 
@@ -45180,7 +45180,7 @@ And he knew his enemy was closing on him, knew it without a glance at scan-which
 
 By the time he succeeded at pulling his ship out of her spin, Nick Succorso would be ready to blast him to dust.
 
-DVEVIRCECA LAST ©.
+DVEVIRCECA LAST .
 
 R_Y: -- ' Only because Bright Beauty's motion was so painful, he struggled with .
 
@@ -45828,7 +45828,7 @@ I told you.
 
 I was after Succorso.
 
-ST.E POA EN) 2Ro yD BOFNFAPL DD S7O°N That changes nothing.
+ST.E POA EN) 2Ro yD BOFNFAPL DD S7ON That changes nothing.
 
 You broke curfew.
 
@@ -45896,7 +45896,7 @@ In fact, he didn't often pay much attention to his physical organism.
 
 But now he tried to comfort himself with physiological speculations.
 
-THeEVREAL®STORY He was getting old.
+THeEVREALSTORY He was getting old.
 
 He was having trouble adjusting to Station g.
 
@@ -46076,7 +46076,7 @@ It was slim to the point of nonexistence.
 
 Nevertheless Angus believed it instantly.
 
-T HPEVMREAL STORY Bee » You're hatching something.
+T HPEVMREAL STORY Bee  You're hatching something.
 
 What else had she ever had to hope for?
 
@@ -46698,7 +46698,7 @@ Yes, I was doing exactly what I'm supposed to do when I wrote the novella: I acc
 
 for the simple and sufficient reason that it came to me; I followed the idea where it chose to lead me, rather than trying to make it serve my own purposes.
 
-And no, I hadn't given my best to the work: I hadn't done everything in my power to raise the aesthétic level of the novella as high as possible.
+And no, I hadn't given my best to the work: I hadn't done everything in my power to raise the aesthtic level of the novella as high as possible.
 
 So I spent the next two years, off and on, rewriting The Real Story.
 
@@ -46756,7 +46756,7 @@ There's no indication here, certainly, that events will take four more books to 
 
 That's because the original source for this sequence of novels was a recording of Richard 'Wag- TASER SECA SL SS FO RY.
 
-- ner's Gétterdammerung (The Twilight of the Gods); the true genesis began in the fall of 1966.
+- ner's Gtterdammerung (The Twilight of the Gods); the true genesis began in the fall of 1966.
 
 .
 
@@ -46790,7 +46790,7 @@ My work there disturbed me because it wasn't complete-and couldn't be com- plete
 
 As the ending of The Real Story suggests, the relevance of Wagner's epic to Angus's fate may not be readily apparent.
 
-That's the only excuse I can S TER HEN €R2 PDSOINSARL D 'S'OWN | : ( | offer for my slowness to comprehend that Wagner and Angus needed each other.
+That's the only excuse I can S TER HEN R2 PDSOINSARL D 'S'OWN | : ( | offer for my slowness to comprehend that Wagner and Angus needed each other.
 
 Fortunately or unfortunately, depending on whether afterwords are considered a pleasure or an affliction, I can't explain the relevance without discussing The Ring in some detail.
 
@@ -47120,7 +47120,7 @@ And who better to represent the dwarves than the Amnion, who-desire nothing less
 
 Whether Angus and Morn can preserve their own humanity (not to mention their entire species) is a question which could only have arisen from the intersection of The Real Story and Der Ring des Nibelungen.
 
-STE (ACR ESN -éR SD ZOaN BAGLID 2SkO IN (Continued from front flap) something none of them would have believed.
+STE (ACR ESN -R SD ZOaN BAGLID 2SkO IN (Continued from front flap) something none of them would have believed.
 
 Here is that story, as told by one of the modern giants of imaginative fiction.
 
@@ -47136,7 +47136,7 @@ It begins the fiercest, most profound story that he has ever written.
 
 Includes a special afterword from the author.
 
-\UTHOR PHOTO © HELEN MARCUS STEPHEN R.
+\UTHOR PHOTO  HELEN MARCUS STEPHEN R.
 
 DONALDSON was born in Cleveland, Ohio, in 1947, and as the son of an American missionary spent his early years in India.
 
@@ -47150,7 +47150,7 @@ Campbell Award as Best New Writer in 1979.
 
 He currently lives in New Mexico, where he is working on the next book in the Gap series.
 
-Jacket illustration © 1990 Chris Hopkins
+Jacket illustration  1990 Chris Hopkins
 
 --- NEXT VOLUME ---
 
@@ -47162,7 +47162,7 @@ sweet, self-deprecating Wade, whose universe is an odd mix of the real past and 
 
 I couldn't put it down."
 
--Charles Ardai, Edgar Award–winning author and producer of Haven "Pure geek heaven.
+-Charles Ardai, Edgar Awardwinning author and producer of Haven "Pure geek heaven.
 
 Ernest Cline's hero competes in a virtual world with life- and-death stakes-which is only fitting, because he's fighting to make his dreams into reality.
 
@@ -47234,7 +47234,7 @@ I.
 
 Title.
 
-PS3603.L548R43 2011 813′.6-dc22 2011015247 Jacket design by Christopher Brand v3.1 For Susan and Libby Because there is no map for where we are going Contents Cover Title Page Prologue Level One Level Two Level Three Acknowledgments About the Author Everyone my age remembers where they were and what they were doing when they first heard about the contest.
+PS3603.L548R43 2011 813.6-dc22 2011015247 Jacket design by Christopher Brand v3.1 For Susan and Libby Because there is no map for where we are going Contents Cover Title Page Prologue Level One Level Two Level Three Acknowledgments About the Author Everyone my age remembers where they were and what they were doing when they first heard about the contest.
 
 I was sitting in my hideout watching cartoons when the news bulletin broke in on my video feed, announcing that James Halliday had died during the night.
 
@@ -47328,9 +47328,9 @@ He abruptly stops dancing and makes a cutting motion with his right hand, silenc
 
 At the same moment, the dancers and the gymnasium behind him vanish, and the scene around him suddenly changes.
 
-Halliday now stands at the front of a funeral parlor, next to an open casket.† A second, much older Halliday lies inside the casket, his body emaciated and ravaged by cancer.
+Halliday now stands at the front of a funeral parlor, next to an open casket. A second, much older Halliday lies inside the casket, his body emaciated and ravaged by cancer.
 
-Shiny quarters cover each of his eyelids.‡ The younger Halliday gazes down at the corpse of his older self with mock sadness, then turns to address the assembled mourners.§ Halliday snaps his fingers and a scroll appears in his right hand.
+Shiny quarters cover each of his eyelids. The younger Halliday gazes down at the corpse of his older self with mock sadness, then turns to address the assembled mourners. Halliday snaps his fingers and a scroll appears in his right hand.
 
 He opens it with a flourish and it unfurls to the floor, unraveling down the aisle in front of him.
 
@@ -47482,7 +47482,7 @@ If that's the case, it's too late to change anything now.
 
 So I guess we'll see."
 
-Anorak throws open the double doors, revealing an immense treasure room filled with piles of glittering gold coins and jewel-encrusted goblets.* Then he steps into the open doorway and turns to face the viewer, stretching out his arms to hold open the giant double doors.† "So without further ado,"
+Anorak throws open the double doors, revealing an immense treasure room filled with piles of glittering gold coins and jewel-encrusted goblets.* Then he steps into the open doorway and turns to face the viewer, stretching out his arms to hold open the giant double doors. "So without further ado,"
 
 Anorak announces, "let the hunt for Halliday's Easter egg begin!"
 
@@ -47580,13 +47580,13 @@ So I want to set the record straight, once and for all.
 
 * Careful analysis of this scene reveals that all of the teenagers behind Halliday are actually extras from various John Hughes teen films who have been digitally cut-and-pasted into the video.
 
-† His surroundings are actually from a scene in the 1989 film Heathers.
+ His surroundings are actually from a scene in the 1989 film Heathers.
 
 Halliday appears to have digitally re-created the funeral parlor set and then inserted himself into it.
 
-‡ High-resolution scrutiny reveals that both quarters were minted in 1984.
+ High-resolution scrutiny reveals that both quarters were minted in 1984.
 
-§ The mourners are actually all actors and extras from the same funeral scene in Heathers.
+ The mourners are actually all actors and extras from the same funeral scene in Heathers.
 
 Winona Ryder and Christian Slater are clearly visible in the audience, sitting near the back.
 
@@ -47594,7 +47594,7 @@ Winona Ryder and Christian Slater are clearly visible in the audience, sitting n
 
 * Analysis reveals dozens of curious items hidden among the mounds of treasure, most notably: several early home computers (an Apple IIe, a Commodore 64, an Atari 800XL, and a TRS-80 Color Computer 2), dozens of videogame controllers for a variety of game systems, and hundreds of polyhedral dice like those used in old tabletop role-playing games.
 
-† A freeze-frame of this scene appears nearly identical to a painting by Jeff Easley that appeared on the cover of the Dungeon Master's Guide, a Dungeons & Dragons rulebook published in 1983.
+ A freeze-frame of this scene appears nearly identical to a painting by Jeff Easley that appeared on the cover of the Dungeon Master's Guide, a Dungeons & Dragons rulebook published in 1983.
 
 Being human totally sucks most of the time.
 
@@ -48666,7 +48666,7 @@ The schools were all identical, because the same construction code was copied an
 
 And since the buildings were just pieces of software, their design wasn't limited by monetary constraints, or even by the laws of physics.
 
-So every school was a grand palace of learning, with polished marble hallways, cathedral-like classrooms, zero-g gymnasiums, and virtual libraries containing every (school board–approved) book ever written.
+So every school was a grand palace of learning, with polished marble hallways, cathedral-like classrooms, zero-g gymnasiums, and virtual libraries containing every (school boardapproved) book ever written.
 
 On my first day at OPS #1873, I thought I'd died and gone to heaven.
 
@@ -49988,7 +49988,7 @@ after watching the third Indiana Jones film).
 
 The more I'd learned about Halliday's life, the more I'd grown to idolize him.
 
-He was a god among geeks, a nerd über-deity on the level of Gygax, Garriott, and Gates.
+He was a god among geeks, a nerd ber-deity on the level of Gygax, Garriott, and Gates.
 
 He'd left home after high school with nothing but his wits and his imagination, and he'd used them to attain worldwide fame and amass a vast fortune.
 
@@ -50060,7 +50060,7 @@ They all found the game addictive, and lost countless hours attempting to solve 
 
 Ogden Morrow convinced Halliday that Anorak's Quest was better than most of the computer games currently on the market, and encouraged him to try selling it.
 
-He helped Halliday create some simple cover artwork for the game, and together, the two of them hand-copied Anorak's Quest onto dozens of 51⁄4-inch floppy disks and stuck them into Ziploc bags along with a single photocopied sheet of instructions.
+He helped Halliday create some simple cover artwork for the game, and together, the two of them hand-copied Anorak's Quest onto dozens of 514-inch floppy disks and stuck them into Ziploc bags along with a single photocopied sheet of instructions.
 
 They began selling the game on the software rack at their local computer store.
 
@@ -51832,7 +51832,7 @@ She wore a suit of scaled gunmetal-blue armor that looked more sci-fi than fanta
 
 Twin blaster pistols were slung low on her hips in quickdraw holsters, and there was a long, curved elvish sword in a scabbard across her back.
 
-She wore fingerless Road Warrior–style racing gloves and a pair of classic Ray-Ban shades.
+She wore fingerless Road Warriorstyle racing gloves and a pair of classic Ray-Ban shades.
 
 Overall, she seemed to be going for a sort of mid-'80s postapocalyptic cyberpunk girl-next-door look.
 
@@ -51880,7 +51880,7 @@ Couldn't she take the hint?
 
 I said, bowing slightly.
 
-"I am Juan Sánchez Villa-Lobos Ramírez."
+"I am Juan Snchez Villa-Lobos Ramrez."
 
 She smirked.
 
@@ -52072,7 +52072,7 @@ She eyed me a moment, then said, "I also recognize your sword and the armor you'
 
 You got them both right here in this dungeon, which means they're better than whatever your avatar had before.
 
-You look like a low-level wimpazoid to me, Juan Ramírez.
+You look like a low-level wimpazoid to me, Juan Ramrez.
 
 And I think you're hiding something."
 
@@ -53370,7 +53370,7 @@ It wasn't my avatar's face I saw there.
 
 It was Matthew Broderick's face.
 
-A young pre–Ferris Bueller and pre-Ladyhawke Matthew Broderick.
+A young preFerris Bueller and pre-Ladyhawke Matthew Broderick.
 
 Then I knew where I was.
 
@@ -55872,7 +55872,7 @@ I said.
 
 "To win a videogame contest?"
 
-"Don't pretend to be naïve, Wade,"
+"Don't pretend to be nave, Wade,"
 
 Sorrento said.
 
@@ -57562,7 +57562,7 @@ I kept glancing at the meter to see how much farther we had to go.
 
 Finally, the cab pulled up in front of my new apartment building, a slate-gray monolith on the banks of the Scioto, just at the edge of the Twin Rivers ghetto.
 
-I noticed a discolored outline on the building's façade where the Hilton logo used to be, back when the place had been a hotel.
+I noticed a discolored outline on the building's faade where the Hilton logo used to be, back when the place had been a hotel.
 
 I thumbed my fare and climbed out of the cab.
 
@@ -58176,7 +58176,7 @@ Sweet dreams.
 
 chatlog ends.
 
-2.27.2045–02:51:38 OST I started e-mailing her.
+2.27.204502:51:38 OST I started e-mailing her.
 
 At first I showed restraint and only wrote her once a week.
 
@@ -58458,7 +58458,7 @@ I couldn't feel it, of course.
 
 But it still set my heart racing.
 
-I'd heard all the clichéd warnings about the perils of falling for someone you only knew online, but I ignored them.
+I'd heard all the clichd warnings about the perils of falling for someone you only knew online, but I ignored them.
 
 I decided that whoever Art3mis really was, I was in love with her.
 
@@ -58516,7 +58516,7 @@ Ogden Morrow had coded the place himself decades ago and was still its sole owne
 
 I'd never visited the Globe before.
 
-I wasn't much for dancing, or for socializing with the twinked-out wannabe-gunter überdorks who were known to frequent the place.
+I wasn't much for dancing, or for socializing with the twinked-out wannabe-gunter berdorks who were known to frequent the place.
 
 But Og's birthday party was a special event, and so the usual clientele would be banished for the evening.
 
@@ -58562,7 +58562,7 @@ I'd had it only a few weeks now, but my time-traveling, Ghost Busting, Knight Ri
 
 I knew that leaving my sweet ride parked in a PvP zone was an open invitation for some moron to try to boost it.
 
-The DeLorean had several antitheft systems installed, and the ignition system was booby-trapped Max Rockatansky–style so that if any other avatar tried to start the car, the plutonium chamber would detonate in a small thermonuclear explosion.
+The DeLorean had several antitheft systems installed, and the ignition system was booby-trapped Max Rockatanskystyle so that if any other avatar tried to start the car, the plutonium chamber would detonate in a small thermonuclear explosion.
 
 But keeping my car safe wouldn't be a problem here on Neonoir.
 
@@ -59280,7 +59280,7 @@ Simulated musculature.
 
 And all of the attendant appendages and orifices one would imagine.
 
-Driven by loneliness, curiosity, and raging teen hormones, I'd purchased a midrange ACHD, the Shaptic ÜberBetty, a few weeks after Art3mis stopped speaking to me.
+Driven by loneliness, curiosity, and raging teen hormones, I'd purchased a midrange ACHD, the Shaptic berBetty, a few weeks after Art3mis stopped speaking to me.
 
 After spending several highly unproductive days inside a stand- alone brothel simulation called the Pleasuredome, I'd gotten rid of the doll, out of a combination of shame and self-preservation.
 
@@ -59476,7 +59476,7 @@ This meant that I couldn't go to work, continue my quest, or, in effect, live my
 
 Once the lockout was engaged, you couldn't disable it for two months.
 
-And the software was bound to my OASIS account, so I couldn't just buy a new computer or go rent a booth in some public OASIS café.
+And the software was bound to my OASIS account, so I couldn't just buy a new computer or go rent a booth in some public OASIS caf.
 
 If I wanted to log in, I had no choice but to exercise first.
 
@@ -59570,7 +59570,7 @@ I looked a little freaky without any eyebrows, but I got used to it.
 
 When the rinse jets cut off, the blow-dryers kicked on, blasting the moisture off of my skin in a matter of seconds.
 
-I stepped into the kitchen and took out a can of Sludge, a high-protein, vitamin D–infused breakfast drink (to help counteract my sunlight deprivation).
+I stepped into the kitchen and took out a can of Sludge, a high-protein, vitamin Dinfused breakfast drink (to help counteract my sunlight deprivation).
 
 As I gulped it down, my computer's sensors silently took note, scanning the barcode and adding the calories to my total for the day.
 
@@ -59594,7 +59594,7 @@ In real life, I was nothing but an antisocial hermit.
 
 A recluse.
 
-A pale-skinned pop culture–obsessed geek.
+A pale-skinned pop cultureobsessed geek.
 
 An agoraphobic shut-in, with no real friends, family, or genuine human contact.
 
@@ -60008,7 +60008,7 @@ But my primary source of income was my full-time job doing OASIS technical suppo
 
 When I'd created my new Bryce Lynch identity, I'd given myself a college degree, along with multiple technical certifications and a long, sterling work record as an OASIS programmer and app developer.
 
-However, despite my sterling bogus résumé, the only job I'd been able to get was as a tier-one technical support representative at Helpful Helpdesk Inc., one of the contract firms GSS used to handle OASIS customer service and support.
+However, despite my sterling bogus rsum, the only job I'd been able to get was as a tier-one technical support representative at Helpful Helpdesk Inc., one of the contract firms GSS used to handle OASIS customer service and support.
 
 Now I worked forty hours a week, helping morons reboot their OASIS consoles and update the drivers for their haptic gloves.
 
@@ -60710,7 +60710,7 @@ Of course, I'd never really made a serious attempt.
 
 Up until now, I'd never had a reason to.
 
-I opened my grail diary and pulled up all of the Pac-Man–related data I'd ever collected.
+I opened my grail diary and pulled up all of the Pac-Manrelated data I'd ever collected.
 
 The original game code.
 
@@ -62664,7 +62664,7 @@ Every radio and television interview the band had ever done.
 
 Unabridged biographies on each band member, along with copies of their side projects and solo work.
 
-I pulled up the band's discography and selected the album I was looking for: 2112, Rush's classic sci-fi–themed concept album.
+I pulled up the band's discography and selected the album I was looking for: 2112, Rush's classic sci-fithemed concept album.
 
 A high-resolution scan of the album's cover appeared on my display.
 
@@ -63436,7 +63436,7 @@ The transport rolled into a parking garage at the base of the circular tower and
 
 A sign over a row of wide bay doors read IOI INDENTURED EMPLOYEE INDUCTION CENTER.
 
-The other indents and I were herded off the transport, where a squad of stun gun–armed security guards was waiting to take custody of us.
+The other indents and I were herded off the transport, where a squad of stun gunarmed security guards was waiting to take custody of us.
 
 Our handcuffs were removed; then another guard began to swipe each of us with a handheld retina scanner.
 
@@ -68606,7 +68606,7 @@ I said.
 
 There's no way I'm going to beat Halliday's high score on my first attempt."
 
-I glanced at the bottom of the screen: ©MCMLXXX ATARI.
+I glanced at the bottom of the screen: MCMLXXX ATARI.
 
 "Nineteen eighty?"
 
@@ -69052,7 +69052,7 @@ I said, forgetting myself for a second.
 
 A warning flashed on my display: INCORRECT DIALOGUE!
 
-A score of –100 points appeared in the corner of my display.
+A score of 100 points appeared in the corner of my display.
 
 "Smooth move, Ex-lax,"
 
@@ -70254,7 +70254,7 @@ My sincere thanks to Eric Cline, Susan Somers-Willett, Chris Beaver, Harry Knowl
 
 I'm also indebted to Yfat Reiss Gendell, the Coolest Agent in the Known Universe, who managed to make several of my lifelong dreams come true just a few months after I met her.
 
-Thanks also to Stéphanie Abou, Hannah Brown Gordon, Cecilia Campbell-Westlind, and all of the awesome folks at Foundry Literary and Media.
+Thanks also to Stphanie Abou, Hannah Brown Gordon, Cecilia Campbell-Westlind, and all of the awesome folks at Foundry Literary and Media.
 
 A huge shout-out to the amazing Dan Farah, my friend, manager, and Hollywood partner in crime.
 
@@ -70326,7 +70326,7 @@ For the next four years Orwell mixed journalistic work with writing his best-kno
 
 In October 1949, shortly before his death, he married Sonia Brownell.
 
-GEORGE ORWELL Nineteen Eighty-Four Title: Nineteen Eighty-Four Author: George Orwell (pseudonym of Eric Blair) (1903–1950) eBook No.: 0100021.txt Language: English Date first posted: August 2001 Date most recently updated: August 2001 Project Gutenberg of Australia eBooks are created from printed editions which do NOT keep any eBooks in compliance with a particular paper edition.
+GEORGE ORWELL Nineteen Eighty-Four Title: Nineteen Eighty-Four Author: George Orwell (pseudonym of Eric Blair) (19031950) eBook No.: 0100021.txt Language: English Date first posted: August 2001 Date most recently updated: August 2001 Project Gutenberg of Australia eBooks are created from printed editions which do NOT keep any eBooks in compliance with a particular paper edition.
 
 laws for your country before downloading or redistributing this file.
 
@@ -82814,7 +82814,7 @@ The relevant data on this apparition, as recorded in various logbooks, agreed pr
 
 If it was a cetacean, it exceeded in bulk any whale previously classified by science.
 
-No naturalist, neither Cuvier nor Lacépède, neither Professor Dumeril nor Professor de Quatrefages, would have accepted the existence of such a monster sight unseen-- specifically, unseen by their own scientific eyes.
+No naturalist, neither Cuvier nor Lacpde, neither Professor Dumeril nor Professor de Quatrefages, would have accepted the existence of such a monster sight unseen-- specifically, unseen by their own scientific eyes.
 
 Striking an average of observations taken at different times-- rejecting those timid estimates that gave the object a length of 200 feet, and ignoring those exaggerated views that saw it as a mile wide and three long--you could still assert that this phenomenal creature greatly exceeded the dimensions of anything then known to ichthyologists, if it existed at all.
 
@@ -83514,7 +83514,7 @@ He believed in it as certain pious women believe in the leviathan from the Book 
 
 The monster existed, and he had vowed to rid the seas of it.
 
-The man was a sort of Knight of Rhodes, a latter-day Sir Dieudonné of Gozo, on his way to fight an encounter with the dragon devastating the island.
+The man was a sort of Knight of Rhodes, a latter-day Sir Dieudonn of Gozo, on his way to fight an encounter with the dragon devastating the island.
 
 Either Commander Farragut would slay the narwhale, or the narwhale would slay Commander Farragut.
 
@@ -86622,7 +86622,7 @@ The masters are ageless."
 
 "What about these composers?"
 
-I said, pointing to sheet music by Weber, Rossini, Mozart, Beethoven, Haydn, Meyerbeer, Hérold, Wagner, Auber, Gounod, Victor Massé, and a number of others scattered over a full size piano-organ, which occupied one of the wall panels in this lounge.
+I said, pointing to sheet music by Weber, Rossini, Mozart, Beethoven, Haydn, Meyerbeer, Hrold, Wagner, Auber, Gounod, Victor Mass, and a number of others scattered over a full size piano-organ, which occupied one of the wall panels in this lounge.
 
 "These composers,"
 
@@ -86642,7 +86642,7 @@ They consisted chiefly of plants, shells, and other exhibits from the ocean that
 
 In the middle of the lounge, a jet of water, electrically lit, fell back into a basin made from a single giant clam.
 
-The delicately festooned rim of this shell, supplied by the biggest mollusk in the class Acephala, measured about six meters in circumference; so it was even bigger than those fine giant clams given to King François I by the Republic of Venice, and which the Church of Saint-Sulpice in Paris has made into two gigantic holy-water fonts.
+The delicately festooned rim of this shell, supplied by the biggest mollusk in the class Acephala, measured about six meters in circumference; so it was even bigger than those fine giant clams given to King Franois I by the Republic of Venice, and which the Church of Saint-Sulpice in Paris has made into two gigantic holy-water fonts.
 
 Around this basin, inside elegant glass cases fastened with copper bands, there were classified and labeled the most valuable marine exhibits ever put before the eyes of a naturalist.
 
@@ -86650,7 +86650,7 @@ My professorial glee may easily be imagined.
 
 The zoophyte branch offered some very unusual specimens from its two groups, the polyps and the echinoderms.
 
-In the first group: organ-pipe coral, gorgonian coral arranged into fan shapes, soft sponges from Syria, isis coral from the Molucca Islands, sea-pen coral, wonderful coral of the genus Virgularia from the waters of Norway, various coral of the genus Umbellularia, alcyonarian coral, then a whole series of those madrepores that my mentor Professor Milne-Edwards has so shrewdly classified into divisions and among which I noted the wonderful genus Flabellina as well as the genus Oculina from Réunion Island, plus a "Neptune's chariot"
+In the first group: organ-pipe coral, gorgonian coral arranged into fan shapes, soft sponges from Syria, isis coral from the Molucca Islands, sea-pen coral, wonderful coral of the genus Virgularia from the waters of Norway, various coral of the genus Umbellularia, alcyonarian coral, then a whole series of those madrepores that my mentor Professor Milne-Edwards has so shrewdly classified into divisions and among which I noted the wonderful genus Flabellina as well as the genus Oculina from Runion Island, plus a "Neptune's chariot"
 
 from the Caribbean Sea--every superb variety of coral, and in short, every species of these unusual polyparies that congregate to form entire islands that will one day turn into continents.
 
@@ -87908,7 +87908,7 @@ Cavorting around the Nautilus was a school of triggerfish with flat bodies, grai
 
 Nothing could have been more wonderful than the skin covering them: white underneath, gray above, with spots of gold sparkling in the dark eddies of the waves.
 
-Around them, rays were undulating like sheets flapping in the wind, and among these I spotted, much to my glee, a Chinese ray, yellowish on its topside, a dainty pink on its belly, and armed with three stings behind its eyes; a rare species whose very existence was still doubted in Lacépède's day, since that pioneering classifier of fish had seen one only in a portfolio of Japanese drawings.
+Around them, rays were undulating like sheets flapping in the wind, and among these I spotted, much to my glee, a Chinese ray, yellowish on its topside, a dainty pink on its belly, and armed with three stings behind its eyes; a rare species whose very existence was still doubted in Lacpde's day, since that pioneering classifier of fish had seen one only in a portfolio of Japanese drawings.
 
 For two hours a whole aquatic army escorted the Nautilus.
 
@@ -89096,7 +89096,7 @@ The Nautilus was motionless.
 
 Its ballast tanks full, it was sitting at a depth of 1,000 meters in a comparatively unpopulated region of the ocean where only larger fish put in occasional appearances.
 
-Just then I was studying a delightful book by Jean Macé, The Servants of the Stomach, and savoring its ingenious teachings, when Conseil interrupted my reading.
+Just then I was studying a delightful book by Jean Mac, The Servants of the Stomach, and savoring its ingenious teachings, when Conseil interrupted my reading.
 
 "Would master kindly come here for an instant?"
 
@@ -89184,7 +89184,7 @@ In some places, they form atolls, a circular ring surrounding a lagoon or small 
 
 Elsewhere, they take the shape of barrier reefs, such as those that exist along the coasts of New Caledonia and several of the Tuamotu Islands.
 
-In still other localities, such as Réunion Island and the island of Mauritius, they build fringing reefs, high, straight walls next to which the ocean's depth is considerable.
+In still other localities, such as Runion Island and the island of Mauritius, they build fringing reefs, high, straight walls next to which the ocean's depth is considerable.
 
 While cruising along only a few cable lengths from the underpinning of Reao Island, I marveled at the gigantic piece of work accomplished by these microscopic laborers.
 
@@ -89256,7 +89256,7 @@ Its waters supplied excellent fish for the tables on board: mackerel, bonito, al
 
 The Nautilus had cleared 8,100 miles.
 
-We logged 9,720 miles when we passed between the Tonga Islands, where crews from the Argo, Port-au-Prince, and Duke of Portland had perished, and the island group of Samoa, scene of the slaying of Captain de Langle, friend of that long-lost navigator, the Count de La Pérouse.
+We logged 9,720 miles when we passed between the Tonga Islands, where crews from the Argo, Port-au-Prince, and Duke of Portland had perished, and the island group of Samoa, scene of the slaying of Captain de Langle, friend of that long-lost navigator, the Count de La Prouse.
 
 Then we raised the Fiji Islands, where savages slaughtered sailors from the Union, as well as Captain Bureau, commander of the Darling Josephine out of Nantes, France.
 
@@ -89270,7 +89270,7 @@ I'll let the reader decide which of these deeds was more beneficial to humanity.
 
 Coming later, Captain Cook in 1774, Rear Admiral d'Entrecasteaux in 1793, and finally Captain Dumont d'Urville in 1827, untangled the whole chaotic geography of this island group.
 
-The Nautilus drew near Wailea Bay, an unlucky place for England's Captain Dillon, who was the first to shed light on the longstanding mystery surrounding the disappearance of ships under the Count de La Pérouse.
+The Nautilus drew near Wailea Bay, an unlucky place for England's Captain Dillon, who was the first to shed light on the longstanding mystery surrounding the disappearance of ships under the Count de La Prouse.
 
 This bay, repeatedly dredged, furnished a huge supply of excellent oysters.
 
@@ -89286,7 +89286,7 @@ Ned Land did not repent of his gluttony at our oyster fest, it's because oysters
 
 In fact, it takes no less than sixteen dozen of these headless mollusks to supply the 315 grams that satisfy one man's minimum daily requirement for nitrogen.
 
-On December 25 the Nautilus navigated amid the island group of the New Hebrides, which the Portuguese seafarer Queirós discovered in 1606, which Commander Bougainville explored in 1768, and to which Captain Cook gave its current name in 1773.
+On December 25 the Nautilus navigated amid the island group of the New Hebrides, which the Portuguese seafarer Queirs discovered in 1606, which Commander Bougainville explored in 1768, and to which Captain Cook gave its current name in 1773.
 
 This group is chiefly made up of nine large islands and forms a 120-league strip from the north-northwest to the south-southeast, lying between latitude 2 degrees and 15 degrees south, and between longitude 164 degrees and 168 degrees.
 
@@ -89304,7 +89304,7 @@ The captain approached, placed a finger over a position on the chart, and pronou
 
 This name was magic!
 
-It was the name of those islets where vessels under the Count de La Pérouse had miscarried.
+It was the name of those islets where vessels under the Count de La Prouse had miscarried.
 
 I straightened suddenly.
 
@@ -89340,7 +89340,7 @@ Under the green shade of some tropical evergreens, I spotted a few savages who l
 
 In this long, blackish object advancing flush with the water, didn't they see some fearsome cetacean that they were obliged to view with distrust?
 
-Just then Captain Nemo asked me what I knew about the shipwreck of the Count de La Pérouse.
+Just then Captain Nemo asked me what I knew about the shipwreck of the Count de La Prouse.
 
 "What everybody knows, captain,"
 
@@ -89354,7 +89354,7 @@ he asked me in a gently ironic tone.
 
 I related to him what the final deeds of Captain Dumont d'Urville had brought to light, deeds described here in this heavily condensed summary of the whole matter.
 
-In 1785 the Count de La Pérouse and his subordinate, Captain de Langle, were sent by King Louis XVI of France on a voyage to circumnavigate the globe.
+In 1785 the Count de La Prouse and his subordinate, Captain de Langle, were sent by King Louis XVI of France on a voyage to circumnavigate the globe.
 
 They boarded two sloops of war, the Compass and the Astrolabe, which were never seen again.
 
@@ -89362,7 +89362,7 @@ In 1791, justly concerned about the fate of these two sloops of war, the French 
 
 Two months later, testimony from a certain Commander Bowen, aboard the Albemarle, alleged that rubble from shipwrecked vessels had been seen on the coast of New Georgia.
 
-But d'Entrecasteaux was unaware of this news--which seemed a bit dubious anyhow--and headed toward the Admiralty Islands, which had been named in a report by one Captain Hunter as the site of the Count de La Pérouse's shipwreck.
+But d'Entrecasteaux was unaware of this news--which seemed a bit dubious anyhow--and headed toward the Admiralty Islands, which had been named in a report by one Captain Hunter as the site of the Count de La Prouse's shipwreck.
 
 They looked in vain.
 
@@ -89378,7 +89378,7 @@ There a native boatman pulled alongside in a dugout canoe and sold Dillon a silv
 
 Furthermore, this native boatman claimed that during a stay in Vanikoro six years earlier, he had seen two Europeans belonging to ships that had run aground on the island's reefs many years before.
 
-Dillon guessed that the ships at issue were those under the Count de La Pérouse, ships whose disappearance had shaken the entire world.
+Dillon guessed that the ships at issue were those under the Count de La Prouse, ships whose disappearance had shaken the entire world.
 
 He tried to reach Vanikoro, where, according to the native boatman, a good deal of rubble from the shipwreck could still be found, but winds and currents prevented his doing so.
 
@@ -89418,7 +89418,7 @@ On the 23rd, several officers circled the island and brought back some rubble of
 
 The natives, adopting a system of denial and evasion, refused to guide them to the site of the casualty.
 
-This rather shady conduct aroused the suspicion that the natives had mistreated the castaways; and in truth, the natives seemed afraid that Dumont d'Urville had come to avenge the Count de La Pérouse and his unfortunate companions.
+This rather shady conduct aroused the suspicion that the natives had mistreated the castaways; and in truth, the natives seemed afraid that Dumont d'Urville had come to avenge the Count de La Prouse and his unfortunate companions.
 
 But on the 26th, appeased with gifts and seeing that they didn't need to fear any reprisals, the natives led the chief officer, Mr.
 
@@ -89428,7 +89428,7 @@ At this location, in three or four fathoms of water between the Paeu and Vana re
 
 A launch and whaleboat from the new Astrolabe were steered to this locality, and after going to exhausting lengths, their crews managed to dredge up an anchor weighing 1,800 pounds, a cast-iron eight-pounder cannon, a lead ingot, and two copper swivel guns.
 
-Questioning the natives, Captain Dumont d'Urville also learned that after La Pérouse's two ships had miscarried on the island's reefs, the count had built a smaller craft, only to go off and miscarry a second time.
+Questioning the natives, Captain Dumont d'Urville also learned that after La Prouse's two ships had miscarried on the island's reefs, the count had built a smaller craft, only to go off and miscarry a second time.
 
 Where?
 
@@ -89442,7 +89442,7 @@ Then Dumont d'Urville tried to depart; but his crews were run down from the feve
 
 Meanwhile, fearing that Dumont d'Urville wasn't abreast of Dillon's activities, the French government sent a sloop of war to Vanikoro, the Bayonnaise under Commander Legoarant de Tromelin, who had been stationed on the American west coast.
 
-Dropping anchor before Vanikoro a few months after the new Astrolabe's departure, the Bayonnaise didn't find any additional evidence but verified that the savages hadn't disturbed the memorial honoring the Count de La Pérouse.
+Dropping anchor before Vanikoro a few months after the new Astrolabe's departure, the Bayonnaise didn't find any additional evidence but verified that the savages hadn't disturbed the memorial honoring the Count de La Prouse.
 
 This is the substance of the account I gave Captain Nemo.
 
@@ -89458,7 +89458,7 @@ The Nautilus sank a few meters beneath the waves, and the panels opened.
 
 I rushed to the window and saw crusts of coral: fungus coral, siphonula coral, alcyon coral, sea anemone from the genus Caryophylia, plus myriads of charming fish including greenfish, damselfish, sweepers, snappers, and squirrelfish; underneath this coral covering I detected some rubble the old dredges hadn't been able to tear free-- iron stirrups, anchors, cannons, shells, tackle from a capstan, a stempost, all objects hailing from the wrecked ships and now carpeted in moving flowers.
 
-And as I stared at this desolate wreckage, Captain Nemo told me in a solemn voice: "Commander La Pérouse set out on December 7, 1785, with his ships, the Compass and the Astrolabe.
+And as I stared at this desolate wreckage, Captain Nemo told me in a solemn voice: "Commander La Prouse set out on December 7, 1785, with his ships, the Compass and the Astrolabe.
 
 He dropped anchor first at Botany Bay, visited the Tonga Islands and New Caledonia, headed toward the Santa Cruz Islands, and put in at Nomuka, one of the islands in the Ha'apai group.
 
@@ -89478,7 +89478,7 @@ The latter took up residence on the island and built a smaller craft with rubble
 
 A few seamen stayed voluntarily in Vanikoro.
 
-The others, weak and ailing, set sail with the Count de La Pérouse.
+The others, weak and ailing, set sail with the Count de La Prouse.
 
 They headed to the Solomon Islands, and they perished with all hands on the westerly coast of the chief island in that group, between Cape Deception and Cape Satisfaction!"
 
@@ -89492,7 +89492,7 @@ Captain Nemo showed me a tin box, stamped with the coat of arms of France and al
 
 He opened it and I saw a bundle of papers, yellowed but still legible.
 
-They were the actual military orders given by France's Minister of the Navy to Commander La Pérouse, with notes along the margin in the handwriting of King Louis XVI!
+They were the actual military orders given by France's Minister of the Navy to Commander La Prouse, with notes along the margin in the handwriting of King Louis XVI!
 
 "Ah, what a splendid death for a seaman!"
 
@@ -89502,7 +89502,7 @@ Captain Nemo then said.
 
 The Torres Strait DURING THE NIGHT of December 27-28, the Nautilus left the waterways of Vanikoro behind with extraordinary speed.
 
-Its heading was southwesterly, and in three days it had cleared the 750 leagues that separated La Pérouse's islands from the southeastern tip of Papua.
+Its heading was southwesterly, and in three days it had cleared the 750 leagues that separated La Prouse's islands from the southeastern tip of Papua.
 
 On January 1, 1868, bright and early, Conseil joined me on the platform.
 
@@ -90990,7 +90990,7 @@ If that energetic man was able to think about his life in its last seconds, imag
 
 As he spoke, Captain Nemo seemed deeply moved, an emotion I felt was to his credit.
 
-Then, chart in hand, we returned to the deeds of the French navigator: his voyages to circumnavigate the globe, his double attempt at the South Pole, which led to his discovery of the Adélie Coast and the Louis-Philippe Peninsula, finally his hydrographic surveys of the chief islands in Oceania.
+Then, chart in hand, we returned to the deeds of the French navigator: his voyages to circumnavigate the globe, his double attempt at the South Pole, which led to his discovery of the Adlie Coast and the Louis-Philippe Peninsula, finally his hydrographic surveys of the chief islands in Oceania.
 
 "What your d'Urville did on the surface of the sea,"
 
@@ -92154,7 +92154,7 @@ Conseil, I also retrieve certain fish from the genus Tetradon unique to these se
 
 Then, as specimens of other genera, blowfish resembling a dark brown egg, furrowed with white bands, and lacking tails; globefish, genuine porcupines of the sea, armed with stings and able to inflate themselves until they look like a pin cushion bristling with needles; seahorses common to every ocean; flying dragonfish with long snouts and highly distended pectoral fins shaped like wings, which enable them, if not to fly, at least to spring into the air; spatula-shaped paddlefish whose tails are covered with many scaly rings; snipefish with long jaws, excellent animals twenty-five centimeters long and gleaming with the most cheerful colors; bluish gray dragonets with wrinkled heads; myriads of leaping blennies with black stripes and long pectoral fins, gliding over the surface of the water with prodigious speed; delicious sailfish that can hoist their fins in a favorable current like so many unfurled sails; splendid nurseryfish on which nature has lavished yellow, azure, silver, and gold; yellow mackerel with wings made of filaments; bullheads forever spattered with mud, which make distinct hissing sounds; sea robins whose livers are thought to be poisonous; ladyfish that can flutter their eyelids; finally, archerfish with long, tubular snouts, real oceangoing flycatchers, armed with a rifle unforeseen by either Remington or Chassepot: it slays insects by shooting them with a simple drop of water.
 
-From the eighty-ninth fish genus in Lacépède's system of classification, belonging to his second subclass of bony fish (characterized by gill covers and a bronchial membrane), I noted some scorpionfish whose heads are adorned with stings and which have only one dorsal fin; these animals are covered with small scales, or have none at all, depending on the subgenus to which they belong.
+From the eighty-ninth fish genus in Lacpde's system of classification, belonging to his second subclass of bony fish (characterized by gill covers and a bronchial membrane), I noted some scorpionfish whose heads are adorned with stings and which have only one dorsal fin; these animals are covered with small scales, or have none at all, depending on the subgenus to which they belong.
 
 The second subgenus gave us some Didactylus specimens three to four decimeters long, streaked with yellow, their heads having a phantasmagoric appearance.
 
@@ -92812,7 +92812,7 @@ Conseil exclaimed.
 
 the Canadian replied in all seriousness, "and it wasn't my fault the whole business fell through.
 
-I even bought a pearl necklace for my fiancée, Kate Tender, but she married somebody else instead.
+I even bought a pearl necklace for my fiance, Kate Tender, but she married somebody else instead.
 
 Well, that necklace cost me only $1.50, but you can absolutely trust me on this, professor, its pearls were so big, they wouldn't have gone through that strainer with twenty holes."
 
@@ -93606,7 +93606,7 @@ Twenty miles wide, it's only fifty-two kilometers long, and with the Nautilus la
 
 But I didn't see a thing, not even Perim Island where the British government built fortifications to strengthen Aden's position.
 
-There were many English and French steamers plowing this narrow passageway, liners going from Suez to Bombay, Calcutta, Melbourne, Réunion Island, and Mauritius; far too much traffic for the Nautilus to make an appearance on the surface.
+There were many English and French steamers plowing this narrow passageway, liners going from Suez to Bombay, Calcutta, Melbourne, Runion Island, and Mauritius; far too much traffic for the Nautilus to make an appearance on the surface.
 
 So it wisely stayed in midwater.
 
@@ -95216,7 +95216,7 @@ But whenever the Nautilus drew near the surface, those denizens of the Mediterra
 
 These were tuna from the genus Scomber, blue-black on top, silver on the belly armor, their dorsal stripes giving off a golden gleam.
 
-They are said to follow ships in search of refreshing shade from the hot tropical sun, and they did just that with the Nautilus, as they had once done with the vessels of the Count de La Pérouse.
+They are said to follow ships in search of refreshing shade from the hot tropical sun, and they did just that with the Nautilus, as they had once done with the vessels of the Count de La Prouse.
 
 For long hours they competed in speed with our submersible.
 
@@ -95224,7 +95224,7 @@ I couldn't stop marveling at these animals so perfectly cut out for racing, thei
 
 Like certain flocks of birds, whose speed they equal, these tuna swim in triangle formation, which prompted the ancients to say they'd boned up on geometry and military strategy.
 
-And yet they can't escape the Provençal fishermen, who prize them as highly as did the ancient inhabitants of Turkey and Italy; and these valuable animals, as oblivious as if they were deaf and blind, leap right into the Marseilles tuna nets and perish by the thousands.
+And yet they can't escape the Provenal fishermen, who prize them as highly as did the ancient inhabitants of Turkey and Italy; and these valuable animals, as oblivious as if they were deaf and blind, leap right into the Marseilles tuna nets and perish by the thousands.
 
 Just for the record, I'll mention those Mediterranean fish that Conseil and I barely glimpsed.
 
@@ -96060,7 +96060,7 @@ No more shore in sight.
 
 Nothing but the immenseness of the sea.
 
-A few sails were on the horizon, no doubt ships going as far as Cape São Roque to find favorable winds for doubling the Cape of Good Hope.
+A few sails were on the horizon, no doubt ships going as far as Cape So Roque to find favorable winds for doubling the Cape of Good Hope.
 
 The sky was overcast.
 
@@ -97868,7 +97868,7 @@ Better armed than a baleen whale, whose upper jaw is adorned solely with whalebo
 
 In the top part of this enormous head, inside big cavities separated by cartilage, you'll find 300 to 400 kilograms of that valuable oil called "spermaceti."
 
-The sperm whale is an awkward animal, more tadpole than fish, as Professor Frédol has noted.
+The sperm whale is an awkward animal, more tadpole than fish, as Professor Frdol has noted.
 
 It's poorly constructed, being "defective,"
 
@@ -99216,7 +99216,7 @@ In 1829 the Englishman Forster, commander of the Chanticleer, laid claim to the 
 
 On February 1, 1831, the Englishman Biscoe discovered Enderby Land at latitude 68 degrees 50', Adelaide Land at latitude 67 degrees on February 5, 1832, and Graham Land at latitude 64 degrees 45' on February 21.
 
-In 1838 the Frenchman Dumont d'Urville stopped at the Ice Bank in latitude 62 degrees 57', sighting the Louis-Philippe Peninsula; on January 21 two years later, at a new southerly position of 66 degrees 30', he named the Adélie Coast and eight days later, the Clarie Coast at 64 degrees 40'.
+In 1838 the Frenchman Dumont d'Urville stopped at the Ice Bank in latitude 62 degrees 57', sighting the Louis-Philippe Peninsula; on January 21 two years later, at a new southerly position of 66 degrees 30', he named the Adlie Coast and eight days later, the Clarie Coast at 64 degrees 40'.
 
 In 1838 the American Wilkes advanced as far as the 69th parallel on the 100th meridian.
 
@@ -100624,7 +100624,7 @@ Much to Ned Land's displeasure, Captain Nemo had no liking for the neighborhood 
 
 Not even the swiftest fish or birds could keep up with us, and the natural curiosities in these seas completely eluded our observation.
 
-This speed was maintained for several days, and on the evening of April 9, we raised South America's easternmost tip, Cape São Roque.
+This speed was maintained for several days, and on the evening of April 9, we raised South America's easternmost tip, Cape So Roque.
 
 But then the Nautilus veered away again and went looking for the lowest depths of an underwater valley gouged between this cape and Sierra Leone on the coast of Africa.
 
@@ -101458,7 +101458,7 @@ As discovered by Commander Maury, the true source of the Gulf Stream, its starti
 
 There its waters, still weak in temperature and color, begin to form.
 
-It goes down south, skirts equatorial Africa, warms its waves in the rays of the Torrid Zone, crosses the Atlantic, reaches Cape São Roque on the coast of Brazil, and forks into two branches, one going to the Caribbean Sea for further saturation with heat particles.
+It goes down south, skirts equatorial Africa, warms its waves in the rays of the Torrid Zone, crosses the Atlantic, reaches Cape So Roque on the coast of Brazil, and forks into two branches, one going to the Caribbean Sea for further saturation with heat particles.
 
 Then, entrusted with restoring the balance between hot and cold temperatures and with mixing tropical and northern waters, the Gulf Stream begins to play its stabilizing role.
 
@@ -101500,7 +101500,7 @@ Argonauts, so common in the Mediterranean, voyaged here in schools of large numb
 
 Among cartilaginous fish, the most remarkable were rays whose ultra slender tails made up nearly a third of the body, which was shaped like a huge diamond twenty-five feet long; then little one-meter sharks, the head large, the snout short and rounded, the teeth sharp and arranged in several rows, the body seemingly covered with scales.
 
-Among bony fish, I noted grizzled wrasse unique to these seas, deep-water gilthead whose iris has a fiery gleam, one-meter croakers whose large mouths bristle with small teeth and which let out thin cries, black rudderfish like those I've already discussed, blue dorados accented with gold and silver, rainbow-hued parrotfish that can rival the loveliest tropical birds in coloring, banded blennies with triangular heads, bluish flounder without scales, toadfish covered with a crosswise yellow band in the shape of a Greek t, swarms of little freckled gobies stippled with brown spots, lungfish with silver heads and yellow tails, various specimens of salmon, mullet with slim figures and a softly glowing radiance that Lacépède dedicated to the memory of his wife, and finally the American cavalla, a handsome fish decorated by every honorary order, bedizened with their every ribbon, frequenting the shores of this great nation where ribbons and orders are held in such low esteem.
+Among bony fish, I noted grizzled wrasse unique to these seas, deep-water gilthead whose iris has a fiery gleam, one-meter croakers whose large mouths bristle with small teeth and which let out thin cries, black rudderfish like those I've already discussed, blue dorados accented with gold and silver, rainbow-hued parrotfish that can rival the loveliest tropical birds in coloring, banded blennies with triangular heads, bluish flounder without scales, toadfish covered with a crosswise yellow band in the shape of a Greek t, swarms of little freckled gobies stippled with brown spots, lungfish with silver heads and yellow tails, various specimens of salmon, mullet with slim figures and a softly glowing radiance that Lacpde dedicated to the memory of his wife, and finally the American cavalla, a handsome fish decorated by every honorary order, bedizened with their every ribbon, frequenting the shores of this great nation where ribbons and orders are held in such low esteem.
 
 I might add that during the night, the Gulf Stream's phosphorescent waters rivaled the electric glow of our beacon, especially in the stormy weather that frequently threatened us.
 
@@ -101884,7 +101884,7 @@ It was their relatives in the tidal wave on December 23, 1854, that toppled part
 
 After nightfall the storm grew in intensity.
 
-As in the 1860 cyclone on Réunion Island, the barometer fell to 710 millimeters.
+As in the 1860 cyclone on Runion Island, the barometer fell to 710 millimeters.
 
 At the close of day, I saw a big ship passing on the horizon, struggling painfully.
 
