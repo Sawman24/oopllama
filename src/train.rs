@@ -18,6 +18,8 @@ fn check_temperature() -> u32 {
 }
 
 fn main() -> Result<()> {
+    tracing_subscriber::fmt::init();
+    
     println!("=====================================");
     println!("🚀 NOVA V2: MEGA-DATASET EDITION");
     println!("Mode: Word-Level (BPE 4096 Vocab)");
@@ -146,7 +148,7 @@ fn main() -> Result<()> {
 
         // Frequent Progress Reporting (Every 100 epochs)
         if epoch % 100 == 0 || epoch == 1 {
-            println!("Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
+            tracing::info!("Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
             writeln!(log_file, "{},{:.4},{:.6}", epoch, smoothed_loss, current_lr).expect("Log write fail");
             
             // Save "Best" weights if loss hits new low
