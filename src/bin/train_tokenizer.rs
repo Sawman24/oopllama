@@ -1,7 +1,12 @@
-use tokenizers::tokenizer::{Result, TokenizerBuilder};
+use tokenizers::tokenizer::{Result, TokenizerImpl};
 use tokenizers::models::bpe::{BPE, BpeTrainer};
+use tokenizers::normalizers::utils::Sequence as NormalizerSequence;
 use tokenizers::pre_tokenizers::byte_level::ByteLevel;
-use tokenizers::normalizers::utils::Sequence;
+use tokenizers::processors::sequence::Sequence as ProcessorSequence;
+use tokenizers::decoders::byte_level::ByteLevel as DecoderByteLevel;
+
+// Explicitly define the full type to satisfy the compiler
+type MyTokenizer = TokenizerImpl<BPE, NormalizerSequence, ByteLevel, ProcessorSequence, DecoderByteLevel>;
 
 fn main() -> Result<()> {
     // 1. Setup the BPE Trainer
@@ -11,12 +16,14 @@ fn main() -> Result<()> {
         .min_frequency(2)
         .build();
 
-    // 2. Build the Tokenizer with explicit (empty) Normalizer to satisfy type inference
-    let mut tokenizer = TokenizerBuilder::new()
-        .with_model(BPE::default())
-        .with_normalizer(Some(Sequence::new(vec![]))) 
-        .with_pre_tokenizer(Some(ByteLevel::default()))
-        .build()?;
+    // 2. Create the tokenizer with all components explicitly initialized
+    let mut tokenizer = MyTokenizer::new(
+        BPE::default(),
+        NormalizerSequence::new(vec![]),
+        ByteLevel::default(),
+        ProcessorSequence::new(vec![]),
+        DecoderByteLevel::default(),
+    );
 
     // 3. Train on the perfect text
     let files = vec!["hail_mary_perfect.txt".to_string()];
