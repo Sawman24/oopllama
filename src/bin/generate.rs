@@ -31,7 +31,7 @@ fn main() -> Result<()> {
     // 3. Prompt the model
     let prompt = "Alice said ";
     let mut generated = prompt.as_bytes().iter().map(|&b| b as u32).collect::<Vec<u32>>();
-    let temperature = 0.8f64;
+    let temperature = 0.2f64;
     
     println!("Generating (Sampling with Temp {})...", temperature);
     print!("{}", prompt);

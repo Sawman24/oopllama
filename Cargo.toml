@@ -16,13 +16,17 @@ path = "src/train.rs"
 name = "generate"
 path = "src/bin/generate.rs"
 
+[[bin]]
+name = "train_tokenizer"
+path = "src/bin/train_tokenizer.rs"
+
 [dependencies]
 # Inference Pipeline
 candle-core = { version = "0.8.2", features = ["cuda"] }
 candle-nn = { version = "0.8.2", features = ["cuda"] }
+tokenizers = "0.21.0"
 candle-transformers = "0.8.2"
 safetensors = "0.4.5"
-tokenizers = "0.21.0"
 
 # Async Orchestration
 tokio = { version = "1.41.1", features = ["full"] }
