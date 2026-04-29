@@ -32,7 +32,7 @@ fn main() -> Result<()> {
         n_embd: 512,
         n_layer: 8,
         n_head: 8,
-        max_seq_len: 256,
+        max_seq_len: 128, // Shorter context for faster word learning
     };
     
     let mut varmap = VarMap::new();
@@ -57,7 +57,7 @@ fn main() -> Result<()> {
     let mega_batch_steps = 1000;
 
     // 3. Setup Optimizer
-    let mut current_lr = 1e-3; // High LR to break the plateau
+    let mut current_lr = 2e-3; // Momentum Turbo LR
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
