@@ -1,79 +1,77 @@
 use candle_core::{DType, Device, Result, Tensor};
-use candle_nn::{VarBuilder, VarMap};
 use oopllama::custom_model::{GPT, Config};
-use std::io::{Write, stdout};
+use tokenizers::Tokenizer;
+use rand::distributions::{Distribution, WeightedIndex};
+use rand::thread_rng;
 
 fn main() -> Result<()> {
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
-    
-    // 1. Setup Architecture
+
+    // 1. Load Tokenizer
+    let tokenizer_path = "hail_mary_tokenizer.json";
+    let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
+
+    // 2. Setup Model with 4096 Vocab
     let cfg = Config {
-        vocab_size: 256,
+        vocab_size: 4096,
         n_embd: 256,
         n_layer: 6,
         n_head: 8,
         max_seq_len: 128,
     };
-    
-    let mut varmap = VarMap::new();
-    let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
-    let model = GPT::new(vb, &cfg)?;
-    
-    // 2. Load Weights
-    let weights_file = "nova_lean_weights.safetensors";
+
+    let weights_file = "nova_hail_mary_weights.safetensors";
     if !std::path::Path::new(weights_file).exists() {
-        println!("Error: Could not find weights file '{}'", weights_file);
+        println!("❌ Error: No weights found. Run training first!");
         return Ok(());
     }
+
+    let mut varmap = candle_nn::VarMap::new();
+    let vb = candle_nn::VarBuilder::from_varmap(&varmap, DType::F32, &device);
+    let model = GPT::new(vb, &cfg)?;
     varmap.load(weights_file)?;
-    println!("🧠 Nova Brain Loaded Successfully!");
 
-    // 3. Prompt the model
-    let prompt = "Alice said ";
-    let mut generated = prompt.as_bytes().iter().map(|&b| b as u32).collect::<Vec<u32>>();
-    let temperature = 0.2f64;
+    println!("🧠 Nova Brain Loaded Successfully (Word-Level)!");
     
-    println!("Generating (Sampling with Temp {})...", temperature);
+    // 3. Inference Setup
+    let prompt = "“What’s two plus two?”";
+    let encoding = tokenizer.encode(prompt, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
+    let mut tokens = encoding.get_ids().to_vec();
+    
+    println!("Generating (Sampling with Temp 0.8)...");
     print!("{}", prompt);
-    stdout().flush().unwrap();
 
-    for _ in 0..500 {
-        let start = if generated.len() > cfg.max_seq_len {
-            generated.len() - cfg.max_seq_len
+    let temperature = 0.8;
+
+    for _ in 0..100 {
+        let input_tokens = if tokens.len() > cfg.max_seq_len {
+            &tokens[tokens.len() - cfg.max_seq_len..]
         } else {
-            0
+            &tokens[..]
         };
-        
-        let context = &generated[start..];
-        let input = Tensor::from_slice(context, (1, context.len()), &device)?;
-        
+
+        let input = Tensor::new(input_tokens, &device)?.unsqueeze(0)?;
         let logits = model.forward(&input)?;
-        let seq_len = logits.dim(1)?;
-        let logits_last = logits.narrow(1, seq_len - 1, 1)?.squeeze(1)?.squeeze(0)?;
+        let logits = logits.get(0)?.get(input_tokens.len() - 1)?;
         
-        // --- SAMPLING WITH TEMPERATURE ---
-        let prs = (&logits_last / temperature)?;
-        let prs = candle_nn::ops::softmax(&prs, 0)?;
+        // Temperature Scaling
+        let prs = (&logits / temperature as f64)?.softmax(0)?;
+        let probs: Vec<f32> = prs.to_vec1()?;
         
-        let prs_vec: Vec<f32> = prs.to_vec1()?;
-        let r = fastrand::f32();
-        let mut cum = 0.0;
-        let mut next_token = 0;
-        for (idx, &p) in prs_vec.iter().enumerate() {
-            cum += p;
-            if r < cum {
-                next_token = idx as u32;
-                break;
-            }
-        }
+        // Weighted Sampling
+        let dist = WeightedIndex::new(&probs).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
+        let mut rng = thread_rng();
+        let next_token = dist.sample(&mut rng) as u32;
+
+        tokens.push(next_token);
         
-        generated.push(next_token);
+        // Decode and Print
+        let word = tokenizer.decode(&[next_token], true).unwrap_or_default();
+        print!("{}", word);
         
-        let c = next_token as u8 as char;
-        print!("{}", c);
-        stdout().flush().unwrap();
+        if next_token == 0 { break; } // Assuming 0 is EOS
     }
-    
-    println!("\n\n--- End of Dream ---");
+
+    println!("\n");
     Ok(())
 }
