@@ -4,6 +4,7 @@ use oopllama::custom_model::{GPT, Config};
 use tokenizers::Tokenizer;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
+use std::io::Write;
 
 fn check_temperature() -> u32 {
     let output = std::process::Command::new("nvidia-smi")
@@ -18,7 +19,7 @@ fn check_temperature() -> u32 {
 
 fn main() -> Result<()> {
     println!("=====================================");
-    println!("🚀 NOVA V2: PROJECT HAIL MARY EDITION");
+    println!("🚀 NOVA V2: MEGA-DATASET EDITION");
     println!("Mode: Word-Level (BPE 4096 Vocab)");
     println!("=====================================");
 
@@ -26,10 +27,6 @@ fn main() -> Result<()> {
     
     // 1. Setup Tokenizer
     let tokenizer_path = "hail_mary_tokenizer.json";
-    if !std::path::Path::new(tokenizer_path).exists() {
-        println!("❌ Error: Run 'cargo run --release --bin train_tokenizer' first!");
-        return Ok(());
-    }
     let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     
     // 2. Load and Tokenize Dataset
@@ -39,9 +36,9 @@ fn main() -> Result<()> {
     let tokens = encoding.get_ids();
     println!("✅ Dataset ready: {} tokens", tokens.len());
 
-    // 3. Setup Model Architecture
+    // 3. Setup Model
     let cfg = Config {
-        vocab_size: 4096, // Upgraded from 256!
+        vocab_size: 4096,
         n_embd: 256,
         n_layer: 6,
         n_head: 8,
@@ -74,19 +71,31 @@ fn main() -> Result<()> {
     });
 
     // 4. Setup Optimizer
-    let mut current_lr = 1e-3; // Slightly lower LR for BPE stability
+    let mut current_lr = 1e-3;
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
         ..Default::default()
     })?;
 
-    println!("Starting MEGA-DATASET training loop...");
+    // --- LOGGING SETUP ---
+    let mut log_file = std::fs::OpenOptions::new()
+        .append(true)
+        .create(true)
+        .open("training_log.csv")
+        .expect("Cannot open log file");
+    
+    if std::fs::metadata("training_log.csv").unwrap().len() == 0 {
+        writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
+    }
+
+    println!("Starting MEGA-TRAINING loop...");
     let epochs = 50000;
     let batch_size = 64;
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 1000;
     let mut smoothed_loss = 0.0;
+    let mut best_loss = f32::MAX;
 
     let mut mega_x_tensor: Option<Tensor> = None;
     let mut mega_y_tensor: Option<Tensor> = None;
@@ -94,18 +103,18 @@ fn main() -> Result<()> {
     for epoch in 1..=epochs {
         // Async Thermal Check
         while pause_flag.load(Ordering::SeqCst) {
-            println!("⚠️ Cooling down...");
+            println!("⚠️ Cooling down (85C hit)...");
             std::thread::sleep(std::time::Duration::from_secs(30));
         }
 
-        // Adaptive LR Decay
-        if epoch % 10000 == 0 {
+        // Adaptive LR Decay & Periodic Save
+        if epoch % 5000 == 0 {
             let _ = varmap.save(weights_file);
             current_lr *= 0.9; 
             opt.set_learning_rate(current_lr);
         }
 
-        // MEGA-BATCH REFRESH (Now with Tokens!)
+        // MEGA-BATCH REFRESH
         if (epoch - 1) % mega_batch_steps == 0 {
             let mut mega_x = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
             let mut mega_y = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
@@ -131,15 +140,24 @@ fn main() -> Result<()> {
         
         opt.backward_step(&loss)?;
         
-        if epoch % 1000 == 0 || epoch == 1 {
-            let loss_val = loss.to_vec0::<f32>()?;
-            if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
-            smoothed_loss = smoothed_loss * 0.9 + loss_val * 0.1;
-            println!("Epoch {}/{} | Smoothed Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
+        let loss_val = loss.to_vec0::<f32>()?;
+        if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
+        smoothed_loss = smoothed_loss * 0.99 + loss_val * 0.01;
+
+        // Frequent Progress Reporting (Every 100 epochs)
+        if epoch % 100 == 0 || epoch == 1 {
+            println!("Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
+            writeln!(log_file, "{},{:.4},{:.6}", epoch, smoothed_loss, current_lr).expect("Log write fail");
+            
+            // Save "Best" weights if loss hits new low
+            if smoothed_loss < best_loss && epoch > 1000 {
+                best_loss = smoothed_loss;
+                let _ = varmap.save("nova_best_weights.safetensors");
+            }
         }
     }
 
     varmap.save(weights_file)?;
-    println!("✅ Training Complete!");
+    println!("✅ Mega-Training Complete!");
     Ok(())
 }
