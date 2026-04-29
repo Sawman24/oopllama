@@ -33,8 +33,8 @@ fn main() -> Result<()> {
     let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     
     // 2. Load and Tokenize Dataset
-    println!("Tokenizing Project Hail Mary...");
-    let dataset_text = std::fs::read_to_string("hail_mary_perfect.txt").expect("Could not read perfect text");
+    println!("Tokenizing Mega-Dataset...");
+    let dataset_text = std::fs::read_to_string("master_training_data.txt").expect("Could not read master text");
     let encoding = tokenizer.encode(dataset_text, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     let tokens = encoding.get_ids();
     println!("✅ Dataset ready: {} tokens", tokens.len());

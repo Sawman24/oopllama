@@ -26,8 +26,8 @@ fn main() -> Result<()> {
     tokenizer.with_post_processor(Some(ProcessorSequence::new(vec![])));
     tokenizer.with_decoder(Some(DecoderByteLevel::default()));
 
-    // 3. Train on the perfect text
-    let files = vec!["hail_mary_perfect.txt".to_string()];
+    // 3. Train on the master training data
+    let files = vec!["master_training_data.txt".to_string()];
     tokenizer.train_from_files(&mut trainer, files)?;
 
     // 4. Save the result
