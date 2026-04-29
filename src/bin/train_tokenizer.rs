@@ -16,14 +16,15 @@ fn main() -> Result<()> {
         .min_frequency(2)
         .build();
 
-    // 2. Create the tokenizer with all components explicitly initialized
-    let mut tokenizer = MyTokenizer::new(
-        BPE::default(),
-        NormalizerSequence::new(vec![]),
-        ByteLevel::default(),
-        ProcessorSequence::new(vec![]),
-        DecoderByteLevel::default(),
-    );
+    // 2. Create the tokenizer with the Model
+    // Because we use the 'MyTokenizer' type alias, the compiler knows the other 4 types!
+    let mut tokenizer = MyTokenizer::new(BPE::default());
+    
+    // Attach the components (using Some() as required by v0.21)
+    tokenizer.with_normalizer(Some(NormalizerSequence::new(vec![])));
+    tokenizer.with_pre_tokenizer(Some(ByteLevel::default()));
+    tokenizer.with_post_processor(Some(ProcessorSequence::new(vec![])));
+    tokenizer.with_decoder(Some(DecoderByteLevel::default()));
 
     // 3. Train on the perfect text
     let files = vec!["hail_mary_perfect.txt".to_string()];
