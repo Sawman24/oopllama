@@ -1,7 +1,8 @@
 use candle_core::{DType, Device, Result, Tensor};
 use candle_nn::{AdamW, Optimizer, VarBuilder, VarMap, loss};
-use oopllama::custom_model::{GPT, Config};
-use std::io::Command; // Not needed, we use process::Command
+mod custom_model;
+use custom_model::{GPT, Config};
+use std::process::Command; 
 
 fn check_temperature() -> u32 {
     let output = std::process::Command::new("nvidia-smi")
