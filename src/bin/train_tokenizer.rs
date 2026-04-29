@@ -1,28 +1,28 @@
-use tokenizers::tokenizer::{Result, Tokenizer, TrainerWrapper};
+use tokenizers::tokenizer::{Result, TokenizerBuilder};
 use tokenizers::models::bpe::{BPE, BpeTrainer};
-use tokenizers::models::ModelWrapper;
 use tokenizers::pre_tokenizers::byte_level::ByteLevel;
+use tokenizers::normalizers::utils::Sequence;
 
 fn main() -> Result<()> {
-    // 1. Initialize a BPE trainer and wrap it in the TrainerWrapper
-    let bpe_trainer = BpeTrainer::builder()
+    // 1. Setup the BPE Trainer
+    let mut trainer = BpeTrainer::builder()
         .show_progress(true)
         .vocab_size(4096) 
         .min_frequency(2)
         .build();
-    let mut trainer = TrainerWrapper::BPE(bpe_trainer);
 
-    // 2. Initialize the Tokenizer with a BPE model wrapped in ModelWrapper
-    let mut tokenizer = Tokenizer::new(ModelWrapper::BPE(BPE::default()));
-    
-    // 3. Add the ByteLevel pre-tokenizer
-    tokenizer.with_pre_tokenizer(Some(ByteLevel::default()));
+    // 2. Build the Tokenizer with explicit (empty) Normalizer to satisfy type inference
+    let mut tokenizer = TokenizerBuilder::new()
+        .with_model(BPE::default())
+        .with_normalizer(Some(Sequence::new(vec![]))) 
+        .with_pre_tokenizer(Some(ByteLevel::default()))
+        .build()?;
 
-    // 4. Train on the perfect text
+    // 3. Train on the perfect text
     let files = vec!["hail_mary_perfect.txt".to_string()];
     tokenizer.train_from_files(&mut trainer, files)?;
 
-    // 5. Save the result
+    // 4. Save the result
     tokenizer.save("hail_mary_tokenizer.json", true)?;
     println!("✅ Tokenizer trained and saved to hail_mary_tokenizer.json");
     Ok(())
