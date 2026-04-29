@@ -81,8 +81,8 @@ fn main() -> Result<()> {
         ..Default::default()
     })?;
 
-    println!("Starting HAIL MARY training loop...");
-    let epochs = 200000;
+    println!("Starting MEGA-DATASET training loop...");
+    let epochs = 50000;
     let batch_size = 64;
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 1000;
