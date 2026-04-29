@@ -15,7 +15,7 @@ fn main() -> Result<()> {
         max_seq_len: 128,
     };
     
-    let varmap = VarMap::new();
+    let mut varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
     let model = GPT::new(vb, &cfg)?;
     
