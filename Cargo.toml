@@ -27,6 +27,8 @@ candle-nn = { version = "0.8.2", features = ["cuda"] }
 tokenizers = "0.21.0"
 candle-transformers = "0.8.2"
 safetensors = "0.4.5"
+rand = "0.8"
+fastrand = "2.0"
 
 # Async Orchestration
 tokio = { version = "1.41.1", features = ["full"] }

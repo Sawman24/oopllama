@@ -55,7 +55,7 @@ fn main() -> Result<()> {
         let logits = logits.get(0)?.get(input_tokens.len() - 1)?;
         
         // Temperature Scaling
-        let prs = (&logits / temperature as f64)?.softmax(0)?;
+        let prs = candle_nn::ops::softmax(&(&logits / temperature as f64)?, 0)?;
         let probs: Vec<f32> = prs.to_vec1()?;
         
         // Weighted Sampling
