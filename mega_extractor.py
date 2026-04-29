@@ -2,86 +2,78 @@ import fitz  # PyMuPDF
 import re
 import os
 
+def is_garbage(line):
+    """Detects if a line is likely boilerplate or metadata."""
+    garbage_patterns = [
+        r'ISBN', r'Copyright', r'All rights reserved', r'Published by',
+        r'www\.', r'http', r'\.com', r'Library of Congress',
+        r'Printed in', r'First edition', r'Author of', r'Dedication',
+        r'Table of Contents', r'Part [IVXLCDM]+', r'Chapter \d+'
+    ]
+    for pattern in garbage_patterns:
+        if re.search(pattern, line, re.IGNORECASE):
+            return True
+    
+    # Remove lines that are just numbers (page numbers)
+    if re.match(r'^\d+$', line.strip()):
+        return True
+        
+    return False
+
 def extract_pdf_clean(pdf_path):
     doc = fitz.open(pdf_path)
     full_text = []
 
-    print(f"📖 Extracting: {pdf_path}...")
+    print(f"📖 Surgically Extracting: {pdf_path}...")
 
     for page_num in range(doc.page_count):
         page = doc.load_page(page_num)
         text = page.get_text("text")
         
-        # Remove page numbers
-        text = re.sub(r'\n\d+\n', '\n', text)
-        full_text.append(text)
-
-    text = "\n".join(full_text)
-
-    # Clean the "Legal/Boilerplate"
-    # We look for common story starts and ends
-    start_markers = ["“What’s two plus two?”", "I’m pretty much fucked.", "I’m in a hospital."]
-    found_start = -1
-    for marker in start_markers:
-        idx = text.find(marker)
-        if idx != -1:
-            found_start = idx
-            break
+        lines = text.split('\n')
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
             
-    if found_start != -1:
-        text = text[found_start:]
+            # Skip page numbers and boilerplate
+            if is_garbage(line):
+                continue
+                
+            full_text.append(line)
 
-    # Stitch lines
-    lines = text.split('\n')
-    cleaned_lines = []
-    current_line = ""
+    # Stitch the words into a continuous narrative
+    text = " ".join(full_text)
 
-    for line in lines:
-        line = line.strip()
-        if not line:
-            if current_line:
-                cleaned_lines.append(current_line)
-                current_line = ""
-            cleaned_lines.append("")
-            continue
+    # Fix spacing artifacts (double spaces, etc.)
+    text = re.sub(r'\s+', ' ', text)
+    
+    # Optional: Break into paragraphs by looking for sentence ends
+    # This helps the model understand structure better
+    text = re.sub(r'([.!?\u201d\"]) ', r'\1\n\n', text)
 
-        if current_line:
-            current_line += " " + line
-        else:
-            current_line = line
-
-        if line.endswith(('.', '!', '?', '"', '”')):
-            cleaned_lines.append(current_line)
-            current_line = ""
-
-    if current_line:
-        cleaned_lines.append(current_line)
-
-    return "\n\n".join([l for l in cleaned_lines if l.strip()])
+    return text
 
 def build_mega_dataset():
     all_books_text = []
-    
-    # Find all PDFs in the current directory
     pdfs = [f for f in os.listdir('.') if f.endswith('.pdf')]
     
     if not pdfs:
-        print("⚠️ No PDFs found! Drop them in the folder.")
+        print("⚠️ No PDFs found!")
         return
 
     for pdf in pdfs:
         book_text = extract_pdf_clean(pdf)
         all_books_text.append(book_text)
-        print(f"✅ Added {len(book_text)} characters from {pdf}")
+        print(f"✅ Cleaned {len(book_text)} characters from {pdf}")
 
-    master_text = "\n\n--- NEW BOOK ---\n\n".join(all_books_text)
+    master_text = "\n\n--- NEXT VOLUME ---\n\n".join(all_books_text)
     
     with open("master_training_data.txt", 'w', encoding='utf-8') as f:
         f.write(master_text)
 
-    print(f"\n✨ MEGA-DATASET READY! ✨")
-    print(f"Total Character Count: {len(master_text)}")
-    print(f"Saved to: master_training_data.txt")
+    print(f"\n✨ SURGICAL CLEAN COMPLETE! ✨")
+    print(f"Final Data Size: {len(master_text)} characters")
 
 if __name__ == "__main__":
     build_mega_dataset()
