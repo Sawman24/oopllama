@@ -2,7 +2,7 @@ use candle_core::{DType, Device, Result, Tensor};
 use candle_nn::{AdamW, Optimizer, VarBuilder, VarMap, loss};
 mod custom_model;
 use custom_model::{GPT, Config};
-use std::process::Command; 
+use std::process::Command;
 
 fn check_temperature() -> u32 {
     let output = std::process::Command::new("nvidia-smi")
@@ -17,9 +17,8 @@ fn check_temperature() -> u32 {
 
 fn main() -> Result<()> {
     println!("=====================================");
-    println!("Initializing Custom NOVA Training...");
-    println!("Architecture: GPT from scratch");
-    println!("Safeguard: Thermal Throttling Active (Max 85°C)");
+    println!("Initializing Lean & Mean Training...");
+    println!("Architecture: GPT (256-embd, 6-layer)");
     println!("=====================================");
 
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
@@ -29,22 +28,22 @@ fn main() -> Result<()> {
     let dtype = DType::F32; 
     let cfg = Config {
         vocab_size: 256,
-        n_embd: 512,
-        n_layer: 8,
+        n_embd: 256,
+        n_layer: 6,
         n_head: 8,
-        max_seq_len: 128, // Shorter context for faster word learning
+        max_seq_len: 128,
     };
     
     let mut varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, dtype, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    let weights_file = "nova_large_weights.safetensors";
+    let weights_file = "nova_lean_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
         println!("Found existing weights! Resuming training from {}...", weights_file);
         varmap.load(weights_file)?;
     } else {
-        println!("No existing weights found. Initializing fresh weights.");
+        println!("No existing weights found. Initializing fresh Lean & Mean weights.");
     }
 
     // 2. Setup Dataset
@@ -52,23 +51,22 @@ fn main() -> Result<()> {
     let dataset_string = std::fs::read_to_string("alice.txt").unwrap_or_else(|_| String::from("Fallback text!"));
     let data_bytes = dataset_string.as_bytes();
     
-    let batch_size = 32;
+    let batch_size = 64; // High batch size for better gradients
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 1000;
 
     // 3. Setup Optimizer
-    let mut current_lr = 2e-3; // Momentum Turbo LR
+    let mut current_lr = 2e-3;
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
         ..Default::default()
     })?;
 
-    println!("Starting PLATEAU-SMASHER training loop...");
+    println!("Starting LEAN-AND-MEAN training loop...");
     let epochs = 50000;
     let mut smoothed_loss = 0.0;
     
-    // We'll initialize these inside the loop on the first iteration
     let mut mega_x_tensor: Option<Tensor> = None;
     let mut mega_y_tensor: Option<Tensor> = None;
 
@@ -92,7 +90,7 @@ fn main() -> Result<()> {
 
         // --- MEGA-BATCH REFRESH ---
         if (epoch - 1) % mega_batch_steps == 0 {
-            if epoch > 1 { println!("🔄 Refreshing Mega-Batch with fresh samples from the book..."); }
+            if epoch > 1 { println!("🔄 Refreshing Mega-Batch..."); }
             let mut mega_x = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
             let mut mega_y = Vec::with_capacity(mega_batch_steps * batch_size * seq_len);
             
@@ -131,24 +129,7 @@ fn main() -> Result<()> {
 
     println!("=====================================");
     println!("Training Complete!");
-    println!("Saving weights to '{}'...", weights_file);
     varmap.save(weights_file)?;
-    println!("=====================================");
-
-    println!("Testing Generative Output (Greedy Decoding)...");
-    let mut generated = vec!['A' as u32, 'l' as u32, 'i' as u32, 'c' as u32, 'e' as u32];
-    
-    for _ in 0..200 {
-        let input = Tensor::from_slice(&generated, (1, generated.len()), &device)?;
-        let logits = model.forward(&input)?;
-        let seq_len = logits.dim(1)?;
-        let logits_last = logits.narrow(1, seq_len - 1, 1)?.squeeze(1)?.squeeze(0)?;
-        let next_token = logits_last.argmax(0)?.to_scalar::<u32>()?;
-        generated.push(next_token);
-    }
-    
-    let generated_str: String = generated.into_iter().map(|c| c as u8 as char).collect();
-    println!("\n🧠 Custom GPT Output: {}", generated_str);
     println!("=====================================");
 
     Ok(())
