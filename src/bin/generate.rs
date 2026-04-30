@@ -20,9 +20,9 @@ fn main() -> Result<()> {
         max_seq_len: 128,
     };
 
-    let weights_file = "nova_prime_best_weights.safetensors";
+    let weights_file = "nova_prime_personality_best_weights.safetensors";
     if !std::path::Path::new(weights_file).exists() {
-        println!("❌ Error: No weights found. Run training first!");
+        println!("❌ Error: No personality weights found yet. Wait for Epoch 200!");
         return Ok(());
     }
 
@@ -31,10 +31,10 @@ fn main() -> Result<()> {
     let model = GPT::new(vb, &cfg)?;
     varmap.load(weights_file)?;
 
-    println!("🧠 Nova Brain Loaded Successfully (Word-Level)!");
+    println!("🧠 Nova Agent Loaded (IFT Personality Mode)!");
     
     // 3. Inference Setup
-    let prompt = "I woke up";
+    let prompt = "User: Who are you?\nAssistant:";
     let encoding = tokenizer.encode(prompt, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     let mut tokens = encoding.get_ids().to_vec();
     
