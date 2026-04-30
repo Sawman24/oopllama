@@ -55,9 +55,9 @@ fn main() -> Result<()> {
         let mut logits = logits.get(0)?.get(input_tokens.len() - 1)?;
         
         // Repetition Penalty: Discourage words she just said
-        let penalty = 1.2;
+        let penalty = 1.5;
         let mut already_seen = std::collections::HashSet::new();
-        let history_window = 15; // Look back at the last 15 words
+        let history_window = 30; // Look back further to prevent ego-looping
         for &t in tokens.iter().rev().take(history_window) {
             if !already_seen.contains(&t) {
                 let current_val = logits.get(t as usize)?.to_vec0::<f32>()?;
