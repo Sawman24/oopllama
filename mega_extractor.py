@@ -68,6 +68,11 @@ def build_mega_dataset():
     pdfs = [f for f in os.listdir('.') if f.endswith('.pdf')]
     
     for pdf in pdfs:
+        # SKIP THE BWB FILE AS REQUESTED
+        if "bwb_W6" in pdf:
+            print(f"🚫 Purging BWB Volume: {pdf}")
+            continue
+            
         book_text = extract_pdf_clean(pdf)
         all_books_text.append(book_text)
         print(f"✅ Scrubbed {len(book_text)} characters from {pdf}")
