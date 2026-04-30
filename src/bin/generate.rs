@@ -51,7 +51,7 @@ fn main() -> Result<()> {
             break;
         }
 
-        conversation_history.push_str(&format!("User: {}\nAssistant:", user_input));
+        conversation_history.push_str(&format!("The human asked, \"{}\"\nNova replied, \"", user_input));
         
         // Keep context window manageable (take last 500 chars roughly)
         let context = if conversation_history.len() > 500 {
@@ -104,7 +104,7 @@ fn main() -> Result<()> {
             
             let current_text = tokenizer.decode(&tokens[response_start_idx..], true).unwrap_or_default();
             
-            if current_text.contains("User:") || current_text.contains("Assistant:") {
+            if current_text.contains("\"") || current_text.contains("The human") {
                 tokens.pop(); // Remove the token that triggered the stop
                 break;
             }
@@ -113,7 +113,7 @@ fn main() -> Result<()> {
         }
         
         let final_response = tokenizer.decode(&tokens[response_start_idx..], true).unwrap_or_default();
-        let final_response = final_response.replace("User:", "").replace("Assistant:", "").trim().to_string();
+        let final_response = final_response.replace("\"", "").trim().to_string();
         
         println!("{}", final_response);
         conversation_history.push_str(&final_response);
