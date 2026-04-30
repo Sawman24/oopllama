@@ -73,7 +73,7 @@ fn main() -> Result<()> {
     });
 
     // 4. Setup Optimizer
-    let mut current_lr = 1e-5; // Surgical LR for Polish Phase
+    let mut current_lr = 8e-5; // Increased to break repetitive loops
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,

@@ -52,8 +52,21 @@ fn main() -> Result<()> {
 
         let input = Tensor::new(input_tokens, &device)?.unsqueeze(0)?;
         let logits = model.forward(&input)?;
-        let logits = logits.get(0)?.get(input_tokens.len() - 1)?;
+        let mut logits = logits.get(0)?.get(input_tokens.len() - 1)?;
         
+        // Repetition Penalty: Discourage words she just said
+        let penalty = 1.2;
+        let mut already_seen = std::collections::HashSet::new();
+        let history_window = 15; // Look back at the last 15 words
+        for &t in tokens.iter().rev().take(history_window) {
+            if !already_seen.contains(&t) {
+                let current_val = logits.get(t as usize)?.to_vec0::<f32>()?;
+                let new_val = if current_val < 0.0 { current_val * penalty } else { current_val / penalty };
+                logits = logits.slice_assign(&[t as usize..t as usize + 1], &Tensor::new(&[new_val], &device)?)?;
+                already_seen.insert(t);
+            }
+        }
+
         // Temperature Scaling
         let prs = candle_nn::ops::softmax(&(&logits / temperature as f64)?, 0)?;
         let probs: Vec<f32> = prs.to_vec1()?;
