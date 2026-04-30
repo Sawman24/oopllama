@@ -2,14 +2,15 @@ version: '3.8'
 
 services:
   oopllama:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: nvidia/cuda:12.4.1-devel-ubuntu22.04
     container_name: oopllama_agent
+    
+    stdin_open: true 
+    tty: true        
+    
     volumes:
-      - .:/app/code
-      - ./models:/app/models
       - ./data:/app/data
+      - ./models:/app/models
     deploy:
       resources:
         reservations:
@@ -19,5 +20,18 @@ services:
               capabilities: [gpu]
     environment:
       - RUST_LOG=info
-      - CUDA_VISIBLE_DEVICES=0
+    command: >
+      bash -c "
+      apt-get update && apt-get install -y git curl build-essential pkg-config libssl-dev &&
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y &&
+      source /root/.cargo/env &&
+      mkdir -p /app/code && cd /app/code &&
+      if [ ! -d .git ]; then
+        git clone https://github.com/Sawman24/oopllama.git .
+      else
+        git pull origin main
+      fi &&
+      echo 'NOVA PRIME ENVIRONMENT READY - GPU IS FREE' &&
+      tail -f /dev/null
+      "
     restart: unless-stopped
