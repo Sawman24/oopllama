@@ -91,8 +91,8 @@ fn main() -> Result<()> {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting NOVA PRIME POLISH PHASE...");
-    let epochs = 150000; // 100k Done + 50k Polish
+    println!("Starting NOVA PRIME POLISH PHASE (50k Epochs)...");
+    let epochs = 50000; 
     let batch_size = 8;  
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 50; 
