@@ -27,4 +27,5 @@ COPY --from:builder /usr/src/oopllama/models ./models
 
 # Set runtime environment
 ENV RUST_LOG=info
-CMD ["./oopllama"]
+# Disabled auto-launch to free up GPU for Nova Prime training
+CMD ["tail", "-f", "/dev/null"]
