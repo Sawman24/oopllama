@@ -64,8 +64,7 @@ fn main() -> Result<()> {
         let encoding = tokenizer.encode(context, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
         let mut tokens = encoding.get_ids().to_vec();
         
-        let mut assistant_response = String::new();
-        let mut response_start_idx = tokens.len();
+        let response_start_idx = tokens.len();
 
         for _ in 0..100 {
             let input_tokens = if tokens.len() > cfg.max_seq_len {
@@ -108,9 +107,6 @@ fn main() -> Result<()> {
                 tokens.pop(); // Remove the token that triggered the stop
                 break;
             }
-            
-            print!("{}", tokenizer.decode(&[next_token], true).unwrap_or_default());
-            io::stdout().flush().unwrap();
 
             if next_token == 0 { break; } // Assuming 0 is EOS
         }
@@ -118,7 +114,7 @@ fn main() -> Result<()> {
         let final_response = tokenizer.decode(&tokens[response_start_idx..], true).unwrap_or_default();
         let final_response = final_response.replace("User:", "").replace("Assistant:", "").trim().to_string();
         
-        println!();
+        println!("{}", final_response);
         conversation_history.push_str(&final_response);
         conversation_history.push('\n');
     }
