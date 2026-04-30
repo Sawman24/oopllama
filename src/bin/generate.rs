@@ -32,63 +32,92 @@ fn main() -> Result<()> {
     varmap.load(weights_file)?;
 
     println!("🧠 Nova Agent Loaded (IFT Personality Mode)!");
-    
-    // 3. Inference Setup
-    let prompt = "User: Who are you?\nAssistant:";
-    let encoding = tokenizer.encode(prompt, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
-    let mut tokens = encoding.get_ids().to_vec();
-    
-    println!("Generating (Sampling with Temp 0.2)...");
-    print!("{}", prompt);
+    println!("Type 'quit' or 'exit' to end the conversation.\n");
 
     let temperature = 0.2;
+    let mut conversation_history = String::new();
 
-    for _ in 0..100 {
-        let input_tokens = if tokens.len() > cfg.max_seq_len {
-            &tokens[tokens.len() - cfg.max_seq_len..]
-        } else {
-            &tokens[..]
-        };
-
-        let input = Tensor::new(input_tokens, &device)?.unsqueeze(0)?;
-        let logits = model.forward(&input)?;
-        let mut logits = logits.get(0)?.get(input_tokens.len() - 1)?;
+    loop {
+        use std::io::{self, Write};
         
-        // Repetition Penalty: Discourage words she just said
-        let penalty = 1.5;
-        let mut already_seen = std::collections::HashSet::new();
-        let history_window = 30; // Look back further to prevent ego-looping
-        for &t in tokens.iter().rev().take(history_window) {
-            if !already_seen.contains(&t) {
-                let current_val = logits.get(t as usize)?.to_vec0::<f32>()?;
-                let new_val = if current_val < 0.0 { current_val * penalty } else { current_val / penalty };
-                logits = logits.slice_assign(&[t as usize..t as usize + 1], &Tensor::new(&[new_val], &device)?)?;
-                already_seen.insert(t);
-            }
+        print!("User: ");
+        io::stdout().flush().unwrap();
+        
+        let mut user_input = String::new();
+        io::stdin().read_line(&mut user_input).unwrap();
+        let user_input = user_input.trim();
+        
+        if user_input.eq_ignore_ascii_case("quit") || user_input.eq_ignore_ascii_case("exit") {
+            break;
         }
 
-        // Temperature Scaling
-        let prs = candle_nn::ops::softmax(&(&logits / temperature as f64)?, 0)?;
-        let probs: Vec<f32> = prs.to_vec1()?;
+        conversation_history.push_str(&format!("User: {}\nAssistant: ", user_input));
         
-        // Weighted Sampling
-        let dist = WeightedIndex::new(&probs).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
-        let mut rng = thread_rng();
-        let next_token = dist.sample(&mut rng) as u32;
+        // Keep context window manageable (take last 500 chars roughly)
+        let context = if conversation_history.len() > 500 {
+            let start = conversation_history.len() - 500;
+            &conversation_history[start..]
+        } else {
+            &conversation_history
+        };
 
-        tokens.push(next_token);
+        let encoding = tokenizer.encode(context, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
+        let mut tokens = encoding.get_ids().to_vec();
         
-        // Decode
-        let word = tokenizer.decode(&[next_token], true).unwrap_or_default();
+        let mut assistant_response = String::new();
+
+        for _ in 0..100 {
+            let input_tokens = if tokens.len() > cfg.max_seq_len {
+                &tokens[tokens.len() - cfg.max_seq_len..]
+            } else {
+                &tokens[..]
+            };
+
+            let input = Tensor::new(input_tokens, &device)?.unsqueeze(0)?;
+            let logits = model.forward(&input)?;
+            let mut logits = logits.get(0)?.get(input_tokens.len() - 1)?;
+            
+            // Repetition Penalty: Lowered to 1.1 for conversation flow
+            let penalty = 1.1;
+            let mut already_seen = std::collections::HashSet::new();
+            let history_window = 30; 
+            for &t in tokens.iter().rev().take(history_window) {
+                if !already_seen.contains(&t) {
+                    let current_val = logits.get(t as usize)?.to_vec0::<f32>()?;
+                    let new_val = if current_val < 0.0 { current_val * penalty } else { current_val / penalty };
+                    logits = logits.slice_assign(&[t as usize..t as usize + 1], &Tensor::new(&[new_val], &device)?)?;
+                    already_seen.insert(t);
+                }
+            }
+
+            // Temperature Scaling
+            let prs = candle_nn::ops::softmax(&(&logits / temperature as f64)?, 0)?;
+            let probs: Vec<f32> = prs.to_vec1()?;
+            
+            // Weighted Sampling
+            let dist = WeightedIndex::new(&probs).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
+            let mut rng = thread_rng();
+            let next_token = dist.sample(&mut rng) as u32;
+
+            tokens.push(next_token);
+            
+            // Decode
+            let word = tokenizer.decode(&[next_token], true).unwrap_or_default();
+            
+            // Stop if she tries to start a new User/Assistant block
+            if word.contains("User:") || word.contains("Assistant:") { break; }
+            
+            print!("{}", word);
+            io::stdout().flush().unwrap();
+            assistant_response.push_str(&word);
+            
+            if next_token == 0 { break; } // Assuming 0 is EOS
+        }
         
-        // Stop if she tries to start a new User/Assistant block
-        if word.contains("User:") || word.contains("Assistant:") { break; }
-        
-        print!("{}", word);
-        
-        if next_token == 0 { break; } // Assuming 0 is EOS
+        println!();
+        conversation_history.push_str(&assistant_response);
+        conversation_history.push('\n');
     }
 
-    println!("\n");
     Ok(())
 }
