@@ -40,11 +40,11 @@ fn main() -> Result<()> {
 
     // 3. Setup NOVA PRIME Model Architecture
     let cfg = Config {
-        vocab_size: 32768, // Huge dictionary
-        n_embd: 768,      // Wide brain
-        n_layer: 12,      // Deep logic
-        n_head: 12,       // 768 / 64 = 12 heads
-        max_seq_len: 256,  // Long vision
+        vocab_size: 32768, 
+        n_embd: 768,      
+        n_layer: 12,      
+        n_head: 12,       
+        max_seq_len: 128,  // Adjusted for VRAM stability
     };
     
     let mut varmap = VarMap::new();
@@ -93,9 +93,9 @@ fn main() -> Result<()> {
 
     println!("Starting NOVA PRIME training loop...");
     let epochs = 100000; 
-    let batch_size = 16;  // Reduced to 16 to fit VRAM
+    let batch_size = 8;  // Ultra-safe for VRAM
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 40; // Adjusted for batch_size
+    let mega_batch_steps = 80; // Adjusted for batch_size
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 

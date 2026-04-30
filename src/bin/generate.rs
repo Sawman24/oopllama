@@ -17,7 +17,7 @@ fn main() -> Result<()> {
         n_embd: 768,
         n_layer: 12,
         n_head: 12,
-        max_seq_len: 256,
+        max_seq_len: 128,
     };
 
     let weights_file = "nova_prime_best_weights.safetensors";
