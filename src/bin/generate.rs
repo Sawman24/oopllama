@@ -38,7 +38,7 @@ fn main() -> Result<()> {
     let encoding = tokenizer.encode(prompt, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     let mut tokens = encoding.get_ids().to_vec();
     
-    println!("Generating (Sampling with Temp 0.8)...");
+    println!("Generating (Sampling with Temp 0.2)...");
     print!("{}", prompt);
 
     let temperature = 0.2;

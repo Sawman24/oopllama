@@ -21,7 +21,7 @@ fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
     
     println!("=====================================");
-    println!("🚀 NOVA PRIME: ULTIMATE EDITION");
+    println!("🚀 NOVA PRIME: 100,000 EPOCH RUN");
     println!("Mode: Word-Level (32,768 Vocab)");
     println!("=====================================");
 
@@ -44,7 +44,7 @@ fn main() -> Result<()> {
         n_embd: 768,      
         n_layer: 12,      
         n_head: 12,       
-        max_seq_len: 128,  // Adjusted for VRAM stability
+        max_seq_len: 128,  // Maximum stability for V100
     };
     
     let mut varmap = VarMap::new();
@@ -73,7 +73,7 @@ fn main() -> Result<()> {
     });
 
     // 4. Setup Optimizer
-    let mut current_lr = 5e-4; // Optimal starting LR for Prime
+    let mut current_lr = 1e-5; // Surgical LR for Polish Phase
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
@@ -91,11 +91,9 @@ fn main() -> Result<()> {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting NOVA PRIME training loop...");
-    let epochs = 100000; 
-    let batch_size = 8;  // Ultra-safe for VRAM
-    let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 80; // Adjusted for batch_size
+    println!("Starting NOVA PRIME POLISH PHASE...");
+    let epochs = 300000; // 100k Done + 200k Polish
+    let batch_size = 8;  
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
@@ -109,9 +107,9 @@ fn main() -> Result<()> {
             std::thread::sleep(std::time::Duration::from_secs(30));
         }
 
-        // Smooth Cosine-style LR Decay
-        if epoch % 1000 == 0 {
-            current_lr *= 0.98; // Gentler decay for Prime
+        // Adaptive LR Decay (Gentle for 1M Run)
+        if epoch % 10000 == 0 {
+            current_lr *= 0.95; 
             opt.set_learning_rate(current_lr);
             let _ = varmap.save(weights_file);
         }
@@ -144,7 +142,7 @@ fn main() -> Result<()> {
         
         let loss_val = loss.to_vec0::<f32>()?;
         if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
-        smoothed_loss = smoothed_loss * 0.95 + loss_val * 0.05; // Faster smoothing for Prime
+        smoothed_loss = smoothed_loss * 0.98 + loss_val * 0.02; 
 
         // Progress Reporting
         if epoch % 100 == 0 || epoch == 1 {
@@ -159,6 +157,6 @@ fn main() -> Result<()> {
     }
 
     varmap.save(weights_file)?;
-    println!("✅ NOVA PRIME Training Complete!");
+    println!("✅ NOVA PRIME 1M Training Complete!");
     Ok(())
 }
