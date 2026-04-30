@@ -51,7 +51,7 @@ fn main() -> Result<()> {
             break;
         }
 
-        conversation_history.push_str(&format!("User: {}\nAssistant: ", user_input));
+        conversation_history.push_str(&format!("User: {}\nAssistant:", user_input));
         
         // Keep context window manageable (take last 500 chars roughly)
         let context = if conversation_history.len() > 500 {
