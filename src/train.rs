@@ -94,6 +94,8 @@ fn main() -> Result<()> {
     println!("Starting NOVA PRIME POLISH PHASE...");
     let epochs = 150000; // 100k Done + 50k Polish
     let batch_size = 8;  
+    let seq_len = cfg.max_seq_len;
+    let mega_batch_steps = 50; 
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
