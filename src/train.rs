@@ -92,10 +92,10 @@ fn main() -> Result<()> {
     }
 
     println!("Starting NOVA PRIME training loop...");
-    let epochs = 100000; // Aiming for total mastery
-    let batch_size = 32;  // Reduced slightly for larger model size
+    let epochs = 100000; 
+    let batch_size = 16;  // Reduced to 16 to fit VRAM
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 20; // Fast rotation for Prime
+    let mega_batch_steps = 40; // Adjusted for batch_size
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
