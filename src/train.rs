@@ -21,8 +21,8 @@ fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
     
     println!("=====================================");
-    println!("🚀 NOVA PRIME: 100,000 EPOCH RUN");
-    println!("Mode: Word-Level (32,768 Vocab)");
+    println!("🚀 NOVA PRIME: PERSONALITY INJECTION");
+    println!("Mode: Virtual Agent Evolution (IFT)");
     println!("=====================================");
 
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
@@ -31,20 +31,20 @@ fn main() -> Result<()> {
     let tokenizer_path = "hail_mary_tokenizer.json";
     let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     
-    // 2. Load and Tokenize Dataset
-    println!("Tokenizing Mega-Dataset (Prime Mode)...");
-    let dataset_text = std::fs::read_to_string("master_training_data.txt").expect("Could not read master text");
+    // 2. Load and Tokenize Personality Dataset
+    println!("Tokenizing Personality Dataset...");
+    let dataset_text = std::fs::read_to_string("nova_personality_data.txt").expect("Could not read personality text");
     let encoding = tokenizer.encode(dataset_text, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     let tokens = encoding.get_ids();
-    println!("✅ Dataset ready: {} tokens", tokens.len());
+    println!("✅ Personality ready: {} tokens", tokens.len());
 
-    // 3. Setup NOVA PRIME Model Architecture
+    // 3. Setup NOVA PRIME Model Architecture (Matches pre-trained)
     let cfg = Config {
         vocab_size: 32768, 
         n_embd: 768,      
         n_layer: 12,      
         n_head: 12,       
-        max_seq_len: 128,  // Maximum stability for V100
+        max_seq_len: 128, 
     };
     
     let mut varmap = VarMap::new();
@@ -53,7 +53,7 @@ fn main() -> Result<()> {
     
     let weights_file = "nova_prime_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
-        println!("Resuming Nova Prime from existing weights...");
+        println!("Resuming from Nova Prime Base Knowledge...");
         varmap.load(weights_file)?;
     }
 
@@ -72,8 +72,8 @@ fn main() -> Result<()> {
         }
     });
 
-    // 4. Setup Optimizer
-    let mut current_lr = 8e-5; // Increased to break repetitive loops
+    // 4. Setup Optimizer (Surgical LR for IFT)
+    let mut current_lr = 5e-5; 
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
@@ -84,18 +84,18 @@ fn main() -> Result<()> {
     let mut log_file = std::fs::OpenOptions::new()
         .append(true)
         .create(true)
-        .open("training_log_prime.csv")
+        .open("training_log_personality.csv")
         .expect("Cannot open log file");
     
-    if std::fs::metadata("training_log_prime.csv").unwrap().len() == 0 {
+    if std::fs::metadata("training_log_personality.csv").unwrap().len() == 0 {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting NOVA PRIME POLISH PHASE (50k Epochs)...");
-    let epochs = 50000; 
+    println!("Starting PERSONALITY INJECTION (5,000 Epochs)...");
+    let epochs = 5000; 
     let batch_size = 8;  
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 50; 
+    let mega_batch_steps = 10; 
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
@@ -107,13 +107,6 @@ fn main() -> Result<()> {
         while pause_flag.load(Ordering::SeqCst) {
             tracing::warn!("⚠️ Cooling down (85C hit)...");
             std::thread::sleep(std::time::Duration::from_secs(30));
-        }
-
-        // Adaptive LR Decay (Gentle for 1M Run)
-        if epoch % 10000 == 0 {
-            current_lr *= 0.95; 
-            opt.set_learning_rate(current_lr);
-            let _ = varmap.save(weights_file);
         }
 
         // MEGA-BATCH REFRESH
@@ -144,21 +137,21 @@ fn main() -> Result<()> {
         
         let loss_val = loss.to_vec0::<f32>()?;
         if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
-        smoothed_loss = smoothed_loss * 0.98 + loss_val * 0.02; 
+        smoothed_loss = smoothed_loss * 0.9 + loss_val * 0.1; 
 
         // Progress Reporting
         if epoch % 100 == 0 || epoch == 1 {
-            tracing::info!("NOVA PRIME | Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
+            tracing::info!("NOVA IFT | Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
             writeln!(log_file, "{},{:.4},{:.6}", epoch, smoothed_loss, current_lr).expect("Log write fail");
             
-            if smoothed_loss < best_loss && epoch > 500 {
+            if smoothed_loss < best_loss && epoch > 200 {
                 best_loss = smoothed_loss;
-                let _ = varmap.save("nova_prime_best_weights.safetensors");
+                let _ = varmap.save("nova_prime_personality_best_weights.safetensors");
             }
         }
     }
 
-    varmap.save(weights_file)?;
-    println!("✅ NOVA PRIME 1M Training Complete!");
+    varmap.save("nova_prime_personality_final.safetensors")?;
+    println!("✅ PERSONALITY INJECTION COMPLETE!");
     Ok(())
 }
