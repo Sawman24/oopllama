@@ -77,8 +77,8 @@ fn main() -> Result<()> {
             let logits = model.forward(&input)?;
             let mut logits = logits.get(0)?.get(input_tokens.len() - 1)?;
             
-            // Repetition Penalty: Lowered to 1.1 for conversation flow
-            let penalty = 1.1;
+            // Repetition Penalty: Removed (1.0) for conversational mode to prevent fragmenting.
+            let penalty = 1.0;
             let mut already_seen = std::collections::HashSet::new();
             let history_window = 30; 
             for &t in tokens.iter().rev().take(history_window) {
@@ -90,7 +90,8 @@ fn main() -> Result<()> {
                 }
             }
 
-            // Temperature Scaling
+            // Temperature Scaling (Increased to 0.7 for natural flow)
+            let temperature = 0.7;
             let prs = candle_nn::ops::softmax(&(&logits / temperature as f64)?, 0)?;
             let probs: Vec<f32> = prs.to_vec1()?;
             
