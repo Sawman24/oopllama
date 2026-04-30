@@ -12,7 +12,7 @@ fn main() -> Result<()> {
     // 1. Setup the BPE Trainer
     let mut trainer = BpeTrainer::builder()
         .show_progress(true)
-        .vocab_size(4096) 
+        .vocab_size(32768) // Upgraded for Nova Prime
         .min_frequency(2)
         .build();
 

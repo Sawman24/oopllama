@@ -21,8 +21,8 @@ fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
     
     println!("=====================================");
-    println!("🚀 NOVA V2: MEGA-DATASET EDITION");
-    println!("Mode: Word-Level (BPE 4096 Vocab)");
+    println!("🚀 NOVA PRIME: ULTIMATE EDITION");
+    println!("Mode: Word-Level (32,768 Vocab)");
     println!("=====================================");
 
     let device = Device::new_cuda(0).unwrap_or(Device::Cpu);
@@ -32,28 +32,28 @@ fn main() -> Result<()> {
     let tokenizer = Tokenizer::from_file(tokenizer_path).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     
     // 2. Load and Tokenize Dataset
-    println!("Tokenizing Mega-Dataset...");
+    println!("Tokenizing Mega-Dataset (Prime Mode)...");
     let dataset_text = std::fs::read_to_string("master_training_data.txt").expect("Could not read master text");
     let encoding = tokenizer.encode(dataset_text, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     let tokens = encoding.get_ids();
     println!("✅ Dataset ready: {} tokens", tokens.len());
 
-    // 3. Setup XL Model Architecture
+    // 3. Setup NOVA PRIME Model Architecture
     let cfg = Config {
-        vocab_size: 4096,
-        n_embd: 512,  // Upgraded from 256
-        n_layer: 12,  // Upgraded from 6
-        n_head: 16,   // Upgraded from 8
-        max_seq_len: 128,
+        vocab_size: 32768, // Huge dictionary
+        n_embd: 768,      // Wide brain
+        n_layer: 12,      // Deep logic
+        n_head: 12,       // 768 / 64 = 12 heads
+        max_seq_len: 256,  // Long vision
     };
     
     let mut varmap = VarMap::new();
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    let weights_file = "nova_xl_weights.safetensors";
+    let weights_file = "nova_prime_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
-        println!("Resuming from existing weights...");
+        println!("Resuming Nova Prime from existing weights...");
         varmap.load(weights_file)?;
     }
 
@@ -72,8 +72,8 @@ fn main() -> Result<()> {
         }
     });
 
-    // 4. Setup Optimizer (Precision Mode for Fine-Tuning)
-    let mut current_lr = 1e-4; 
+    // 4. Setup Optimizer
+    let mut current_lr = 5e-4; // Optimal starting LR for Prime
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
@@ -84,18 +84,18 @@ fn main() -> Result<()> {
     let mut log_file = std::fs::OpenOptions::new()
         .append(true)
         .create(true)
-        .open("training_log.csv")
+        .open("training_log_prime.csv")
         .expect("Cannot open log file");
     
-    if std::fs::metadata("training_log.csv").unwrap().len() == 0 {
+    if std::fs::metadata("training_log_prime.csv").unwrap().len() == 0 {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting MEGA-TRAINING loop (PRECISION MODE ENABLED)...");
-    let epochs = 50000;
-    let batch_size = 128; // Doubled for stability
+    println!("Starting NOVA PRIME training loop...");
+    let epochs = 100000; // Aiming for total mastery
+    let batch_size = 32;  // Reduced slightly for larger model size
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 50; // Faster rotation
+    let mega_batch_steps = 20; // Fast rotation for Prime
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
@@ -105,15 +105,15 @@ fn main() -> Result<()> {
     for epoch in 1..=epochs {
         // Async Thermal Check
         while pause_flag.load(Ordering::SeqCst) {
-            println!("⚠️ Cooling down (85C hit)...");
+            tracing::warn!("⚠️ Cooling down (85C hit)...");
             std::thread::sleep(std::time::Duration::from_secs(30));
         }
 
-        // Adaptive LR Decay & Periodic Save
-        if epoch % 5000 == 0 {
-            let _ = varmap.save(weights_file);
-            current_lr *= 0.9; 
+        // Smooth Cosine-style LR Decay
+        if epoch % 1000 == 0 {
+            current_lr *= 0.98; // Gentler decay for Prime
             opt.set_learning_rate(current_lr);
+            let _ = varmap.save(weights_file);
         }
 
         // MEGA-BATCH REFRESH
@@ -144,22 +144,21 @@ fn main() -> Result<()> {
         
         let loss_val = loss.to_vec0::<f32>()?;
         if smoothed_loss == 0.0 { smoothed_loss = loss_val; }
-        smoothed_loss = smoothed_loss * 0.99 + loss_val * 0.01;
+        smoothed_loss = smoothed_loss * 0.95 + loss_val * 0.05; // Faster smoothing for Prime
 
-        // Frequent Progress Reporting (Every 100 epochs)
+        // Progress Reporting
         if epoch % 100 == 0 || epoch == 1 {
-            tracing::info!("Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
+            tracing::info!("NOVA PRIME | Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
             writeln!(log_file, "{},{:.4},{:.6}", epoch, smoothed_loss, current_lr).expect("Log write fail");
             
-            // Save "Best" weights if loss hits new low
-            if smoothed_loss < best_loss && epoch > 1000 {
+            if smoothed_loss < best_loss && epoch > 500 {
                 best_loss = smoothed_loss;
-                let _ = varmap.save("nova_xl_best_weights.safetensors");
+                let _ = varmap.save("nova_prime_best_weights.safetensors");
             }
         }
     }
 
     varmap.save(weights_file)?;
-    println!("✅ Mega-Training Complete!");
+    println!("✅ NOVA PRIME Training Complete!");
     Ok(())
 }
