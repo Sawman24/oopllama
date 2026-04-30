@@ -94,8 +94,8 @@ fn main() -> Result<()> {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting GENTLE PERSONALITY INJECTION (50 Epochs)...");
-    let epochs = 50; 
+    println!("Starting BALANCED PERSONALITY INJECTION (300 Epochs)...");
+    let epochs = 300; 
     let batch_size = 8;  
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 10; 
