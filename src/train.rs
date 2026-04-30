@@ -72,8 +72,8 @@ fn main() -> Result<()> {
         }
     });
 
-    // 4. Setup Optimizer
-    let mut current_lr = 1e-3; 
+    // 4. Setup Optimizer (Precision Mode for Fine-Tuning)
+    let mut current_lr = 1e-4; 
     let mut opt = AdamW::new(varmap.all_vars(), candle_nn::ParamsAdamW {
         lr: current_lr,
         weight_decay: 0.01,
@@ -91,11 +91,11 @@ fn main() -> Result<()> {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting MEGA-TRAINING loop (TURBO BOOST ENABLED)...");
+    println!("Starting MEGA-TRAINING loop (PRECISION MODE ENABLED)...");
     let epochs = 50000;
-    let batch_size = 64;
+    let batch_size = 128; // Doubled for stability
     let seq_len = cfg.max_seq_len;
-    let mega_batch_steps = 100;
+    let mega_batch_steps = 50; // Faster rotation
     let mut smoothed_loss = 0.0;
     let mut best_loss = f32::MAX;
 
