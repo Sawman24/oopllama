@@ -78,6 +78,9 @@ fn main() -> Result<()> {
 
         tokens.push(next_token);
         
+        // Decode
+        let word = tokenizer.decode(&[next_token], true).unwrap_or_default();
+        
         // Stop if she tries to start a new User/Assistant block
         if word.contains("User:") || word.contains("Assistant:") { break; }
         
