@@ -65,6 +65,7 @@ fn main() -> Result<()> {
         let mut tokens = encoding.get_ids().to_vec();
         
         let mut assistant_response = String::new();
+        let mut response_start_idx = tokens.len();
 
         for _ in 0..100 {
             let input_tokens = if tokens.len() > cfg.max_seq_len {
@@ -101,21 +102,24 @@ fn main() -> Result<()> {
 
             tokens.push(next_token);
             
-            // Decode
-            let word = tokenizer.decode(&[next_token], true).unwrap_or_default();
+            let current_text = tokenizer.decode(&tokens[response_start_idx..], true).unwrap_or_default();
             
-            // Stop if she tries to start a new User/Assistant block
-            if word.contains("User:") || word.contains("Assistant:") { break; }
+            if current_text.contains("User:") || current_text.contains("Assistant:") {
+                tokens.pop(); // Remove the token that triggered the stop
+                break;
+            }
             
-            print!("{}", word);
+            print!("{}", tokenizer.decode(&[next_token], true).unwrap_or_default());
             io::stdout().flush().unwrap();
-            assistant_response.push_str(&word);
-            
+
             if next_token == 0 { break; } // Assuming 0 is EOS
         }
         
+        let final_response = tokenizer.decode(&tokens[response_start_idx..], true).unwrap_or_default();
+        let final_response = final_response.replace("User:", "").replace("Assistant:", "").trim().to_string();
+        
         println!();
-        conversation_history.push_str(&assistant_response);
+        conversation_history.push_str(&final_response);
         conversation_history.push('\n');
     }
 
