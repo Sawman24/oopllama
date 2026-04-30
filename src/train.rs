@@ -51,10 +51,13 @@ fn main() -> Result<()> {
     let vb = VarBuilder::from_varmap(&varmap, DType::F32, &device);
     let model = GPT::new(vb, &cfg)?;
     
-    let weights_file = "nova_prime_weights.safetensors";
+    let weights_file = "nova_prime_best_weights.safetensors";
     if std::path::Path::new(weights_file).exists() {
-        println!("Resuming from Nova Prime Base Knowledge...");
+        println!("Resuming from Pristine Base Knowledge...");
         varmap.load(weights_file)?;
+    } else {
+        println!("❌ Error: Base weights not found!");
+        return Ok(());
     }
 
     // --- BACKGROUND THERMAL MONITOR ---
@@ -91,8 +94,8 @@ fn main() -> Result<()> {
         writeln!(log_file, "epoch,loss,lr").expect("Cannot write header");
     }
 
-    println!("Starting PERSONALITY INJECTION (5,000 Epochs)...");
-    let epochs = 5000; 
+    println!("Starting GENTLE PERSONALITY INJECTION (50 Epochs)...");
+    let epochs = 50; 
     let batch_size = 8;  
     let seq_len = cfg.max_seq_len;
     let mega_batch_steps = 10; 
@@ -140,11 +143,11 @@ fn main() -> Result<()> {
         smoothed_loss = smoothed_loss * 0.9 + loss_val * 0.1; 
 
         // Progress Reporting
-        if epoch % 100 == 0 || epoch == 1 {
+        if epoch % 10 == 0 || epoch == 1 {
             tracing::info!("NOVA IFT | Epoch {}/{} | Loss: {:.4} | LR: {:.6}", epoch, epochs, smoothed_loss, current_lr);
             writeln!(log_file, "{},{:.4},{:.6}", epoch, smoothed_loss, current_lr).expect("Log write fail");
             
-            if smoothed_loss < best_loss && epoch > 200 {
+            if smoothed_loss < best_loss && epoch > 5 {
                 best_loss = smoothed_loss;
                 let _ = varmap.save("nova_prime_personality_best_weights.safetensors");
             }
