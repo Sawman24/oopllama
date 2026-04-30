@@ -78,8 +78,9 @@ fn main() -> Result<()> {
 
         tokens.push(next_token);
         
-        // Decode and Print
-        let word = tokenizer.decode(&[next_token], true).unwrap_or_default();
+        // Stop if she tries to start a new User/Assistant block
+        if word.contains("User:") || word.contains("Assistant:") { break; }
+        
         print!("{}", word);
         
         if next_token == 0 { break; } // Assuming 0 is EOS
