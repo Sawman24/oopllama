@@ -34,14 +34,14 @@ fn main() -> Result<()> {
     println!("🧠 Nova Brain Loaded Successfully (Word-Level)!");
     
     // 3. Inference Setup
-    let prompt = "“What’s two plus two?”";
+    let prompt = "I woke up";
     let encoding = tokenizer.encode(prompt, true).map_err(|e| candle_core::Error::Msg(e.to_string()))?;
     let mut tokens = encoding.get_ids().to_vec();
     
     println!("Generating (Sampling with Temp 0.8)...");
     print!("{}", prompt);
 
-    let temperature = 0.8;
+    let temperature = 0.2;
 
     for _ in 0..100 {
         let input_tokens = if tokens.len() > cfg.max_seq_len {
